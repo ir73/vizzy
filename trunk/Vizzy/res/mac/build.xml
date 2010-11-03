@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Vizzy" default="jar" basedir=".">
+    <description>Builds, tests, and runs the project Vizzy.</description>
+
+    <property name="version" value="2.3"/>
+    
+    <target name="jar" description="Create OSX App bundle for Vizzy">
+        <taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler"
+            classpath="../../../res/mac/jarbundler/jarbundler-2.1.0.jar"/>
+        <jarbundler
+            bundleid="flash.utils.Vizzy"
+            dir="${basedir}"
+            verbose="true"
+            showPlist="false"
+            name="${ant.project.name}"
+            mainclass="vizzy.controller.VizzyController"
+            icon="${ant.project.name}.icns"
+            version="${version}"
+            stubfile="${basedir}/VizzyLauncher"
+            jvmversion="1.5+"
+            infostring="Vizzy Flash Tracer, Copyright 2008-2010"
+            >
+            <jarfileset dir="${basedir}" includes="lib/*.jar"/>
+            <jarfileset dir="${basedir}" includes="${ant.project.name}.jar"/>
+            <javafileset dir="${basedir}" includes="fp-detect/**"/>
+        </jarbundler>
+
+<!--        <move file="build.xml" tofile="../build.xml" />
+        <move file="${ant.project.name}-bg.png" tofile="../${ant.project.name}-bg.png" />
+        <move file="${ant.project.name}.icns" tofile="../${ant.project.name}.icns" />
+        <move file="DS_Store" tofile="../DS_Store" />-->
+
+<!--        <delete includeemptydirs="true">
+            <fileset dir="." includes="**/**"/>
+        </delete>-->
+        <antcall target="dmg" />
+
+    </target>
+
+    <!-- Create a DMG - This only works on MacOSX (requires hdiutil) -->
+    <target name="dmg"
+        description="Create a DMG package for MacOSX (only works on MacOSX)">
+
+    <!-- Set this property value to your application name -->
+        <property name="app.name"
+              value="${ant.project.name}"/>
+
+    <!-- Set this property value to a directory where you can
+         mount temporarily your images, for example /tmp -->
+        <property name="mountdir"
+              value="/tmp"/>
+
+    <!-- Delete previously created DMG -->
+        <delete file="${app.name}.dmg}"
+            quiet="yes" failonerror="false"/>
+
+    <!-- Create a temporary Disk Image -->
+        <exec executable="/usr/bin/hdiutil" os="Mac OS X" failonerror="true">
+            <arg value="create"/>
+            <arg value="-srcfolder"/>
+            <arg value="${app.name}.app"/>
+            <arg value="-volname"/>
+            <arg value="${app.name}"/>
+            <arg value="-ov"/>
+            <arg value="${app.name}-tmp.dmg"/>
+            <arg value="-format"/>
+            <arg value="UDRW"/>
+        </exec>
+
+    <!-- Attach the temporary image -->
+        <exec executable="/usr/bin/hdiutil" os="Mac OS X" failonerror="true">
+            <arg value="attach"/>
+            <arg value="${app.name}-tmp.dmg"/>
+            <arg value="-mountroot"/>
+            <arg value="${mountdir}/"/>
+        </exec>
+
+    <!-- Copy the background, the volume icon and DS_Store files -->
+        <mkdir dir="${mountdir}/${app.name}/.background"/>
+        <copy file="${app.name}-bg.png"
+          tofile="${mountdir}/${app.name}/.background/background.png"
+          overwrite="true"/>
+        <copy file="${app.name}.icns"
+          tofile="${mountdir}/${app.name}/.VolumeIcon.icns"
+          overwrite="true"/>
+        <copy file="DS_Store"
+          tofile="${mountdir}/${app.name}/.DS_Store"
+          overwrite="true"/>
+
+    <!-- Indicate that we want a custom icon -->
+        <exec executable="/Developer/Tools/SetFile" os="Mac OS X">
+            <arg value="-a"/>
+            <arg value="C"/>
+            <arg value="${mountdir}/${app.name}"/>
+        </exec>
+
+    <!-- Add a symbolic link to the Applications directory -->
+        <symlink link="${mountdir}/${app.name}" resource="/Applications"/>
+
+    <!-- Detach the temporary image -->
+        <exec executable="/usr/bin/hdiutil" os="Mac OS X" failonerror="true">
+            <arg value="detach"/>
+            <arg value="${mountdir}/${app.name}"/>
+        </exec>
+
+    <!-- Compress it to a new image -->
+        <exec executable="/usr/bin/hdiutil" os="Mac OS X" failonerror="true">
+            <arg value="convert"/>
+            <arg value="${app.name}-tmp.dmg"/>
+            <arg value="-format"/>
+            <arg value="UDZO"/>
+            <arg value="-o"/>
+            <arg value="${app.name}.dmg"/>
+        </exec>
+
+    <!-- Delete the temporary image -->
+<!--        <delete file="${app.name}-tmp.dmg"
+            quiet="yes" failonerror="false"/>-->
+    </target>
+
+
+</project>
