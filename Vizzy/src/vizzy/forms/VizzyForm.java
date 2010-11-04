@@ -168,7 +168,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         jPanel2.setPreferredSize(new java.awt.Dimension(0, 0));
 
         jTraceTextArea.setColumns(20);
-        jTraceTextArea.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        jTraceTextArea.setFont(new java.awt.Font("Courier New", 0, 12));
         jTraceTextArea.setLineWrap(true);
         jTraceTextArea.setRows(5);
         jTraceTextArea.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
@@ -242,7 +242,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
             }
         });
 
-        logTypeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Flash Log", "Policy File" }));
+        logTypeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Flash Log", "Policy Log" }));
         logTypeCombo.setPreferredSize(new java.awt.Dimension(72, 23));
         logTypeCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
