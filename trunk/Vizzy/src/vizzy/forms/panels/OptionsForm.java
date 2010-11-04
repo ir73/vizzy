@@ -569,9 +569,7 @@ public class OptionsForm extends javax.swing.JFrame {
             public Object getElementAt(int i) { return strings[i]; }
         });
         jListMenu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jListMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jListMenu.setFixedCellHeight(35);
-        jListMenu.setSelectedIndex(0);
+        jListMenu.setFixedCellHeight(30);
         jListMenu.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 jListMenuValueChanged(evt);
@@ -713,8 +711,8 @@ public class OptionsForm extends javax.swing.JFrame {
 
     private void jEnableVizzyTraceCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEnableVizzyTraceCheckBoxActionPerformed
         if (jEnableVizzyTraceCheckBox.isSelected()) {
-            JOptionPane.showMessageDialog(null, "This feature might require plenty of\n"
-                    + "processor resources, so Vizzy has set load file\n"
+            JOptionPane.showMessageDialog(null, "This feature might work slow\n"
+                    + "on older machines, so Vizzy has set load file\n"
                     + "limit to 50,000. You can change it according to\n"
                     + "your needs.", "Warning", JOptionPane.WARNING_MESSAGE);
             jNumLinesEnabledCheckBox.setSelected(true);
@@ -878,7 +876,7 @@ public class OptionsForm extends javax.swing.JFrame {
         checkFlashDevelop();
 
         jListMenu.setSelectedIndex(0);
-        loadMenuTab(0);
+//        loadMenuTab(0);
     }
 
     @Override
