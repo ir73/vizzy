@@ -877,6 +877,7 @@ public class OptionsForm extends javax.swing.JFrame {
 
         checkFlashDevelop();
 
+        jListMenu.setSelectedIndex(0);
         loadMenuTab(0);
     }
 

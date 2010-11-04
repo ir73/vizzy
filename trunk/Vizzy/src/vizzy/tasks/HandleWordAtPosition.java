@@ -91,11 +91,13 @@ public class HandleWordAtPosition {
 
     public void highlightSourceLine(SourceAndLine source) {
         removeHighlight();
-        synchronized (lock) {
-            try {
-                highlight = textArea.getHighlighter().addHighlight(source.startPos, source.startPos + source.filePath.length(), Conf.mouseOverObjectPainter);
-            } catch (BadLocationException ex) {
+        if (source.startPos > -1) {
+            synchronized (lock) {
+                try {
+                    highlight = textArea.getHighlighter().addHighlight(source.startPos, source.startPos + source.filePath.length(), Conf.mouseOverObjectPainter);
+                } catch (BadLocationException ex) {
 //                log.warn("highlightSourceLine()", ex);
+                }
             }
         }
     }
@@ -146,7 +148,8 @@ public class HandleWordAtPosition {
     }
 
     public SourceAndLine checkSourceFile(int offset, boolean executeIfFound) throws Exception {
-        SourceAndLine source = extractSourceFile(offset, textArea.getText());
+        SourceAndLine source = extractSourceFile(offset, textArea.getText(), 
+                textArea.getLineOfOffset(offset), textArea.getLineCount());
         if (source == null) {
             return null;
         }
@@ -168,7 +171,7 @@ public class HandleWordAtPosition {
         return source;
     }
 
-    private SourceAndLine extractSourceFile(int currentIndex, String text) {
+    private SourceAndLine extractSourceFile(int currentIndex, String text, int taLineNum, int taTotalLines) {
         int startIndex;
         int endIndex;
         String currentWord;
@@ -184,8 +187,14 @@ public class HandleWordAtPosition {
                     new MinPositionParam("\r", true)},
                 false);
 
-        if (endIndex == -1) {
-            endIndex = text.length() +10;
+        if (endIndex == -1
+                && taLineNum == taTotalLines) {
+            endIndex = text.length() + 10;
+        }
+
+        if (startIndex == -1
+                && taLineNum == 0) {
+            startIndex = 0;
         }
 
         if (endIndex != -1 && startIndex != -1
@@ -216,21 +225,15 @@ public class HandleWordAtPosition {
                 
             }
             // check Vizzy Plugin
-            int lineOfOffset;
-            try {
-                lineOfOffset = textArea.getLineOfOffset(currentIndex);
-            } catch (BadLocationException ex) {
-                return null;
-            }
             if (settings.getSourceLines() != null
-                    && settings.getSourceLines().containsKey(lineOfOffset)) {
-                String debugLine = settings.getSourceLines().get(lineOfOffset);
+                    && settings.getSourceLines().containsKey(taLineNum)) {
+                String debugLine = settings.getSourceLines().get(taLineNum);
                 if (debugLine != null && debugLine.length() > 0) {
                     debugLine = debugLine.substring(5);
                     int semiColIndex = debugLine.lastIndexOf(":");
                     if (semiColIndex != -1) {
                         return new SourceAndLine(debugLine.substring(0, semiColIndex),
-                                Integer.parseInt(debugLine.substring(semiColIndex + 1).trim()), 0);
+                                Integer.parseInt(debugLine.substring(semiColIndex + 1).trim()), -1);
                     }
                 }
             }

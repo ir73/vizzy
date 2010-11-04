@@ -31,7 +31,6 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import vizzy.forms.VizzyForm;
 import vizzy.forms.panels.AboutPanel;
@@ -45,6 +44,7 @@ import vizzy.model.FlashPlayerFiles;
 import vizzy.model.SearchResult;
 import vizzy.model.SettingsModel;
 import vizzy.model.SourceAndLine;
+import vizzy.tasks.CheckLogReadTime;
 import vizzy.tasks.CheckUpdates;
 import vizzy.tasks.DebugPlayerDetector;
 import vizzy.tasks.DeleteFile;
@@ -364,7 +364,7 @@ public final class VizzyController implements ILogFileListener {
     }
 
     @Override
-    public void onLogFileRead(String log) {
+    public synchronized void onLogFileRead(String log) {
         int len = log.length();
         int max = len > 500 ? len - 500 : 0;
         String currentHash = len + "" + log.substring(max, len);
@@ -372,6 +372,9 @@ public final class VizzyController implements ILogFileListener {
         if (currentHash.equals(settings.getRecentHash())) {
             return;
         }
+
+        CheckLogReadTime check = new CheckLogReadTime(this, settings.getRefreshFreq());
+        check.start();
 
         if (settings.isEnableParsingSourceLines()) {
             log = parseLogSourceData(log);
@@ -384,19 +387,30 @@ public final class VizzyController implements ILogFileListener {
             startSearch(settings.getSearcher().getLastSearchPos(), false);
         }
         highlightStackTraceErrors();
+
+        check.stopRunning();
     }
 
     @Override
-    public void onOutOfMemory() {
-        settings.setMaxNumLinesEnabled(true, false);
-        settings.setMaxNumLines(50000, false);
+    public synchronized void onOutOfMemory() {
+        if (settings.isMaxNumLinesEnabled() && settings.getMaxNumLines() == Conf.MAX_NUM_LINES_OUTOFMEMORY) {
+            return;
+        }
 
-        startReadLogFileTimer();
+        settings.setMaxNumLinesEnabled(true, false);
+        settings.setMaxNumLines(Conf.MAX_NUM_LINES_OUTOFMEMORY, false);
+
+        stopReadLogFileTimer();
 
         JOptionPane.showMessageDialog(null, "The log file is too big and Vizzy has\n"
                 + "run out of memory. Vizzy has set the limit\n"
                 + "of log file to 50KB. You can customize this\n"
                 + "value in Options menu.", "Warning", JOptionPane.ERROR_MESSAGE);
+
+        createReadLogTimerTask().run();
+        if (settings.isAutoRefresh()) {
+            startReadLogFileTimer();
+        }
     }
 
     private void highlightStackTraceErrors() {
