@@ -49,7 +49,6 @@ public class SettingsModel {
     private long refreshFreq = 500;
     private boolean isAlwaysOnTop;
     private Date lastUpdateDate = new Date(0L);
-    private boolean detectPlayer;
     private boolean isHightlightAll = true;
     private boolean isWordWrap = true;
     private boolean isFilter = false;
@@ -366,17 +365,6 @@ public class SettingsModel {
         this.lastUpdateDate = lastUpdateDate;
         if (doFireEvent && listener != null) {
             getListener().onLastUpdateDateChanged(this.lastUpdateDate);
-        }
-    }
-
-    public boolean isDetectPlayer() {
-        return detectPlayer;
-    }
-
-    public void setDetectPlayer(boolean detectPlayer, boolean doFireEvent) {
-        this.detectPlayer = detectPlayer;
-        if (doFireEvent && listener != null) {
-            getListener().onDetectPlayerChanged(this.detectPlayer);
         }
     }
 

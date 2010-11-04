@@ -27,7 +27,6 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
 import org.apache.log4j.Logger;
@@ -82,6 +81,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItemDetectPlayer = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JSeparator();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -328,6 +328,14 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
             }
         });
         jMenu2.add(jMenuItem3);
+
+        jMenuItemDetectPlayer.setText("Detect Flash Player");
+        jMenuItemDetectPlayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDetectPlayerActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemDetectPlayer);
         jMenu2.add(jSeparator1);
 
         jMenuItem2.setText("Options...");
@@ -491,6 +499,10 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         controller.textAreaMouseReleased();
     }//GEN-LAST:event_jTraceTextAreaMouseReleased
 
+    private void jMenuItemDetectPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDetectPlayerActionPerformed
+        controller.detectFlashPlayer();
+    }//GEN-LAST:event_jMenuItemDetectPlayerActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JCheckBox jAutorefreshCheckBox;
     public javax.swing.JButton jButton1;
@@ -505,6 +517,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItemDetectPlayer;
     public javax.swing.JCheckBox jOnTopCheckbox;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -703,10 +716,6 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     }
     @Override
     public void onLastUpdateDateChanged(Date lastUpdateDate) {
-
-    }
-    @Override
-    public void onDetectPlayerChanged(boolean detectPlayer) {
 
     }
     @Override
