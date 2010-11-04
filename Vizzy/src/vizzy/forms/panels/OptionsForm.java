@@ -69,19 +69,6 @@ public class OptionsForm extends javax.swing.JFrame {
     private void initComponents() {
 
         ASEditorButtonGroup = new javax.swing.ButtonGroup();
-        jPanelLogFile = new javax.swing.JPanel();
-        jLayeredPane3 = new javax.swing.JLayeredPane();
-        jUTFCheckBox = new javax.swing.JCheckBox();
-        jLabel4 = new javax.swing.JLabel();
-        jFlashLogTextField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jFreqTextField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLayeredPane4 = new javax.swing.JLayeredPane();
-        jNumLinesTextField = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jNumLinesEnabledCheckBox = new javax.swing.JCheckBox();
         jPanelTraceOutput = new javax.swing.JPanel();
         jCheckBoxBuffer = new javax.swing.JCheckBox();
         jCheckBoxTraceAll = new javax.swing.JCheckBox();
@@ -97,6 +84,31 @@ public class OptionsForm extends javax.swing.JFrame {
         jLabelClickInfo = new javax.swing.JLabel();
         jLabelCodePopupInfo = new javax.swing.JLabel();
         jLabelVizzyTraceInfo = new javax.swing.JLabel();
+        jPanelGeneral = new javax.swing.JPanel();
+        jLayeredPane2 = new javax.swing.JLayeredPane();
+        jLabel3 = new javax.swing.JLabel();
+        jFontSizeTextField = new javax.swing.JTextField();
+        jFontComboBox = new javax.swing.JComboBox();
+        jLabel5 = new javax.swing.JLabel();
+        jRestoreCheckBox = new javax.swing.JCheckBox();
+        jLayeredPane5 = new javax.swing.JLayeredPane();
+        bgColorLabel = new javax.swing.JLabel();
+        fontColorLabel = new javax.swing.JLabel();
+        bgColorPanel = new javax.swing.JPanel();
+        fontColorPanel = new javax.swing.JPanel();
+        jPanelLogFile = new javax.swing.JPanel();
+        jLayeredPane3 = new javax.swing.JLayeredPane();
+        jUTFCheckBox = new javax.swing.JCheckBox();
+        jLabel4 = new javax.swing.JLabel();
+        jFlashLogTextField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jFreqTextField = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLayeredPane4 = new javax.swing.JLayeredPane();
+        jNumLinesTextField = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jNumLinesEnabledCheckBox = new javax.swing.JCheckBox();
         jPanelApplications = new javax.swing.JPanel();
         jLayeredPane6 = new javax.swing.JLayeredPane();
         jFlashDevelopIntegrLabel = new javax.swing.JLabel();
@@ -113,92 +125,6 @@ public class OptionsForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jListMenu = new javax.swing.JList();
         jPanelContainer = new javax.swing.JPanel();
-        jPanelGeneral = new javax.swing.JPanel();
-        jLayeredPane2 = new javax.swing.JLayeredPane();
-        jLabel3 = new javax.swing.JLabel();
-        jFontSizeTextField = new javax.swing.JTextField();
-        jFontComboBox = new javax.swing.JComboBox();
-        jLabel5 = new javax.swing.JLabel();
-        jRestoreCheckBox = new javax.swing.JCheckBox();
-        jLayeredPane5 = new javax.swing.JLayeredPane();
-        bgColorLabel = new javax.swing.JLabel();
-        fontColorLabel = new javax.swing.JLabel();
-        bgColorPanel = new javax.swing.JPanel();
-        fontColorPanel = new javax.swing.JPanel();
-
-        jLayeredPane3.setBorder(javax.swing.BorderFactory.createTitledBorder("Log file"));
-
-        jUTFCheckBox.setText("read file as UTF-8");
-        jUTFCheckBox.setBounds(160, 16, 180, 20);
-        jLayeredPane3.add(jUTFCheckBox, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLabel4.setText("flash log location:");
-        jLabel4.setBounds(10, 20, 180, 14);
-        jLayeredPane3.add(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jFlashLogTextField.setBounds(10, 40, 210, 23);
-        jLayeredPane3.add(jFlashLogTextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLabel1.setText("Log file read frequency (in milliseconds):");
-        jLabel1.setBounds(10, 70, 320, 14);
-        jLayeredPane3.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jFreqTextField.setText("1000");
-        jFreqTextField.setBounds(10, 90, 170, 23);
-        jLayeredPane3.add(jFreqTextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jButton1.setText("Browse...");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                browseButtonClicked(evt);
-            }
-        });
-        jButton1.setBounds(230, 40, 110, 23);
-        jLayeredPane3.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLayeredPane4.setBorder(javax.swing.BorderFactory.createTitledBorder("Limit"));
-        jNumLinesTextField.setBounds(10, 140, 170, 23);
-        jLayeredPane4.add(jNumLinesTextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLabel8.setText("Max amount of bytes to load from end of file:");
-        jLabel8.setBounds(10, 120, 320, 14);
-        jLayeredPane4.add(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLabel11.setText("<html>This is usually required when the log file gets too big and that might cause slower performance. Setting this limit is not mandatory because Vizzy will set this automatically if runs out of memory.</html>");
-        jLabel11.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel11.setBounds(10, 40, 330, 70);
-        jLayeredPane4.add(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jNumLinesEnabledCheckBox.setText("Load limited amount of bytes from the end of file only");
-        jNumLinesEnabledCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        jNumLinesEnabledCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jNumLinesEnabledCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jNumLinesEnabledCheckBoxActionPerformed(evt);
-            }
-        });
-        jNumLinesEnabledCheckBox.setBounds(10, 20, 350, 15);
-        jLayeredPane4.add(jNumLinesEnabledCheckBox, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        org.jdesktop.layout.GroupLayout jPanelLogFileLayout = new org.jdesktop.layout.GroupLayout(jPanelLogFile);
-        jPanelLogFile.setLayout(jPanelLogFileLayout);
-        jPanelLogFileLayout.setHorizontalGroup(
-            jPanelLogFileLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanelLogFileLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanelLogFileLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jLayeredPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jLayeredPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanelLogFileLayout.setVerticalGroup(
-            jPanelLogFileLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanelLogFileLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLayeredPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 123, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLayeredPane4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 194, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
 
         jCheckBoxBuffer.setText("<html>Buffer trace output. Use this if you trace really much which causes your CPU work with 100% load</html>");
 
@@ -232,13 +158,13 @@ public class OptionsForm extends javax.swing.JFrame {
             jPanelTraceOutputLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanelTraceOutputLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jPanelTraceOutputLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel7, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 304, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jCheckBoxStatic, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jCheckBoxBuffer, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 291, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jCheckBoxTraceAll, 0, 0, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jCheckBoxVerbose, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .add(jPanelTraceOutputLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jCheckBoxStatic, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 270, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jCheckBoxVerbose, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                    .add(jCheckBoxTraceAll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jCheckBoxBuffer, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 291, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel7, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 304, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jPanelTraceOutputLayout.linkSize(new java.awt.Component[] {jCheckBoxBuffer, jCheckBoxStatic, jCheckBoxTraceAll, jCheckBoxVerbose, jLabel7}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
@@ -249,21 +175,23 @@ public class OptionsForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .add(jLabel7, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jCheckBoxBuffer, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(jCheckBoxBuffer, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jCheckBoxTraceAll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 41, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jCheckBoxVerbose, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 43, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jCheckBoxStatic, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .add(jCheckBoxStatic, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 46, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(94, Short.MAX_VALUE))
         );
+
+        jPanelTraceOutputLayout.linkSize(new java.awt.Component[] {jCheckBoxBuffer, jCheckBoxStatic, jCheckBoxTraceAll, jCheckBoxVerbose}, org.jdesktop.layout.GroupLayout.VERTICAL);
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Smart Trace Parser"));
 
         jEnableClickCheckBox.setText("<html>1. Open HTTP links on double click.<br>2. Open source files from stack traces on double click.</html>");
         jEnableClickCheckBox.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jEnableClickCheckBox.setBounds(10, 60, 330, 40);
+        jEnableClickCheckBox.setBounds(10, 60, 330, 50);
         jLayeredPane1.add(jEnableClickCheckBox, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jEnablePopupsCheckBox.setText("<html>Enable code popup when mouse is over the stack-trace source file</html>");
@@ -337,6 +265,186 @@ public class OptionsForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .add(jLayeredPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                 .addContainerGap())
+        );
+
+        jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder("Font"));
+
+        jLabel3.setText("Font size:");
+        jLabel3.setBounds(240, 20, 90, 14);
+        jLayeredPane2.add(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jFontSizeTextField.setBounds(240, 40, 90, 23);
+        jLayeredPane2.add(jFontSizeTextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jFontComboBox.setModel(new DefaultComboBoxModel(settings.getFontNames()));
+        jFontComboBox.setBounds(10, 40, 220, 23);
+        jLayeredPane2.add(jFontComboBox, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel5.setText("Font:");
+        jLabel5.setBounds(10, 20, 250, 14);
+        jLayeredPane2.add(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jRestoreCheckBox.setText("<html>Restore window on trace update if window minimized</html>");
+        jRestoreCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jRestoreCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
+
+        jLayeredPane5.setBorder(javax.swing.BorderFactory.createTitledBorder("Colors"));
+
+        bgColorLabel.setText("Background color:");
+        bgColorLabel.setBounds(180, 20, 150, 15);
+        jLayeredPane5.add(bgColorLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        fontColorLabel.setText("Font color: ");
+        fontColorLabel.setBounds(10, 20, 130, 15);
+        jLayeredPane5.add(fontColorLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        bgColorPanel.setBackground(new java.awt.Color(255, 255, 0));
+        bgColorPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bgColorPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bgColorPanelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bgColorPanelMouseEntered(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout bgColorPanelLayout = new org.jdesktop.layout.GroupLayout(bgColorPanel);
+        bgColorPanel.setLayout(bgColorPanelLayout);
+        bgColorPanelLayout.setHorizontalGroup(
+            bgColorPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 18, Short.MAX_VALUE)
+        );
+        bgColorPanelLayout.setVerticalGroup(
+            bgColorPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 18, Short.MAX_VALUE)
+        );
+
+        bgColorPanel.setBounds(180, 40, 20, 20);
+        jLayeredPane5.add(bgColorPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        fontColorPanel.setBackground(new java.awt.Color(255, 51, 51));
+        fontColorPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        fontColorPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fontColorPanelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                fontColorPanelMouseEntered(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout fontColorPanelLayout = new org.jdesktop.layout.GroupLayout(fontColorPanel);
+        fontColorPanel.setLayout(fontColorPanelLayout);
+        fontColorPanelLayout.setHorizontalGroup(
+            fontColorPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 18, Short.MAX_VALUE)
+        );
+        fontColorPanelLayout.setVerticalGroup(
+            fontColorPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 18, Short.MAX_VALUE)
+        );
+
+        fontColorPanel.setBounds(10, 40, 20, 20);
+        jLayeredPane5.add(fontColorPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        org.jdesktop.layout.GroupLayout jPanelGeneralLayout = new org.jdesktop.layout.GroupLayout(jPanelGeneral);
+        jPanelGeneral.setLayout(jPanelGeneralLayout);
+        jPanelGeneralLayout.setHorizontalGroup(
+            jPanelGeneralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanelGeneralLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanelGeneralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLayeredPane5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                    .add(jLayeredPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelGeneralLayout.createSequentialGroup()
+                        .add(jRestoreCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 317, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(45, 45, 45)))
+                .addContainerGap())
+        );
+        jPanelGeneralLayout.setVerticalGroup(
+            jPanelGeneralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanelGeneralLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jRestoreCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 41, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLayeredPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 83, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLayeredPane5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 76, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(123, Short.MAX_VALUE))
+        );
+
+        jLayeredPane3.setBorder(javax.swing.BorderFactory.createTitledBorder("Log file"));
+
+        jUTFCheckBox.setText("read file as UTF-8");
+        jUTFCheckBox.setBounds(160, 16, 180, 20);
+        jLayeredPane3.add(jUTFCheckBox, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel4.setText("flash log location:");
+        jLabel4.setBounds(10, 20, 180, 14);
+        jLayeredPane3.add(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jFlashLogTextField.setBounds(10, 40, 210, 23);
+        jLayeredPane3.add(jFlashLogTextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel1.setText("Log file read frequency (in milliseconds):");
+        jLabel1.setBounds(10, 70, 320, 14);
+        jLayeredPane3.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jFreqTextField.setText("1000");
+        jFreqTextField.setBounds(10, 90, 170, 23);
+        jLayeredPane3.add(jFreqTextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton1.setText("Browse...");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browseButtonClicked(evt);
+            }
+        });
+        jButton1.setBounds(230, 40, 110, 23);
+        jLayeredPane3.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLayeredPane4.setBorder(javax.swing.BorderFactory.createTitledBorder("Limit"));
+        jNumLinesTextField.setBounds(10, 140, 170, 23);
+        jLayeredPane4.add(jNumLinesTextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel8.setText("Max amount of bytes to load from end of file:");
+        jLabel8.setBounds(10, 120, 320, 14);
+        jLayeredPane4.add(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel11.setText("<html>This is usually required when the log file gets too big and that might cause slower performance. Setting this limit is not mandatory because Vizzy will set this automatically if runs out of memory.</html>");
+        jLabel11.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel11.setBounds(10, 40, 330, 70);
+        jLayeredPane4.add(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jNumLinesEnabledCheckBox.setText("Load limited amount of bytes from the end of file only");
+        jNumLinesEnabledCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jNumLinesEnabledCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jNumLinesEnabledCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jNumLinesEnabledCheckBoxActionPerformed(evt);
+            }
+        });
+        jNumLinesEnabledCheckBox.setBounds(10, 20, 350, 15);
+        jLayeredPane4.add(jNumLinesEnabledCheckBox, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        org.jdesktop.layout.GroupLayout jPanelLogFileLayout = new org.jdesktop.layout.GroupLayout(jPanelLogFile);
+        jPanelLogFile.setLayout(jPanelLogFileLayout);
+        jPanelLogFileLayout.setHorizontalGroup(
+            jPanelLogFileLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanelLogFileLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanelLogFileLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jLayeredPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jLayeredPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanelLogFileLayout.setVerticalGroup(
+            jPanelLogFileLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanelLogFileLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jLayeredPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 123, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLayeredPane4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 194, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jLayeredPane6.setBorder(javax.swing.BorderFactory.createTitledBorder("Actionscript Editor"));
@@ -472,114 +580,6 @@ public class OptionsForm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jListMenu);
 
         jPanelContainer.setLayout(new javax.swing.BoxLayout(jPanelContainer, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder("Font"));
-
-        jLabel3.setText("Font size:");
-        jLabel3.setBounds(240, 20, 90, 14);
-        jLayeredPane2.add(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jFontSizeTextField.setBounds(240, 40, 90, 23);
-        jLayeredPane2.add(jFontSizeTextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jFontComboBox.setModel(new DefaultComboBoxModel(settings.getFontNames()));
-        jFontComboBox.setBounds(10, 40, 220, 23);
-        jLayeredPane2.add(jFontComboBox, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLabel5.setText("Font:");
-        jLabel5.setBounds(10, 20, 250, 14);
-        jLayeredPane2.add(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jRestoreCheckBox.setText("<html>Restore window on trace update if window minimized</html>");
-        jRestoreCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        jRestoreCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
-
-        jLayeredPane5.setBorder(javax.swing.BorderFactory.createTitledBorder("Colors"));
-
-        bgColorLabel.setText("Background color:");
-        bgColorLabel.setBounds(180, 20, 150, 15);
-        jLayeredPane5.add(bgColorLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        fontColorLabel.setText("Font color: ");
-        fontColorLabel.setBounds(10, 20, 130, 15);
-        jLayeredPane5.add(fontColorLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        bgColorPanel.setBackground(new java.awt.Color(255, 255, 0));
-        bgColorPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        bgColorPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bgColorPanelMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                bgColorPanelMouseEntered(evt);
-            }
-        });
-
-        org.jdesktop.layout.GroupLayout bgColorPanelLayout = new org.jdesktop.layout.GroupLayout(bgColorPanel);
-        bgColorPanel.setLayout(bgColorPanelLayout);
-        bgColorPanelLayout.setHorizontalGroup(
-            bgColorPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 18, Short.MAX_VALUE)
-        );
-        bgColorPanelLayout.setVerticalGroup(
-            bgColorPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 18, Short.MAX_VALUE)
-        );
-
-        bgColorPanel.setBounds(180, 40, 20, 20);
-        jLayeredPane5.add(bgColorPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        fontColorPanel.setBackground(new java.awt.Color(255, 51, 51));
-        fontColorPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        fontColorPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                fontColorPanelMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                fontColorPanelMouseEntered(evt);
-            }
-        });
-
-        org.jdesktop.layout.GroupLayout fontColorPanelLayout = new org.jdesktop.layout.GroupLayout(fontColorPanel);
-        fontColorPanel.setLayout(fontColorPanelLayout);
-        fontColorPanelLayout.setHorizontalGroup(
-            fontColorPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 18, Short.MAX_VALUE)
-        );
-        fontColorPanelLayout.setVerticalGroup(
-            fontColorPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 18, Short.MAX_VALUE)
-        );
-
-        fontColorPanel.setBounds(10, 40, 20, 20);
-        jLayeredPane5.add(fontColorPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        org.jdesktop.layout.GroupLayout jPanelGeneralLayout = new org.jdesktop.layout.GroupLayout(jPanelGeneral);
-        jPanelGeneral.setLayout(jPanelGeneralLayout);
-        jPanelGeneralLayout.setHorizontalGroup(
-            jPanelGeneralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanelGeneralLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanelGeneralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLayeredPane5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
-                    .add(jLayeredPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelGeneralLayout.createSequentialGroup()
-                        .add(jRestoreCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 317, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(45, 45, 45)))
-                .addContainerGap())
-        );
-        jPanelGeneralLayout.setVerticalGroup(
-            jPanelGeneralLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanelGeneralLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jRestoreCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 41, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLayeredPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 83, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLayeredPane5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 76, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
-        );
-
-        jPanelContainer.add(jPanelGeneral);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
