@@ -37,7 +37,7 @@ public class DebugPlayerDetector {
         }
     }
 
-    private void detect() {
+    public void detect() {
         try {
             File f = new File(Conf.vizzyRootDir, "fp-detect/fp-detect.html");
             if (Desktop.isDesktopSupported()) {

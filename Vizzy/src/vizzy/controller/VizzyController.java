@@ -80,7 +80,6 @@ public final class VizzyController implements ILogFileListener {
     private Properties props;
     private Timer readFileTimer;
     private OptionsForm optionsForm;
-    private DebugPlayerDetector debugPlayerDetector;
     private AboutPanel aboutForm;
 
     public static void main(String args[]) {
@@ -141,7 +140,6 @@ public final class VizzyController implements ILogFileListener {
         initVars();
         initSettings(view.getBounds());
         initCurrentLogTimer();
-        initPlayerDetection();
         initCheckUpdates();
         initNewFeatures();
         settings.setUIActionsAvailable(true);
@@ -232,12 +230,12 @@ public final class VizzyController implements ILogFileListener {
         mmcfgInitializer.init();
         settings.setMmcfgKeys(mmcfgInitializer.getMmcfgKeys());
         settings.setPolicyFileRecorded(mmcfgInitializer.isPolicyFileRecorded());
-        if (mmcfgInitializer.isMmcfgCreated()) {
-            JOptionPane.showMessageDialog(null, "Vizzy has created mm.cfg file for you.\n" +
-                    "Please restart all your browsers for the\n"
-                    + "changes to take effect.",
-                    "Info", JOptionPane.INFORMATION_MESSAGE);
-        }
+//        if (mmcfgInitializer.isMmcfgCreated()) {
+//            JOptionPane.showMessageDialog(null, "Vizzy has created mm.cfg file for you.\n" +
+//                    "Please restart all your browsers for the\n"
+//                    + "changes to take effect.",
+//                    "Info", JOptionPane.INFORMATION_MESSAGE);
+//        }
         if (mmcfgInitializer.getTraceFileLocation() != null) {
              settings.setFlashLogFileName(mmcfgInitializer.getTraceFileLocation(), false);
         }
@@ -329,7 +327,6 @@ public final class VizzyController implements ILogFileListener {
     
     private void initSettings(Rectangle rect) {
         settings.setLastUpdateDate(props.getProperty("update.last"), true);
-        settings.setDetectPlayer(props.getProperty("settings.detectplayer", "true").equals("true"), true);
         settings.setCheckUpdates(props.getProperty("settings.autoupdates", "true").equals("true"), true);
         settings.setFlashLogFileName(props.getProperty("settings.filename", settings.getFlashLogFileName()), true);
         settings.setRefreshFreq(props.getProperty("settings.refreshFreq", "500"), true);
@@ -561,6 +558,11 @@ public final class VizzyController implements ILogFileListener {
         SwingUtilities.invokeLater(new HW(viewToModel));
     }
 
+    public void detectFlashPlayer() {
+        DebugPlayerDetector d = new DebugPlayerDetector();
+        d.detect();
+    }
+
     class HW implements Runnable {
         private final int offset;
         public HW(int offset) {
@@ -663,7 +665,6 @@ public final class VizzyController implements ILogFileListener {
 
     public void onClose() {
         settings.setMainWindowLocation(view.getBounds(), false);
-        props.setProperty("settings.detectplayer", String.valueOf(settings.isDetectPlayer()));
         props.setProperty("settings.autoupdates", String.valueOf(settings.isCheckUpdates()));
         props.setProperty("settings.refreshFreq", String.valueOf(settings.getRefreshFreq()));
         props.setProperty("settings.isUTF", String.valueOf(settings.isUTF()));
@@ -890,14 +891,6 @@ public final class VizzyController implements ILogFileListener {
             }
         });
         checkUpdatesThread.start();
-    }
-
-    private void initPlayerDetection() {
-        if (settings.isDetectPlayer()) {
-            settings.setDetectPlayer(false, false);
-            debugPlayerDetector = new DebugPlayerDetector();
-            debugPlayerDetector.offerDetection();
-        }
     }
 
     public void traceAreaMouseWheel(MouseWheelEvent evt) {

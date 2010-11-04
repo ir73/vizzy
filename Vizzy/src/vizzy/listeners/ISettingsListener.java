@@ -62,8 +62,6 @@ public interface ISettingsListener {
 
     public void onLastUpdateDateChanged(Date lastUpdateDate);
 
-    public void onDetectPlayerChanged(boolean detectPlayer);
-
     public void onDefaultFontChanged(String defaultFont);
 
     public void onSetFontNamesChanged(String[] fontNames);
