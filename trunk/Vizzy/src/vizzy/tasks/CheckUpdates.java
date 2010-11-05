@@ -39,6 +39,7 @@ public class CheckUpdates extends Thread {
 
     @Override
     public void run() {
+        boolean downloaded = false;
         try {
             URL u = new URL(Conf.URL_PROJECT_HOME);
             URLConnection openConnection = u.openConnection();
@@ -89,6 +90,7 @@ public class CheckUpdates extends Thread {
                             options,
                             options[0]);
                     if (reply == JOptionPane.YES_OPTION) {
+                        downloaded = true;
                         downloadNewVersion(newVer);
                     }
                 } else {
@@ -100,7 +102,7 @@ public class CheckUpdates extends Thread {
         } catch (Exception ex) {
             log.warn("run() error", ex);
         } finally {
-            listener.updateFinished();
+            listener.updateFinished(downloaded);
             listener = null;
         }
         
@@ -108,6 +110,7 @@ public class CheckUpdates extends Thread {
 
     private void downloadNewVersion(String newVer) {
         String filename = String.format("Vizzy-%s-%s.zip", Conf.OSShortName, newVer);
+//        String filename = String.format("Vizzy_v%s.zip", newVer);
         String fileUrl = "http://flash-tracer.googlecode.com/files/" + filename;
         try {
 
@@ -149,7 +152,11 @@ public class CheckUpdates extends Thread {
                 Desktop.getDesktop().open(saveFile);
             }
 
+
+            DialogUtils.closeDialog();
         } catch (Exception ex) {
+            DialogUtils.closeDialog();
+
             log.warn("downloadNewVersion() failed to download uptdate", ex);
 
             JOptionPane.showMessageDialog(null, "Failed to download update. Press OK to go\n"
@@ -165,9 +172,6 @@ public class CheckUpdates extends Thread {
 //                log.warn("downloadNewVersion() desktop not supported", ex);
             }
 
-        } finally {
-            DialogUtils.closeDialog();
-        }
-
+        } 
     }
 }

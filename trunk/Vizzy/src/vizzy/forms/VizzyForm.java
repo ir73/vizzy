@@ -911,4 +911,8 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     public void onEnableParsingSourceLines(boolean enableParsingSourceLines) {
     }
 
+    public void closeApp() {
+        dispose();
+    }
+
 }

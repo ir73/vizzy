@@ -106,4 +106,6 @@ public interface ISettingsListener {
 
     public void onEnableParsingSourceLines(boolean enableParsingSourceLines);
 
+    public void closeApp();
+
 }

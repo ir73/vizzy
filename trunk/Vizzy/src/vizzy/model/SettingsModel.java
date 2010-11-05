@@ -694,6 +694,10 @@ public class SettingsModel {
             getListener().onEnableParsingSourceLines(this.enableParsingSourceLines);
         }
     }
+
+    public void closeApp() {
+        listener.closeApp();
+    }
     
 
 }

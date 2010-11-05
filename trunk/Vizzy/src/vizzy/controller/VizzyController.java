@@ -290,8 +290,11 @@ public final class VizzyController implements ILogFileListener {
                     public void offerUpdate() {
                         settings.setAlwaysOnTopUI(false, true);
                     }
-                    public void updateFinished() {
+                    public void updateFinished(boolean downloaded) {
                         settings.setAlwaysOnTopUI(settings.isAlwaysOnTop(), true);
+                        if (downloaded) {
+                            saveAndExit();
+                        }
                     }
                 });
                 checkUpdatesThread.start();
@@ -887,7 +890,10 @@ public final class VizzyController implements ILogFileListener {
         checkUpdatesThread = new CheckUpdates(true, new IUpdateCheckListener() {
             public void offerUpdate() {
             }
-            public void updateFinished() {
+            public void updateFinished(boolean downloaded) {
+                if (downloaded) {
+                    saveAndExit();
+                }
             }
         });
         checkUpdatesThread.start();
@@ -935,4 +941,9 @@ public final class VizzyController implements ILogFileListener {
         }
     }
 
+    private void saveAndExit() {
+        onClose();
+        settings.closeApp();
+        System.exit(0);
+    }
 }
