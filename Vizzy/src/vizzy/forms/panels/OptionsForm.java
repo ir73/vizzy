@@ -76,13 +76,12 @@ public class OptionsForm extends javax.swing.JFrame {
         jCheckBoxVerbose = new javax.swing.JCheckBox();
         jCheckBoxStatic = new javax.swing.JCheckBox();
         jPanelTraceParser = new javax.swing.JPanel();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
-        jEnableClickCheckBox = new javax.swing.JCheckBox();
-        jEnablePopupsCheckBox = new javax.swing.JCheckBox();
-        jEnableVizzyTraceCheckBox = new javax.swing.JCheckBox();
         jEnableHighlightErrorsCheckBox = new javax.swing.JCheckBox();
+        jEnableClickCheckBox = new javax.swing.JCheckBox();
         jLabelClickInfo = new javax.swing.JLabel();
+        jEnablePopupsCheckBox = new javax.swing.JCheckBox();
         jLabelCodePopupInfo = new javax.swing.JLabel();
+        jEnableVizzyTraceCheckBox = new javax.swing.JCheckBox();
         jLabelVizzyTraceInfo = new javax.swing.JLabel();
         jPanelGeneral = new javax.swing.JPanel();
         jLayeredPane2 = new javax.swing.JLayeredPane();
@@ -110,12 +109,11 @@ public class OptionsForm extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jNumLinesEnabledCheckBox = new javax.swing.JCheckBox();
         jPanelApplications = new javax.swing.JPanel();
-        jLayeredPane6 = new javax.swing.JLayeredPane();
-        jFlashDevelopIntegrLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jDefaultRadioButton = new javax.swing.JRadioButton();
         jCustomEditorRadioButton = new javax.swing.JRadioButton();
-        jLabel2 = new javax.swing.JLabel();
         jCustomASEditorTextFiled = new javax.swing.JTextField();
+        jFlashDevelopIntegrLabel = new javax.swing.JLabel();
         jPanelUpdates = new javax.swing.JPanel();
         jVersionLabel = new javax.swing.JLabel();
         jUpdatesCheckBox = new javax.swing.JCheckBox();
@@ -187,32 +185,10 @@ public class OptionsForm extends javax.swing.JFrame {
 
         jPanelTraceOutputLayout.linkSize(new java.awt.Component[] {jCheckBoxBuffer, jCheckBoxStatic, jCheckBoxTraceAll, jCheckBoxVerbose}, org.jdesktop.layout.GroupLayout.VERTICAL);
 
-        jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Smart Trace Parser"));
+        jEnableHighlightErrorsCheckBox.setText("Highlight thrown errors from stack traces");
 
         jEnableClickCheckBox.setText("<html>1. Open HTTP links on double click.<br>2. Open source files from stack traces on double click.</html>");
         jEnableClickCheckBox.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jEnableClickCheckBox.setBounds(10, 60, 330, 50);
-        jLayeredPane1.add(jEnableClickCheckBox, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jEnablePopupsCheckBox.setText("<html>Enable code popup when mouse is over the stack-trace source file</html>");
-        jEnablePopupsCheckBox.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jEnablePopupsCheckBox.setBounds(10, 140, 330, 33);
-        jLayeredPane1.add(jEnablePopupsCheckBox, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jEnableVizzyTraceCheckBox.setText("<html>Connect VizzyTrace library</html>");
-        jEnableVizzyTraceCheckBox.setToolTipText("Parses VizzyTrace library debug information. See more information in product wiki page.");
-        jEnableVizzyTraceCheckBox.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jEnableVizzyTraceCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jEnableVizzyTraceCheckBoxActionPerformed(evt);
-            }
-        });
-        jEnableVizzyTraceCheckBox.setBounds(10, 210, 330, 23);
-        jLayeredPane1.add(jEnableVizzyTraceCheckBox, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jEnableHighlightErrorsCheckBox.setText("Highlight thrown errors from stack traces");
-        jEnableHighlightErrorsCheckBox.setBounds(10, 20, 330, 30);
-        jLayeredPane1.add(jEnableHighlightErrorsCheckBox, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabelClickInfo.setText("<html>(<a href=\"http://code.google.com/p/flash-tracer/wiki/Features#HTTP_Links_are_Clickable_(since_2.3)\">what's this?</a>)</html>");
         jLabelClickInfo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -223,8 +199,9 @@ public class OptionsForm extends javax.swing.JFrame {
                 jFlashDevelopIntegrLabelMouseEntered(evt);
             }
         });
-        jLabelClickInfo.setBounds(30, 110, 210, 16);
-        jLayeredPane1.add(jLabelClickInfo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jEnablePopupsCheckBox.setText("<html>Enable code popup when mouse is over the stack-trace source file</html>");
+        jEnablePopupsCheckBox.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabelCodePopupInfo.setText("<html>(<a href=\"http://code.google.com/p/flash-tracer/wiki/Features#Explore_Source_Code_(since_2.3)\">what's this?</a>)</html>");
         jLabelCodePopupInfo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -235,8 +212,15 @@ public class OptionsForm extends javax.swing.JFrame {
                 jFlashDevelopIntegrLabelMouseEntered(evt);
             }
         });
-        jLabelCodePopupInfo.setBounds(30, 180, 290, 16);
-        jLayeredPane1.add(jLabelCodePopupInfo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jEnableVizzyTraceCheckBox.setText("<html>Connect VizzyTrace library</html>");
+        jEnableVizzyTraceCheckBox.setToolTipText("Parses VizzyTrace library debug information. See more information in product wiki page.");
+        jEnableVizzyTraceCheckBox.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jEnableVizzyTraceCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEnableVizzyTraceCheckBoxActionPerformed(evt);
+            }
+        });
 
         jLabelVizzyTraceInfo.setText("<html>(<a href=\"http://code.google.com/p/flash-tracer/wiki/VizzyTrace\">what's this?</a>)</html>");
         jLabelVizzyTraceInfo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -247,24 +231,55 @@ public class OptionsForm extends javax.swing.JFrame {
                 jFlashDevelopIntegrLabelMouseEntered(evt);
             }
         });
-        jLabelVizzyTraceInfo.setBounds(30, 240, 310, 16);
-        jLayeredPane1.add(jLabelVizzyTraceInfo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout jPanelTraceParserLayout = new org.jdesktop.layout.GroupLayout(jPanelTraceParser);
         jPanelTraceParser.setLayout(jPanelTraceParserLayout);
         jPanelTraceParserLayout.setHorizontalGroup(
             jPanelTraceParserLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanelTraceParserLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLayeredPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
-                .addContainerGap())
+                .add(jPanelTraceParserLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanelTraceParserLayout.createSequentialGroup()
+                        .add(6, 6, 6)
+                        .add(jPanelTraceParserLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jPanelTraceParserLayout.createSequentialGroup()
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jEnableHighlightErrorsCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 330, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(jPanelTraceParserLayout.createSequentialGroup()
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jPanelTraceParserLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(jPanelTraceParserLayout.createSequentialGroup()
+                                        .add(21, 21, 21)
+                                        .add(jLabelClickInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 210, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                    .add(jEnableClickCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 330, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(jPanelTraceParserLayout.createSequentialGroup()
+                                        .add(21, 21, 21)
+                                        .add(jLabelCodePopupInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 290, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                    .add(jEnablePopupsCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 330, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))))
+                    .add(jPanelTraceParserLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(jPanelTraceParserLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(jLabelVizzyTraceInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 310, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jEnableVizzyTraceCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 330, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         jPanelTraceParserLayout.setVerticalGroup(
             jPanelTraceParserLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanelTraceParserLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jLayeredPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                .addContainerGap())
+                .add(jEnableHighlightErrorsCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jEnableClickCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLabelClickInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(18, 18, 18)
+                .add(jEnablePopupsCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 33, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLabelCodePopupInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(18, 18, 18)
+                .add(jEnableVizzyTraceCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLabelVizzyTraceInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder("Font"));
@@ -447,7 +462,23 @@ public class OptionsForm extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        jLayeredPane6.setBorder(javax.swing.BorderFactory.createTitledBorder("Actionscript Editor"));
+        jPanelApplications.setPreferredSize(new java.awt.Dimension(393, 346));
+
+        jLabel2.setText("Open source files with:");
+
+        ASEditorButtonGroup.add(jDefaultRadioButton);
+        jDefaultRadioButton.setText("Default application");
+
+        ASEditorButtonGroup.add(jCustomEditorRadioButton);
+        jCustomEditorRadioButton.setText(" ");
+        jCustomEditorRadioButton.setPreferredSize(new java.awt.Dimension(25, 23));
+
+        jCustomASEditorTextFiled.setToolTipText("<html>%file% - full path to the file<br>%line%  - line number\n</html>");
+        jCustomASEditorTextFiled.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jCustomASEditorTextFiledKeyReleased(evt);
+            }
+        });
 
         jFlashDevelopIntegrLabel.setText("<html>Check out FlashDevelop Vizzy Plugin for better integration. <a href=\"http://code.google.com/p/flash-tracer/wiki/FlashDevelopPlugin\">Read more...</a></html>");
         jFlashDevelopIntegrLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -459,31 +490,6 @@ public class OptionsForm extends javax.swing.JFrame {
                 jFlashDevelopIntegrLabelMouseEntered(evt);
             }
         });
-        jFlashDevelopIntegrLabel.setBounds(30, 95, 310, 33);
-        jLayeredPane6.add(jFlashDevelopIntegrLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        ASEditorButtonGroup.add(jDefaultRadioButton);
-        jDefaultRadioButton.setText("Default application");
-        jDefaultRadioButton.setBounds(10, 40, 320, 23);
-        jLayeredPane6.add(jDefaultRadioButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        ASEditorButtonGroup.add(jCustomEditorRadioButton);
-        jCustomEditorRadioButton.setText(" ");
-        jCustomEditorRadioButton.setBounds(10, 65, 25, 23);
-        jLayeredPane6.add(jCustomEditorRadioButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLabel2.setText("Open source files with:");
-        jLabel2.setBounds(10, 20, 340, 15);
-        jLayeredPane6.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jCustomASEditorTextFiled.setToolTipText("<html>%file% - full path to the file<br>%line%  - line number\n</html>");
-        jCustomASEditorTextFiled.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jCustomASEditorTextFiledKeyReleased(evt);
-            }
-        });
-        jCustomASEditorTextFiled.setBounds(42, 65, 300, 23);
-        jLayeredPane6.add(jCustomASEditorTextFiled, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout jPanelApplicationsLayout = new org.jdesktop.layout.GroupLayout(jPanelApplications);
         jPanelApplications.setLayout(jPanelApplicationsLayout);
@@ -491,15 +497,32 @@ public class OptionsForm extends javax.swing.JFrame {
             jPanelApplicationsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanelApplicationsLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jLayeredPane6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
-                .addContainerGap())
+                .add(jPanelApplicationsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 340, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jDefaultRadioButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 320, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jPanelApplicationsLayout.createSequentialGroup()
+                        .add(jCustomEditorRadioButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(7, 7, 7)
+                        .add(jCustomASEditorTextFiled, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 300, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jPanelApplicationsLayout.createSequentialGroup()
+                        .add(20, 20, 20)
+                        .add(jFlashDevelopIntegrLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 310, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanelApplicationsLayout.setVerticalGroup(
             jPanelApplicationsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanelApplicationsLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jLayeredPane6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 147, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(188, Short.MAX_VALUE))
+                .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(5, 5, 5)
+                .add(jDefaultRadioButton)
+                .add(2, 2, 2)
+                .add(jPanelApplicationsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jCustomASEditorTextFiled, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 23, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jCustomEditorRadioButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(7, 7, 7)
+                .add(jFlashDevelopIntegrLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 33, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(342, Short.MAX_VALUE))
         );
 
         jVersionLabel.setText("Current version is: 1.19");
@@ -709,6 +732,38 @@ public class OptionsForm extends javax.swing.JFrame {
         bgColorPanel.setBackground(color);
     }//GEN-LAST:event_bgColorPanelMouseClicked
 
+    private void jListMenuValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListMenuValueChanged
+        int selectedIndex = jListMenu.getSelectedIndex();
+        loadMenuTab(selectedIndex);
+    }//GEN-LAST:event_jListMenuValueChanged
+
+    private void jLabelVizzyTraceInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVizzyTraceInfoMouseClicked
+        try {
+            if (Desktop.isDesktopSupported())
+                Desktop.getDesktop().browse(new URI(Conf.URL_VIZZY_WIKI_TRACE));
+        } catch (Exception ex1) {
+            //            log.warn("websiteClicked() error", ex1);
+        }
+}//GEN-LAST:event_jLabelVizzyTraceInfoMouseClicked
+
+    private void jLabelCodePopupInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCodePopupInfoMouseClicked
+        try {
+            if (Desktop.isDesktopSupported())
+                Desktop.getDesktop().browse(new URI(Conf.URL_VIZZY_WIKI_CODE_POPUP));
+        } catch (Exception ex1) {
+            //            log.warn("websiteClicked() error", ex1);
+        }
+}//GEN-LAST:event_jLabelCodePopupInfoMouseClicked
+
+    private void jLabelClickInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelClickInfoMouseClicked
+        try {
+            if (Desktop.isDesktopSupported())
+                Desktop.getDesktop().browse(new URI(Conf.URL_VIZZY_WIKI_CLICKABLE));
+        } catch (Exception ex1) {
+            //            log.warn("websiteClicked() error", ex1);
+        }
+}//GEN-LAST:event_jLabelClickInfoMouseClicked
+
     private void jEnableVizzyTraceCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEnableVizzyTraceCheckBoxActionPerformed
         if (jEnableVizzyTraceCheckBox.isSelected()) {
             JOptionPane.showMessageDialog(null, "This feature might work slow\n"
@@ -719,39 +774,7 @@ public class OptionsForm extends javax.swing.JFrame {
             jNumLinesTextField.setText("50000");
             jNumLinesTextField.setEnabled(true);
         }
-    }//GEN-LAST:event_jEnableVizzyTraceCheckBoxActionPerformed
-
-    private void jLabelVizzyTraceInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVizzyTraceInfoMouseClicked
-        try {
-            if (Desktop.isDesktopSupported())
-                Desktop.getDesktop().browse(new URI(Conf.URL_VIZZY_WIKI_TRACE));
-        } catch (Exception ex1) {
-//            log.warn("websiteClicked() error", ex1);
-        }
-    }//GEN-LAST:event_jLabelVizzyTraceInfoMouseClicked
-
-    private void jLabelCodePopupInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCodePopupInfoMouseClicked
-        try {
-            if (Desktop.isDesktopSupported())
-                Desktop.getDesktop().browse(new URI(Conf.URL_VIZZY_WIKI_CODE_POPUP));
-        } catch (Exception ex1) {
-//            log.warn("websiteClicked() error", ex1);
-        }
-    }//GEN-LAST:event_jLabelCodePopupInfoMouseClicked
-
-    private void jLabelClickInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelClickInfoMouseClicked
-        try {
-            if (Desktop.isDesktopSupported())
-                Desktop.getDesktop().browse(new URI(Conf.URL_VIZZY_WIKI_CLICKABLE));
-        } catch (Exception ex1) {
-//            log.warn("websiteClicked() error", ex1);
-        }
-    }//GEN-LAST:event_jLabelClickInfoMouseClicked
-
-    private void jListMenuValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListMenuValueChanged
-        int selectedIndex = jListMenu.getSelectedIndex();
-        loadMenuTab(selectedIndex);
-    }//GEN-LAST:event_jListMenuValueChanged
+}//GEN-LAST:event_jEnableVizzyTraceCheckBoxActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup ASEditorButtonGroup;
@@ -789,12 +812,10 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelClickInfo;
     private javax.swing.JLabel jLabelCodePopupInfo;
     private javax.swing.JLabel jLabelVizzyTraceInfo;
-    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
     private javax.swing.JLayeredPane jLayeredPane4;
     private javax.swing.JLayeredPane jLayeredPane5;
-    private javax.swing.JLayeredPane jLayeredPane6;
     private javax.swing.JList jListMenu;
     private javax.swing.JCheckBox jNumLinesEnabledCheckBox;
     private javax.swing.JTextField jNumLinesTextField;

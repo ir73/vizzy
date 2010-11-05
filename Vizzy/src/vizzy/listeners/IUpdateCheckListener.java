@@ -13,6 +13,6 @@ public interface IUpdateCheckListener {
 
     public void offerUpdate();
 
-    public void updateFinished();
+    public void updateFinished(boolean downloaded);
 
 }
