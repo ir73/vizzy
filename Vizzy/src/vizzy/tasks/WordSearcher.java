@@ -230,6 +230,9 @@ public class WordSearcher {
         String sContent = content;
 
         String[] words = sWord.split(",");
+        for (int i = 0; i < words.length; i++) {
+            words[i] = words[i].trim();
+        }
 
         StringBuilder sb = new StringBuilder("");
         int totalLines = textArea.getLineCount();
