@@ -61,7 +61,6 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
 
         jPanel1 = new javax.swing.JPanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
-        jHighlightAllCheckbox = new javax.swing.JCheckBox();
         jFilterCheckbox = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         jSearchComboBox = new javax.swing.JComboBox();
@@ -110,17 +109,6 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         jLayeredPane1.setMaximumSize(new java.awt.Dimension(32767, 84));
         jLayeredPane1.setPreferredSize(new java.awt.Dimension(0, 68));
 
-        jHighlightAllCheckbox.setText("Highlight All");
-        jHighlightAllCheckbox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        jHighlightAllCheckbox.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jHighlightAllCheckbox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jHighlightAllCheckboxChecked(evt);
-            }
-        });
-        jHighlightAllCheckbox.setBounds(10, 18, 120, 15);
-        jLayeredPane1.add(jHighlightAllCheckbox, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         jFilterCheckbox.setText("Filter");
         jFilterCheckbox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         jFilterCheckbox.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -129,7 +117,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
                 jFilterCheckboxChecked(evt);
             }
         });
-        jFilterCheckbox.setBounds(130, 18, 80, 15);
+        jFilterCheckbox.setBounds(10, 18, 80, 15);
         jLayeredPane1.add(jFilterCheckbox, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jButton1.setText("Clear");
@@ -160,7 +148,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
                 jRegexpCheckboxChecked(evt);
             }
         });
-        jRegexpCheckbox.setBounds(212, 18, 100, 15);
+        jRegexpCheckbox.setBounds(110, 18, 100, 15);
         jLayeredPane1.add(jRegexpCheckbox, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jPanel1.add(jLayeredPane1);
@@ -372,11 +360,6 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jHighlightAllCheckboxChecked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHighlightAllCheckboxChecked
-        if (!settings.isUIActionsAvailable()) return;
-        controller.highlightAllClicked(jHighlightAllCheckbox.isSelected());
-}//GEN-LAST:event_jHighlightAllCheckboxChecked
-
     private void jFilterCheckboxChecked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFilterCheckboxChecked
         if (!settings.isUIActionsAvailable()) return;
         controller.filterClicked(jFilterCheckbox.isSelected());
@@ -508,7 +491,6 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     public javax.swing.JButton jButton1;
     public javax.swing.JButton jClearTraceButton;
     public javax.swing.JCheckBox jFilterCheckbox;
-    public javax.swing.JCheckBox jHighlightAllCheckbox;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -631,7 +613,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     }
     @Override
     public void onHightlightAllChanged(boolean hightlightAll) {
-        jHighlightAllCheckbox.setSelected(settings.isHightlightAll());
+//        jHighlightAllCheckbox.setSelected(settings.isHightlightAll());
     }
     @Override
     public void onDefaultASEditorChanged(boolean defaultASEditor) {
@@ -679,7 +661,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         }
         jFilterCheckbox.setSelected(settings.isFilter());
         updateCommaTooltipCheckBox();
-        jHighlightAllCheckbox.setEnabled(!settings.isFilter());
+//        jHighlightAllCheckbox.setEnabled(!settings.isFilter());
         jRegexpCheckbox.setEnabled(!settings.isFilter());
         ((JScrollHighlightPanel) jScrollHighlight).setAllowHighlighting(!settings.isFilter());
         ((JScrollHighlightPanel) jScrollHighlight).setIndexes(null);

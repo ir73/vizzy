@@ -101,7 +101,7 @@ public final class VizzyController implements ILogFileListener {
 
     private String parseLogSourceData(String log) {
         Map<Integer, String> sourceLines = new ConcurrentHashMap<Integer, String>();
-        String[] split = log.split("\\n");
+        String[] split = log.split("\n");
         StringBuilder sb = new StringBuilder();
         Integer lines = 0;
         for (int i = 0; i < split.length; i++) {
@@ -329,32 +329,32 @@ public final class VizzyController implements ILogFileListener {
     }
     
     private void initSettings(Rectangle rect) {
-        settings.setLastUpdateDate(props.getProperty("update.last"), true);
-        settings.setCheckUpdates(props.getProperty("settings.autoupdates", "true").equals("true"), true);
-        settings.setFlashLogFileName(props.getProperty("settings.filename", settings.getFlashLogFileName()), true);
-        settings.setRefreshFreq(props.getProperty("settings.refreshFreq", "500"), true);
-        settings.setUTF(props.getProperty("settings.isUTF", "true").equals("true"), true);
-        settings.setMaxNumLinesEnabled(props.getProperty("settings.maxNumLinesEnabled", "false").equals("true"), true);
-        settings.setMaxNumLines(props.getProperty("settings.maxNumLines", "50000"), true);
-        settings.setRestoreOnUpdate(props.getProperty("settings.restore", "false").equals("true"), true);
-        settings.setAlwaysOnTop(props.getProperty("settings.alwaysontop", "false").equals("true"), true);
+        settings.setLastUpdateDate(props.getProperty("settings.update.last"), true);
+        settings.setCheckUpdates(props.getProperty("settings.update.autoupdates", "true").equals("true"), true);
+        settings.setFlashLogFileName(props.getProperty("settings.flashlog.filename", settings.getFlashLogFileName()), true);
+        settings.setRefreshFreq(props.getProperty("settings.refresh_freq", "500"), true);
+        settings.setUTF(props.getProperty("settings.flashlog.utf", "true").equals("true"), true);
+        settings.setMaxNumLinesEnabled(props.getProperty("settings.flashlog.max_num_lines_enabled", "false").equals("true"), true);
+        settings.setMaxNumLines(props.getProperty("settings.flashlog.max_num_lines", "50000"), true);
+        settings.setRestoreOnUpdate(props.getProperty("settings.restore_on_trace_update", "false").equals("true"), true);
+        settings.setAlwaysOnTop(props.getProperty("settings.always_on_top", "false").equals("true"), true);
         settings.setHighlightAll(props.getProperty("settings.highlight_all", "true").equals("true"), true);
-        settings.setAutoRefresh(props.getProperty("settings.autorefresh", "true").equals("true"), true);
-        settings.setWordWrap(props.getProperty("settings.wordwrap", "true").equals("true"), true);
-        settings.setEnableParsingSourceLines(props.getProperty("settings.parseSourceLines", "false").equals("true"), true);
-        settings.setHighlightStackTraceErrors(props.getProperty("settings.enableHighlightErrors", "false").equals("true"), true);
-        settings.setEnableCodePopup(props.getProperty("settings.enableCodePopups", "true").equals("true"), true);
-        settings.setEnableTraceClick(props.getProperty("settings.enableTraceClick", "true").equals("true"), true);
-        settings.setCustomASEditor(props.getProperty("settings.customASEditor", null), true);
-        settings.setDefaultASEditor(props.getProperty("settings.isDefaultASEditor", "true").equals("true"), true);
-        settings.setNewFeaturesPanelShown(props.getProperty("settings.newFeaturesShown" + Conf.VERSION, "false").equals("true"), true);
+        settings.setAutoRefresh(props.getProperty("settings.flashlog.auto_refresh", "true").equals("true"), true);
+        settings.setWordWrap(props.getProperty("settings.flashlog.word_wrap", "true").equals("true"), true);
+        settings.setEnableParsingSourceLines(props.getProperty("settings.flashlog.vizzy_trace_enabled", "false").equals("true"), true);
+        settings.setHighlightStackTraceErrors(props.getProperty("settings.flashlog.highlight_errors_enabled", "false").equals("true"), true);
+        settings.setEnableCodePopup(props.getProperty("settings.enable_code_popups", "true").equals("true"), true);
+        settings.setEnableTraceClick(props.getProperty("settings.enable_trace_click", "true").equals("true"), true);
+        settings.setCustomASEditor(props.getProperty("settings.custom_as_editor", null), true);
+        settings.setDefaultASEditor(props.getProperty("settings.use_custom_as_editor", "true").equals("true"), true);
+        settings.setNewFeaturesPanelShown(props.getProperty("settings.new_features_shown" + Conf.VERSION, "false").equals("true"), true);
         settings.setTraceFont(props.getProperty("settings.font.name", settings.getDefaultFont()), 
                 props.getProperty("settings.font.size", "12"), true);
         settings.setFontColor(props.getProperty("settings.font.color"), true);
-        settings.setBgColor(props.getProperty("settings.textArea.color"), true);
+        settings.setBgColor(props.getProperty("settings.text_area.color"), true);
         settings.setSearchKeywords(props.getProperty("search.keywords", "").split("\\|\\|\\|"), true);
         settings.setFilter(false, true);
-        setLogType(props.getProperty("settings.logtype", "0"), true);
+        setLogType(props.getProperty("settings.log_type", "0"), true);
         settings.setMainWindowLocation(props.getProperty("settings.window.x", String.valueOf(rect.getX())),
                 props.getProperty("settings.window.y", String.valueOf(rect.getY())),
                 props.getProperty("settings.window.width", String.valueOf(rect.getWidth())),
@@ -668,34 +668,34 @@ public final class VizzyController implements ILogFileListener {
 
     public void onClose() {
         settings.setMainWindowLocation(view.getBounds(), false);
-        props.setProperty("settings.autoupdates", String.valueOf(settings.isCheckUpdates()));
-        props.setProperty("settings.refreshFreq", String.valueOf(settings.getRefreshFreq()));
-        props.setProperty("settings.isUTF", String.valueOf(settings.isUTF()));
-        props.setProperty("settings.autorefresh", String.valueOf(settings.isAutoRefresh()));
-        props.setProperty("settings.alwaysontop", String.valueOf(settings.isAlwaysOnTop()));
+        props.setProperty("settings.update.autoupdates", String.valueOf(settings.isCheckUpdates()));
+        props.setProperty("settings.refresh_freq", String.valueOf(settings.getRefreshFreq()));
+        props.setProperty("settings.flashlog.utf", String.valueOf(settings.isUTF()));
+        props.setProperty("settings.flashlog.auto_refresh", String.valueOf(settings.isAutoRefresh()));
+        props.setProperty("settings.always_on_top", String.valueOf(settings.isAlwaysOnTop()));
         props.setProperty("settings.highlight_all", String.valueOf(settings.isHightlightAll()));
-        props.setProperty("settings.wordwrap", String.valueOf(settings.isWordWrap()));
+        props.setProperty("settings.flashlog.word_wrap", String.valueOf(settings.isWordWrap()));
         props.setProperty("settings.font.name", settings.getTraceFont().getName());
         props.setProperty("settings.font.size", String.valueOf(settings.getTraceFont().getSize()));
-        props.setProperty("settings.filename", settings.getFlashLogFileName());
+        props.setProperty("settings.flashlog.filename", settings.getFlashLogFileName());
         props.setProperty("settings.window.x", String.valueOf(settings.getMainWindowLocation().getX()));
         props.setProperty("settings.window.y", String.valueOf(settings.getMainWindowLocation().getY()));
         props.setProperty("settings.window.width", String.valueOf(settings.getMainWindowLocation().getWidth()));
         props.setProperty("settings.window.height", String.valueOf(settings.getMainWindowLocation().getHeight()));
-        props.setProperty("settings.restore", String.valueOf(settings.isRestoreOnUpdate()));
-        props.setProperty("settings.maxNumLines", String.valueOf(settings.getMaxNumLines()));
-        props.setProperty("settings.maxNumLinesEnabled", String.valueOf(settings.isMaxNumLinesEnabled()));
-        props.setProperty("settings.logtype", String.valueOf(settings.getLogType()));
-        props.setProperty("settings.enableHighlightErrors", String.valueOf(settings.isHighlightStackTraceErrors()));
-        props.setProperty("settings.enableCodePopups", String.valueOf(settings.isEnableCodePopup()));
-        props.setProperty("settings.enableTraceClick", String.valueOf(settings.isEnableTraceClick()));
-        props.setProperty("settings.customASEditor", String.valueOf(settings.getCustomASEditor()));
-        props.setProperty("settings.isDefaultASEditor", String.valueOf(settings.isDefaultASEditor()));
-        props.setProperty("settings.newFeaturesShown" + Conf.VERSION, String.valueOf(settings.wasNewFeaturesPanelShown()));
-        props.setProperty("settings.parseSourceLines", String.valueOf(settings.isEnableParsingSourceLines()));
-        props.setProperty("update.last", String.valueOf(settings.getLastUpdateDate().getTime()));
+        props.setProperty("settings.restore_on_trace_update", String.valueOf(settings.isRestoreOnUpdate()));
+        props.setProperty("settings.flashlog.max_num_lines", String.valueOf(settings.getMaxNumLines()));
+        props.setProperty("settings.flashlog.max_num_lines_enabled", String.valueOf(settings.isMaxNumLinesEnabled()));
+        props.setProperty("settings.log_type", String.valueOf(settings.getLogType()));
+        props.setProperty("settings.flashlog.highlight_errors_enabled", String.valueOf(settings.isHighlightStackTraceErrors()));
+        props.setProperty("settings.enable_code_popups", String.valueOf(settings.isEnableCodePopup()));
+        props.setProperty("settings.enable_trace_click", String.valueOf(settings.isEnableTraceClick()));
+        props.setProperty("settings.custom_as_editor", String.valueOf(settings.getCustomASEditor()));
+        props.setProperty("settings.use_custom_as_editor", String.valueOf(settings.isDefaultASEditor()));
+        props.setProperty("settings.new_features_shown" + Conf.VERSION, String.valueOf(settings.wasNewFeaturesPanelShown()));
+        props.setProperty("settings.flashlog.vizzy_trace_enabled", String.valueOf(settings.isEnableParsingSourceLines()));
+        props.setProperty("settings.update.last", String.valueOf(settings.getLastUpdateDate().getTime()));
         props.setProperty("settings.font.color", String.valueOf(settings.getFontColor().getRGB()));
-        props.setProperty("settings.textArea.color", String.valueOf(settings.getBgColor().getRGB()));
+        props.setProperty("settings.text_area.color", String.valueOf(settings.getBgColor().getRGB()));
 
         StringBuilder keywords = new StringBuilder();
         DefaultComboBoxModel searchKeywordsModel = settings.getSearchKeywordsModel();

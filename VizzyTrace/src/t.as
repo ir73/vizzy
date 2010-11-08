@@ -32,17 +32,9 @@
 		
 		if (strings != null && strings.length > 0) {
 			var st:String = new Error().getStackTrace();
-			var split:/*String*/Array = st.split("	at ");
+			var split:/*String*/Array = st.split("\n");
 			if (split.length > 2) {
-				var split2:String = split[2];
-				var braceStart:int = split2.indexOf("[");
-				if (braceStart != -1) {
-					var braceEnd:int = split2.indexOf("]", braceStart + 1);
-					if (braceEnd != -1) {
-						var fileAndLine:String = split2.substring(braceStart + 1, braceEnd);
-						strings[0] = "|vft|" + fileAndLine + "\n" + strings[0];
-					}
-				}
+				strings[0] = "|vft|" + split[2] + "\n" + strings[0];
 			} 
 		}
 		
