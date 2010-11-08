@@ -19,8 +19,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Timer;
@@ -100,19 +102,34 @@ public final class VizzyController implements ILogFileListener {
     }
 
     private String parseLogSourceData(String log) {
+//        long currentTimeMillis = System.currentTimeMillis();
+
         Map<Integer, String> sourceLines = new ConcurrentHashMap<Integer, String>();
-        String[] split = log.split("\n");
+
+        List<String> list = new ArrayList<String>();
+        int lastIndex = 0;
+        int curentIndex = -1;
+        while ((curentIndex = log.indexOf("\n", lastIndex)) != -1) {
+            list.add(log.substring(lastIndex, curentIndex));
+            lastIndex = curentIndex + 1;
+        }
+
+//        long currentTimeMillis1 = System.currentTimeMillis();
+//        System.out.println(currentTimeMillis1 - currentTimeMillis);
+
         StringBuilder sb = new StringBuilder();
-        Integer lines = 0;
-        for (int i = 0; i < split.length; i++) {
-            String string = split[i];
-            if (string.startsWith("|vft|")) {
-                sourceLines.put(lines, string);
+        int lines = 0;
+        int len = list.size();
+        String s;
+        for (int i = 0; i < len; i++) {
+            s = list.get(i);
+            if (s.startsWith("|vft|")) {
+                sourceLines.put(lines, s);
             } else {
                 if (lines > 0) {
                     sb.append("\n");
                 }
-                sb.append(split[i]);
+                sb.append(s);
                 lines++;
             }
         }
