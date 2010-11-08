@@ -216,11 +216,6 @@ public class OptionsForm extends javax.swing.JFrame {
         jEnableVizzyTraceCheckBox.setText("<html>Connect VizzyTrace library</html>");
         jEnableVizzyTraceCheckBox.setToolTipText("Parses VizzyTrace library debug information. See more information in product wiki page.");
         jEnableVizzyTraceCheckBox.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jEnableVizzyTraceCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jEnableVizzyTraceCheckBoxActionPerformed(evt);
-            }
-        });
 
         jLabelVizzyTraceInfo.setText("<html>(<a href=\"http://code.google.com/p/flash-tracer/wiki/VizzyTrace\">what's this?</a>)</html>");
         jLabelVizzyTraceInfo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -763,18 +758,6 @@ public class OptionsForm extends javax.swing.JFrame {
             //            log.warn("websiteClicked() error", ex1);
         }
 }//GEN-LAST:event_jLabelClickInfoMouseClicked
-
-    private void jEnableVizzyTraceCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEnableVizzyTraceCheckBoxActionPerformed
-        if (jEnableVizzyTraceCheckBox.isSelected()) {
-            JOptionPane.showMessageDialog(null, "This feature might work slow\n"
-                    + "on older machines, so Vizzy has set load file\n"
-                    + "limit to 50,000. You can change it according to\n"
-                    + "your needs.", "Warning", JOptionPane.WARNING_MESSAGE);
-            jNumLinesEnabledCheckBox.setSelected(true);
-            jNumLinesTextField.setText("50000");
-            jNumLinesTextField.setEnabled(true);
-        }
-}//GEN-LAST:event_jEnableVizzyTraceCheckBoxActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup ASEditorButtonGroup;

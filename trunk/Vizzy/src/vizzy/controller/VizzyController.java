@@ -114,6 +114,8 @@ public final class VizzyController implements ILogFileListener {
             lastIndex = curentIndex + 1;
         }
 
+        list.add(log.substring(lastIndex));
+
 //        long currentTimeMillis1 = System.currentTimeMillis();
 //        System.out.println(currentTimeMillis1 - currentTimeMillis);
 

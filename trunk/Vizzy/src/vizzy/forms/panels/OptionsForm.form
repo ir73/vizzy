@@ -185,9 +185,6 @@
             <Property name="toolTipText" type="java.lang.String" value="Parses VizzyTrace library debug information. See more information in product wiki page."/>
             <Property name="verticalAlignment" type="int" value="3"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jEnableVizzyTraceCheckBoxActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelVizzyTraceInfo">
           <Properties>
