@@ -229,11 +229,16 @@ public class HandleWordAtPosition {
                     && settings.getSourceLines().containsKey(taLineNum)) {
                 String debugLine = settings.getSourceLines().get(taLineNum);
                 if (debugLine != null && debugLine.length() > 0) {
-                    debugLine = debugLine.substring(5);
-                    int semiColIndex = debugLine.lastIndexOf(":");
-                    if (semiColIndex != -1) {
-                        return new SourceAndLine(debugLine.substring(0, semiColIndex),
-                                Integer.parseInt(debugLine.substring(semiColIndex + 1).trim()), -1);
+                    int openBrace = debugLine.indexOf("[");
+                    if (openBrace != -1) {
+                        int semiColIndex = debugLine.lastIndexOf(":");
+                        if (semiColIndex != -1) {
+                            int closingBrace = debugLine.indexOf("]");
+                            if (closingBrace != -1) {
+                                return new SourceAndLine(debugLine.substring(openBrace + 1, semiColIndex).trim(),
+                                        Integer.parseInt(debugLine.substring(semiColIndex + 1, closingBrace).trim()), -1);
+                            }
+                        }
                     }
                 }
             }

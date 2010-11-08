@@ -59,7 +59,7 @@ public class KeywordsHighlighter {
                 lineText = getTextArea().getText(start, end - start);
                 matcher = templateError.matcher(lineText);
                 if (matcher.find()) {
-                    highlightObjects.add(highlighter.addHighlight(start + matcher.start(), start + matcher.end(), Conf.errorPainter));
+                    highlightObjects.add(highlighter.addHighlight(start + matcher.start(), start + matcher.end() - 1, Conf.errorPainter));
                     highlighted = true;
                 }
             }
