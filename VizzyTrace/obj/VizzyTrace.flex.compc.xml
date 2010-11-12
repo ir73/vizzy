@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<flex-config xmlns="http://www.adobe.com/2006/flex-config">
+  <output>D:\projects\Vizzy\Vizzy\VizzyTrace\..\Vizzy\res\VizzyTrace.swc</output>
+  <use-network>true</use-network>
+  <target-player>9</target-player>
+  <warnings>true</warnings>
+  <benchmark>false</benchmark>
+  <compiler>
+    <accessible>false</accessible>
+    <allow-source-path-overlap>false</allow-source-path-overlap>
+    <optimize>false</optimize>
+    <strict>true</strict>
+    <es>false</es>
+    <show-actionscript-warnings>true</show-actionscript-warnings>
+    <show-binding-warnings>true</show-binding-warnings>
+    <show-unused-type-selector-warnings>true</show-unused-type-selector-warnings>
+    <use-resource-bundle-metadata>true</use-resource-bundle-metadata>
+    <verbose-stacktraces>false</verbose-stacktraces>
+    <source-path>
+      <path-element>d:\projects\vizzy\vizzy\vizzytrace\src</path-element>
+    </source-path>
+  </compiler>
+  <include-classes>
+    <class>t</class>
+    <class>VizzyTrace</class>
+  </include-classes>
+</flex-config>
