@@ -820,7 +820,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     @Override
     public void onShowNewFeaturesPanel() {
         if (newFeaturesPanel == null) {
-            newFeaturesPanel = new NewFeaturesPanel("<html>Did you know that it is possible to explore stack"
+            newFeaturesPanel = new NewFeaturesPanel("<html>Do you know that it is possible to explore stack"
                     + " trace source files directly from Vizzy? "
                     + "<a href=\"" + Conf.URL_PROJECT_HOME + "wiki/Features\">Read more...</a></html>",
                     new INewFeaturesListener() {
