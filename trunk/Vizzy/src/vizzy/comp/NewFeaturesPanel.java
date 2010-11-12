@@ -43,8 +43,10 @@ public class NewFeaturesPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 102));
         setMaximumSize(new java.awt.Dimension(32767, 40));
         setPreferredSize(new java.awt.Dimension(425, 40));
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel.setText("<html>Did you know that:<br>New features</html>");
+        jLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         jLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         jLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -54,10 +56,12 @@ public class NewFeaturesPanel extends javax.swing.JPanel {
                 jLabelMouseEntered(evt);
             }
         });
+        add(jLabel);
 
-        jXLabel.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jXLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jXLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jXLabel.setText("X");
+        jXLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         jXLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jXLabelMouseClicked(evt);
@@ -66,26 +70,7 @@ public class NewFeaturesPanel extends javax.swing.JPanel {
                 jXLabelMouseEntered(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jXLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jXLabel)
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
+        add(jXLabel);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jXLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXLabelMouseClicked
