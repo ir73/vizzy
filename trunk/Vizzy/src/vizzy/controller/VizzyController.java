@@ -174,7 +174,7 @@ public final class VizzyController implements ILogFileListener {
     }
 
     private void initNewFeatures() {
-        if (!settings.wasNewFeaturesPanelShown()) {
+        if (!settings.isFirstRun() && !settings.wasNewFeaturesPanelShown()) {
             settings.showNewFeaturesPanel();
         }
     }
@@ -207,6 +207,11 @@ public final class VizzyController implements ILogFileListener {
         }
 
         ToolTipManager.sharedInstance().setInitialDelay(0);
+
+        settings.setSettingsFile(new File(Conf.vizzyRootDir, Conf.VIZZY_PROPERTIES_FILENAME));
+        if (!settings.getSettingsFile().exists()) {
+            settings.setFirstRun(true);
+        }
 
         try {
             URL myIconUrl = this.getClass().getResource("/img/vizzy.png");
@@ -265,7 +270,6 @@ public final class VizzyController implements ILogFileListener {
      * Loads settings file
      */
     private void loadProperties() {
-        settings.setSettingsFile(new File(Conf.vizzyRootDir, Conf.VIZZY_PROPERTIES_FILENAME));
         props = new Properties();
         try {
             props.load(new FileInputStream(settings.getSettingsFile()));

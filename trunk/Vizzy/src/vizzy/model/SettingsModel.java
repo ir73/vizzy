@@ -30,6 +30,7 @@ import vizzy.util.DefaultHashMap;
 public class SettingsModel {
     private ISettingsListener listener;
 
+    private boolean isFirstRun;
     private boolean wasNewFeaturesPanelShown;
     private String defaultFont;
     private Font[] fonts;
@@ -697,6 +698,14 @@ public class SettingsModel {
 
     public void closeApp() {
         listener.closeApp();
+    }
+
+    public boolean isFirstRun() {
+        return isFirstRun;
+    }
+
+    public void setFirstRun(boolean isFirstRun) {
+        this.isFirstRun = isFirstRun;
     }
     
 
