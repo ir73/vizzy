@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <flex-config xmlns="http://www.adobe.com/2006/flex-config">
-  <output>D:\projects\Vizzy\Vizzy\VizzyTrace\..\Vizzy\res\VizzyTrace.swc</output>
+  <output>..\..\Vizzy\res\VizzyTrace.swc</output>
   <use-network>true</use-network>
   <target-player>9</target-player>
   <warnings>true</warnings>
@@ -17,7 +17,7 @@
     <use-resource-bundle-metadata>true</use-resource-bundle-metadata>
     <verbose-stacktraces>false</verbose-stacktraces>
     <source-path>
-      <path-element>d:\projects\vizzy\vizzy\vizzytrace\src</path-element>
+      <path-element>C:\svn-projects-repos\Vizzy2\vizzy\VizzyTrace\src</path-element>
     </source-path>
   </compiler>
   <include-classes>
