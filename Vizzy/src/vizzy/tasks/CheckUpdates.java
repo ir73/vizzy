@@ -121,7 +121,7 @@ public class CheckUpdates extends Thread {
             URLConnection openConnection = u.openConnection();
             InputStream isr = openConnection.getInputStream();
 
-            File tmpFile = File.createTempFile("vizzy-" + newVer, ".zip");
+            File tmpFile = File.createTempFile("Vizzy-" + newVer, ".zip");
             FileOutputStream fos = new FileOutputStream(tmpFile);
             int len = 0;
             while ((len = isr.read(bytes)) != -1) {
