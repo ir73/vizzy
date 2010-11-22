@@ -28,7 +28,7 @@ package {
 	 * @param	...strings 
 	 * comma separated objects to trace
 	 */
-	public function t(...strings):void {
+	public function trc(...strings):void {
 		if (VizzyTrace.mode == VizzyTrace.SIMPLE) {
 			trace.apply(null, strings);
 			return;

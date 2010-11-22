@@ -2,7 +2,7 @@
 <project name="Vizzy" default="jar" basedir=".">
     <description>Builds, tests, and runs the project Vizzy.</description>
 
-    <property name="version" value="2.3"/>
+    <property name="version" value="2.2"/>
     
     <target name="jar" description="Create OSX App bundle for Vizzy">
         <taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler"
@@ -110,7 +110,7 @@
             <arg value="-format"/>
             <arg value="UDZO"/>
             <arg value="-o"/>
-            <arg value="${app.name}.dmg"/>
+            <arg value="${app.name}-${version}.dmg"/>
         </exec>
 
     <!-- Delete the temporary image -->

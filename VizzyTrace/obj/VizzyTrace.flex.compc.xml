@@ -21,7 +21,7 @@
     </source-path>
   </compiler>
   <include-classes>
-    <class>t</class>
+    <class>trc</class>
     <class>VizzyTrace</class>
   </include-classes>
 </flex-config>

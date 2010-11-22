@@ -47,6 +47,7 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
+    <!-- example: <element path="..." /> -->
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
