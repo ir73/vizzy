@@ -71,7 +71,7 @@
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\fd\flashdevelop_sergei\flashdevelop\FD3\PluginCore\PluginCore.csproj">
+    <ProjectReference Include="..\..\..\fd\flashdevelop_sergei\flashdevelop\FD3\PluginCore\PluginCore.csproj">
       <Project>{61885F70-B4DC-4B44-852D-5D6D03F2A734}</Project>
       <Name>PluginCore</Name>
       <Private>False</Private>
