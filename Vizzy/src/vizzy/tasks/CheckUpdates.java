@@ -77,10 +77,7 @@ public class CheckUpdates extends Thread {
                         "No",};
 
                     int reply = JOptionPane.showOptionDialog(null, "New version is availible (" + newVer + ").\n" +
-                            "Would you like Vizzy to download it?\n"
-                            + "Note: if you do not want to receive update\n"
-                            + "notifications anymore, you can turn\n" +
-                            "them off in Options menu.\n\n" +
+                            "Would you like to update now?\n\n" +
                             "New features:\n" +
                             newFeatures,
                             "New Version",
