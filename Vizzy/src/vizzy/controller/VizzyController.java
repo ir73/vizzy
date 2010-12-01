@@ -416,7 +416,7 @@ public final class VizzyController implements ILogFileListener {
 
     @Override
     public synchronized void onOutOfMemory() {
-        if (settings.isMaxNumLinesEnabled() && settings.getMaxNumLines() == Conf.MAX_NUM_LINES_OUTOFMEMORY) {
+        if (settings.isMaxNumLinesEnabled() && settings.getMaxNumLines() <= Conf.MAX_NUM_LINES_OUTOFMEMORY) {
             return;
         }
 
