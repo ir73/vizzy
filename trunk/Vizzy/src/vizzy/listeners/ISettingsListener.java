@@ -110,4 +110,6 @@ public interface ISettingsListener {
 
     public void onProgramFilesDetected(boolean programFilesDetected);
 
+    public void onSearchVisible(boolean searchVisible);
+
 }

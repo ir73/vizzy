@@ -6,6 +6,8 @@
 package vizzy.controller;
 
 import java.awt.Font;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -29,7 +31,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Timer;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -165,6 +166,7 @@ public final class VizzyController implements ILogFileListener {
         initCurrentLogTimer();
         initCheckUpdates();
         initNewFeatures();
+        initKeyBindings();
         settings.setUIActionsAvailable(true);
         settings.onAfterInit();
     }
@@ -400,7 +402,8 @@ public final class VizzyController implements ILogFileListener {
         settings.setEnableCodePopup(props.getProperty("settings.enable_code_popups", "true").equals("true"), true);
         settings.setEnableTraceClick(props.getProperty("settings.enable_trace_click", "true").equals("true"), true);
         settings.setCustomASEditor(props.getProperty("settings.custom_as_editor", null), true);
-        settings.setDefaultASEditor(props.getProperty("settings.use_custom_as_editor", "true").equals("true"), true);
+        settings.setSearchVisible(props.getProperty("settings.search_panel_visible", "true").equals("true"), true);
+        
         settings.setNewFeaturesPanelShown(props.getProperty("settings.new_features_shown" + Conf.VERSION, "false").equals("true"), true);
         settings.setProgramFilesDetected(props.getProperty("settings.program_files_detected", "false").equals("true"), true);
         settings.setTraceFont(props.getProperty("settings.font.name", settings.getDefaultFont()), 
@@ -415,7 +418,18 @@ public final class VizzyController implements ILogFileListener {
                 props.getProperty("settings.window.width", String.valueOf(rect.getWidth())),
                 props.getProperty("settings.window.height", String.valueOf(rect.getHeight())), true);
 
+        settings.setDefaultASEditor(props.getProperty("settings.use_custom_as_editor", "true").equals("true"), true);
 
+        if (settings.isFirstRun()) {
+            if (Conf.OSName.indexOf(Conf.OS_WINDOWS) > -1) {
+                if (settings.getCustomASEditor() != null) {
+                    File f = new File(Conf.FLASHDEVELOP_PATH);
+                    if (f.exists()) {
+                        settings.setDefaultASEditor(false, true);
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -474,10 +488,11 @@ public final class VizzyController implements ILogFileListener {
         }
     }
 
-    private void handleWordAtPosition() {
+    private boolean handleWordAtPosition() {
         if (settings.isEnableTraceClick()) {
-            settings.getHandleWordAtPosition().findObjectAtPositionAndExecute();
+            return settings.getHandleWordAtPosition().findObjectAtPositionAndExecute();
         }
+        return false;
     }
 
     public void stopShowCodeTimer() {
@@ -621,15 +636,39 @@ public final class VizzyController implements ILogFileListener {
         d.detect();
     }
 
+    private void initKeyBindings() {
+        KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        manager.addKeyEventDispatcher(new KeyEventDispatcher() {
+            @Override
+            public boolean dispatchKeyEvent(KeyEvent e) {
+                if (e.getID() == KeyEvent.KEY_PRESSED) {
+                    if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_F) {
+                        searchPanelVisibleClicked();
+                        return true;
+                    }
+                } 
+                return false;
+            }
+        });
+
+    }
+
     class HW implements Runnable {
         private final int offset;
         public HW(int offset) {
             this.offset = offset;
         }
         public void run() {
+            int selectionStart = view.getTextArea().getSelectionStart();
+            int selectionEnd = view.getTextArea().getSelectionEnd();
             view.getTextArea().setSelectionStart(offset);
             view.getTextArea().setSelectionEnd(offset);
-            handleWordAtPosition();
+            if (!handleWordAtPosition()) {
+                if (selectionEnd > -1 && selectionStart > -1) {
+                    view.getTextArea().setSelectionStart(selectionStart);
+                    view.getTextArea().setSelectionEnd(selectionEnd);
+                }
+            }
         }
     }
 
@@ -665,6 +704,10 @@ public final class VizzyController implements ILogFileListener {
         }
 
         optionsForm.setVisible(true);
+    }
+
+    public void searchPanelVisibleClicked() {
+        settings.setSearchVisible(!settings.isSearchVisible(), true);
     }
 
     public void snapshotClicked(String text) {
@@ -743,6 +786,7 @@ public final class VizzyController implements ILogFileListener {
         props.setProperty("settings.log_type", String.valueOf(settings.getLogType()));
         props.setProperty("settings.flashlog.highlight_errors_enabled", String.valueOf(settings.isHighlightStackTraceErrors()));
         props.setProperty("settings.enable_code_popups", String.valueOf(settings.isEnableCodePopup()));
+        props.setProperty("settings.search_panel_visible", String.valueOf(settings.isSearchVisible()));
         props.setProperty("settings.enable_trace_click", String.valueOf(settings.isEnableTraceClick()));
         props.setProperty("settings.custom_as_editor", String.valueOf(settings.getCustomASEditor()));
         props.setProperty("settings.use_custom_as_editor", String.valueOf(settings.isDefaultASEditor()));

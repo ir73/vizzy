@@ -69,6 +69,7 @@ public class SettingsModel {
     private boolean enableCodePopup;
     private boolean enableParsingSourceLines = false;
     private boolean programFilesDetected = false;
+    private boolean isSearchVisible = true;
     private Map<Integer, String> sourceLines;
     private Color bgColor = Color.white;
     private Color fontColor = Color.black;
@@ -717,6 +718,17 @@ public class SettingsModel {
         this.programFilesDetected = programFilesDetected;
         if (doFireEvent && listener != null) {
             getListener().onProgramFilesDetected(this.programFilesDetected);
+        }
+    }
+
+    public boolean isSearchVisible() {
+        return isSearchVisible;
+    }
+
+    public void setSearchVisible(boolean isSearchVisible, boolean doFireEvent) {
+        this.isSearchVisible = isSearchVisible;
+        if (doFireEvent && listener != null) {
+            getListener().onSearchVisible(this.isSearchVisible);
         }
     }
     
