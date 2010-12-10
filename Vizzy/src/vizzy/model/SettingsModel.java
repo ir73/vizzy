@@ -68,6 +68,7 @@ public class SettingsModel {
     private boolean enableTraceClick;
     private boolean enableCodePopup;
     private boolean enableParsingSourceLines = false;
+    private boolean programFilesDetected = false;
     private Map<Integer, String> sourceLines;
     private Color bgColor = Color.white;
     private Color fontColor = Color.black;
@@ -706,6 +707,17 @@ public class SettingsModel {
 
     public void setFirstRun(boolean isFirstRun) {
         this.isFirstRun = isFirstRun;
+    }
+
+    public boolean isProgramFilesDetected() {
+        return programFilesDetected;
+    }
+
+    public void setProgramFilesDetected(boolean programFilesDetected, boolean doFireEvent) {
+        this.programFilesDetected = programFilesDetected;
+        if (doFireEvent && listener != null) {
+            getListener().onProgramFilesDetected(this.programFilesDetected);
+        }
     }
     
 

@@ -897,4 +897,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         dispose();
     }
 
+    public void onProgramFilesDetected(boolean programFilesDetected) {
+    }
+
 }

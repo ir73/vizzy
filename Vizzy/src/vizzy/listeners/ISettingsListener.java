@@ -108,4 +108,6 @@ public interface ISettingsListener {
 
     public void closeApp();
 
+    public void onProgramFilesDetected(boolean programFilesDetected);
+
 }
