@@ -18,7 +18,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,6 +29,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Timer;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -158,6 +161,7 @@ public final class VizzyController implements ILogFileListener {
         loadProperties();
         initVars();
         initSettings(view.getBounds());
+        initProgramFilesFolder();
         initCurrentLogTimer();
         initCheckUpdates();
         initNewFeatures();
@@ -192,11 +196,21 @@ public final class VizzyController implements ILogFileListener {
             }
         }
 
-
         String rootDir = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+        try {
+            rootDir = URLDecoder.decode(rootDir, "UTF-8");
+        } catch (UnsupportedEncodingException ex) {
+            log.warn("Unable to decode root dir 1. " + rootDir, ex);
+        }
         File dir = PathUtils.getDir(new File(rootDir));
         Conf.vizzyRootDir = dir.getAbsolutePath();
 
+        log.info("rootDir = " + rootDir);
+        log.info("vizzyRootDir = " + Conf.vizzyRootDir);
+
+        if (Conf.vizzyRootDir == null || Conf.vizzyRootDir.equals("")) {
+            Conf.vizzyRootDir = ".";
+        }
 
         if (Conf.OSName.indexOf(Conf.OS_WINDOWS) > -1) {
             settings.setCustomASEditor(Conf.DEFAULT_WINDOWS_EDITOR_PATH, true);
@@ -325,6 +339,23 @@ public final class VizzyController implements ILogFileListener {
         }
     }
 
+    private void initProgramFilesFolder() {
+        if (settings.isProgramFilesDetected()) {
+            return;
+        }
+        settings.setProgramFilesDetected(true, true);
+        if (Conf.OSName.indexOf(Conf.OS_WINDOWS) > -1) {
+            log.info("Conf.vizzyRootDir.toLowerCase() = " + Conf.vizzyRootDir.toLowerCase());
+            log.info("Conf.PROGRAM_FILES_FOLDER_NAME = " + Conf.PROGRAM_FILES_FOLDER_NAME);
+            if (Conf.vizzyRootDir.toLowerCase().startsWith(Conf.PROGRAM_FILES_FOLDER_NAME)) {
+                JOptionPane.showMessageDialog(null, "It seems that you are running Vizzy from\n"
+                        + "system Program Files folder. Vizzy might not save your settings\n"
+                        + "properly. Please move Vizzy to another non-system\n"
+                        + "folder (e.g. Desktop)", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }
+
     private void initCurrentLogTimer() {
         createReadLogTimerTask().run();
         if (settings.isAutoRefresh()) {
@@ -371,6 +402,7 @@ public final class VizzyController implements ILogFileListener {
         settings.setCustomASEditor(props.getProperty("settings.custom_as_editor", null), true);
         settings.setDefaultASEditor(props.getProperty("settings.use_custom_as_editor", "true").equals("true"), true);
         settings.setNewFeaturesPanelShown(props.getProperty("settings.new_features_shown" + Conf.VERSION, "false").equals("true"), true);
+        settings.setProgramFilesDetected(props.getProperty("settings.program_files_detected", "false").equals("true"), true);
         settings.setTraceFont(props.getProperty("settings.font.name", settings.getDefaultFont()), 
                 props.getProperty("settings.font.size", "12"), true);
         settings.setFontColor(props.getProperty("settings.font.color"), true);
@@ -714,6 +746,7 @@ public final class VizzyController implements ILogFileListener {
         props.setProperty("settings.enable_trace_click", String.valueOf(settings.isEnableTraceClick()));
         props.setProperty("settings.custom_as_editor", String.valueOf(settings.getCustomASEditor()));
         props.setProperty("settings.use_custom_as_editor", String.valueOf(settings.isDefaultASEditor()));
+        props.setProperty("settings.program_files_detected", String.valueOf(settings.isProgramFilesDetected()));
         props.setProperty("settings.new_features_shown" + Conf.VERSION, String.valueOf(settings.wasNewFeaturesPanelShown()));
         props.setProperty("settings.flashlog.vizzy_trace_enabled", String.valueOf(settings.isEnableParsingSourceLines()));
         props.setProperty("settings.update.last", String.valueOf(settings.getLastUpdateDate().getTime()));
@@ -736,7 +769,7 @@ public final class VizzyController implements ILogFileListener {
         try {
             props.store(new FileOutputStream(settings.getSettingsFile()), "");
         } catch (FileNotFoundException ex) {
-            log.error("error saving setting 1.");
+            log.error("error saving setting 1." + settings.getSettingsFile().getName());
         } catch (IOException ex) {
             log.error("error saving setting 2.");
         }
