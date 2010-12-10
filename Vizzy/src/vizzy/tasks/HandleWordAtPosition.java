@@ -54,14 +54,14 @@ public class HandleWordAtPosition {
     private Object highlight;
     private final Object lock = new Object();
 
-    public void findObjectAtPositionAndExecute() {
+    public boolean findObjectAtPositionAndExecute() {
         if (!Desktop.isDesktopSupported()) {
-            return;
+            return false;
         }
 
         try {
             if (checkHTTPLink(textArea.getCaretPosition(), true) != null) {
-                return;
+                return true;
             }
         } catch (Exception ex) {
 //            log.warn("findObjectAtPositionAndExecute() checkHTTPLink failed", ex);
@@ -69,11 +69,12 @@ public class HandleWordAtPosition {
 
         try {
             if (checkSourceFile(textArea.getCaretPosition(), true) != null) {
-                return;
+                return true;
             }
         } catch (Exception ex) {
 //            log.warn("findObjectAtPositionAndExecute() checkSourceFile failed", ex);
         }
+        return false;
     }
 
     public void removeHighlight() {

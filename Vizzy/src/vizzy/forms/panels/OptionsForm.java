@@ -21,7 +21,6 @@ import java.util.HashMap;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
 import vizzy.controller.VizzyController;
 import vizzy.model.Conf;

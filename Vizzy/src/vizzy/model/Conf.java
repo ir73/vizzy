@@ -56,7 +56,8 @@ public class Conf {
     public static final String URL_VIZZY_WIKI_CLICKABLE = "http://code.google.com/p/flash-tracer/wiki/Features#HTTP_Links_are_Clickable";
     public static final String URL_VIZZY_WIKI_CODE_POPUP = "http://code.google.com/p/flash-tracer/wiki/Features#Explore_Source_Code";
     public static final String URL_VIZZY_PLUGIN = "http://code.google.com/p/flash-tracer/wiki/FlashDevelopPlugin";
-    public static final String DEFAULT_WINDOWS_EDITOR_PATH = "\"C:\\Program Files\\FlashDevelop\\FlashDevelop.exe\" \"%file%\" -line %line%";
+    public static final String FLASHDEVELOP_PATH = "C:\\Program Files\\FlashDevelop\\FlashDevelop.exe";
+    public static final String DEFAULT_WINDOWS_EDITOR_PATH = "\"" + FLASHDEVELOP_PATH + "\" \"%file%\" -line %line%";
     public static final String DEFAULT_MAC_EDITOR_PATH = "/Applications/TextEdit.app/Contents/MacOS/TextEdit %file%";
     public static final String DEFAULT_LINUX_EDITOR_PATH = "gedit %file%";
     public static final long UPDATE_CHECK_FREQ = 7L * 24L * 60L * 60L * 1000L;
