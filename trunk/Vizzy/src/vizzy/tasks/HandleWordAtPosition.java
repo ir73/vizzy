@@ -54,13 +54,13 @@ public class HandleWordAtPosition {
     private Object highlight;
     private final Object lock = new Object();
 
-    public boolean findObjectAtPositionAndExecute() {
+    public boolean findObjectAtPositionAndExecute(int offset) {
         if (!Desktop.isDesktopSupported()) {
             return false;
         }
 
         try {
-            if (checkHTTPLink(textArea.getCaretPosition(), true) != null) {
+            if (checkHTTPLink(offset, true) != null) {
                 return true;
             }
         } catch (Exception ex) {
@@ -68,7 +68,7 @@ public class HandleWordAtPosition {
         }
 
         try {
-            if (checkSourceFile(textArea.getCaretPosition(), true) != null) {
+            if (checkSourceFile(offset, true) != null) {
                 return true;
             }
         } catch (Exception ex) {
@@ -130,6 +130,7 @@ public class HandleWordAtPosition {
                     new MinPositionParam("'", true),
                     new MinPositionParam("<", true),
                     new MinPositionParam(">", true),
+                    new MinPositionParam(")", true),
                     new MinPositionParam(" ", true)},
                 false);
 
