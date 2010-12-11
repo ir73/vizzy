@@ -12,7 +12,7 @@
     <import file="nbproject/build-impl.xml"/>
     <import file="nbproject/profiler-build-impl.xml"/>
 
-    <property name="version" value="3.0"/>
+    <property name="version" value="3.2"/>
     <property name="vizzy_plugin_version" value="1.0"/>
     <property name="vizzy_trace_version" value="1.0"/>
     <property name="dist.dir" value="dist"/>
@@ -63,6 +63,10 @@
         <launch4j configFile="res/win/launch4j.xml"
             outfile="${dist.dir.win}/${ant.project.name}/${ant.project.name}.exe"
             />
+
+        <zip destfile="${dist.dir}/${ant.project.name}-win-${version}.zip"
+            basedir="${dist.dir.win}"
+            />
     </target>
 
     <target name="build-vizzy-linux" depends="build-vizzy-common">
@@ -77,6 +81,10 @@
                 <include name="**" />
             </fileset>
         </copy>
+
+        <zip destfile="${dist.dir}/${ant.project.name}-linux-${version}.zip"
+            basedir="${dist.dir.linux}"
+            />
     </target>
 
     <target name="build-vizzy-mac" depends="build-vizzy-common">
@@ -103,10 +111,45 @@
 
     <target name="build-vizzy-all" depends="build-vizzy-win, build-vizzy-mac, build-vizzy-linux">
         <delete dir="${dist.dir}/${ant.project.name}" />
-        <zip destfile="${dist.dir}/${ant.project.name}_v${version}.zip" 
-            basedir="${dist.dir}"
-            excludes="*.*"/>
     </target>
+    
+    <target name="build-vizzy-upload-vizzy">
+        <input message="Upload password"
+            addproperty="pwd"
+            />
+
+        <taskdef classname="net.bluecow.googlecode.ant.GoogleCodeUploadTask"
+            classpath="res/ant-googlecode-0.0.2.jar"
+            name="gcupload"/>
+            
+        <gcupload
+            username="sergei.ledvanov"
+            password="${pwd}"
+            projectname="flash-tracer"
+            filename="${basedir}/${dist.dir}/${ant.project.name}-linux-${version}.zip"
+            targetfilename="${ant.project.name}-linux-${version}.zip"
+            summary="Vizzy Flash Tracer ${version} for Linux"
+            labels="Featured, Type-Archive, OpSys-Linux" />
+
+        <gcupload
+            username="sergei.ledvanov"
+            password="${pwd}"
+            projectname="flash-tracer"
+            filename="${basedir}/${dist.dir}/${ant.project.name}-win-${version}.zip"
+            targetfilename="${ant.project.name}-win-${version}.zip"
+            summary="Vizzy Flash Tracer ${version} for Windows"
+            labels="Featured, Type-Archive, OpSys-Windows" />
+
+        <gcupload
+            username="sergei.ledvanov"
+            password="${pwd}"
+            projectname="flash-tracer"
+            filename="${basedir}/${dist.dir}/${ant.project.name}-mac-${version}.zip"
+            targetfilename="${ant.project.name}-mac-${version}.zip"
+            summary="Vizzy Flash Tracer ${version} for Mac OS X"
+            labels="Featured, Type-Archive, OpSys-OSX" />
+    </target>
+    
 
     <!--
 
