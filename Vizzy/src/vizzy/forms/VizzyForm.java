@@ -123,7 +123,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete2.png"))); // NOI18N
-        jButton1.setPreferredSize(new java.awt.Dimension(80, 23));
+        jButton1.setPreferredSize(new java.awt.Dimension(80, 26));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jClearActionPerformed(evt);
@@ -154,9 +154,9 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
             jSearchPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jSearchPanelLayout.createSequentialGroup()
                 .add(jSearchComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(6, 6, 6)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(10, 10, 10)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jFilterCheckbox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 80, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(10, 10, 10)
                 .add(jRegexpCheckbox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -165,15 +165,15 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         jSearchPanelLayout.setVerticalGroup(
             jSearchPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jSearchPanelLayout.createSequentialGroup()
-                .add(jSearchPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jSearchComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(jSearchPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(jSearchComboBox, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(jSearchPanelLayout.createSequentialGroup()
                         .add(5, 5, 5)
-                        .add(jFilterCheckbox))
-                    .add(jSearchPanelLayout.createSequentialGroup()
-                        .add(5, 5, 5)
-                        .add(jRegexpCheckbox)))
+                        .add(jSearchPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(jRegexpCheckbox)
+                            .add(jFilterCheckbox))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 4, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jButton1, 0, 0, Short.MAX_VALUE))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -871,8 +871,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     @Override
     public void onShowNewFeaturesPanel() {
         if (newFeaturesPanel == null) {
-            newFeaturesPanel = new NewFeaturesPanel("<html>Do you know that it is possible to explore stack"
-                    + " trace source files directly from Vizzy? "
+            newFeaturesPanel = new NewFeaturesPanel("<html>Now you can hide or show search panel by pressing Ctrl(Command)+F "
                     + "<a href=\"" + Conf.URL_PROJECT_HOME + "wiki/Features\">Read more...</a></html>",
                     new INewFeaturesListener() {
                 public void click() {
@@ -889,11 +888,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
                     removeNewFeaturesPanel();
                 }
             });
-            if (jPanel1.getComponent(0).equals(jSearchPanel)) {
-                jPanel1.add(newFeaturesPanel, 1);
-            } else {
-                jPanel1.add(newFeaturesPanel, 0);
-            }
+            jPanel1.add(newFeaturesPanel, jPanel1.getComponentCount() - 2);
             jPanel1.validate();
             jPanel1.repaint();
         }
@@ -950,9 +945,6 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
 
     public void closeApp() {
         dispose();
-    }
-
-    public void onProgramFilesDetected(boolean programFilesDetected) {
     }
 
     public void onSearchVisible(boolean searchVisible) {
