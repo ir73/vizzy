@@ -385,6 +385,7 @@ public final class VizzyController implements ILogFileListener {
         settings.setEnableTraceClick(props.getProperty("settings.enable_trace_click", "true").equals("true"), true);
         settings.setCustomASEditor(props.getProperty("settings.custom_as_editor", null), true);
         settings.setSearchVisible(props.getProperty("settings.search_panel_visible", "true").equals("true"), true);
+        settings.setLineNumbersVisible(props.getProperty("settings.line_numbers_visible", "true").equals("true"), true);
         
         settings.setNewFeaturesPanelShown(props.getProperty("settings.new_features_shown" + Conf.VERSION, "false").equals("true"), true);
         settings.setTraceFont(props.getProperty("settings.font.name", settings.getDefaultFont()), 
@@ -692,6 +693,11 @@ public final class VizzyController implements ILogFileListener {
         settings.setSearchVisible(!settings.isSearchVisible(), true);
     }
 
+    public void lineNumbersVisibleClicked() {
+        settings.setLineNumbersVisible(!settings.isLineNumbersVisible(), true);
+    }
+
+
     public void snapshotClicked(String text) {
         Point location = view.getLocation();
         SnapshotForm snapshotForm = new SnapshotForm(this, settings);
@@ -769,6 +775,7 @@ public final class VizzyController implements ILogFileListener {
         props.setProperty("settings.flashlog.highlight_errors_enabled", String.valueOf(settings.isHighlightStackTraceErrors()));
         props.setProperty("settings.enable_code_popups", String.valueOf(settings.isEnableCodePopup()));
         props.setProperty("settings.search_panel_visible", String.valueOf(settings.isSearchVisible()));
+        props.setProperty("settings.line_numbers_visible", String.valueOf(settings.isLineNumbersVisible()));
         props.setProperty("settings.enable_trace_click", String.valueOf(settings.isEnableTraceClick()));
         props.setProperty("settings.custom_as_editor", String.valueOf(settings.getCustomASEditor()));
         props.setProperty("settings.use_custom_as_editor", String.valueOf(settings.isDefaultASEditor()));

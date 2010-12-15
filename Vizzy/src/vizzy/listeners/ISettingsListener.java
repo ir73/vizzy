@@ -110,4 +110,6 @@ public interface ISettingsListener {
 
     public void onSearchVisible(boolean searchVisible);
 
+    public void onLineNumbersVisible(boolean lineNumbersVisible);
+
 }

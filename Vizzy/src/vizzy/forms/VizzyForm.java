@@ -13,6 +13,7 @@ package vizzy.forms;
 
 import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.AdjustmentEvent;
@@ -31,9 +32,12 @@ import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import org.apache.log4j.Logger;
 import vizzy.comp.JScrollHighlightPanel;
+import vizzy.comp.LineHeightTextArea;
 import vizzy.comp.NewFeaturesPanel;
 import vizzy.controller.VizzyController;
 import vizzy.listeners.INewFeaturesListener;
@@ -62,6 +66,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLineNumbersTextArea = new vizzy.comp.LineHeightTextArea();
         jPanel1 = new javax.swing.JPanel();
         jSearchPanel = new javax.swing.JPanel();
         jSearchComboBox = new javax.swing.JComboBox();
@@ -82,6 +87,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jLineNumbersCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
         jSearchVisibleMenuItem = new javax.swing.JCheckBoxMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -89,6 +95,11 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         jSeparator1 = new javax.swing.JSeparator();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+
+        jLineNumbersTextArea.setBackground(new java.awt.Color(204, 204, 204));
+        jLineNumbersTextArea.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        jLineNumbersTextArea.setMinimumSize(new java.awt.Dimension(40, 18));
+        jLineNumbersTextArea.setPreferredSize(new java.awt.Dimension(40, 2147483647));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Vizzy Flash Tracer");
@@ -180,6 +191,10 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         jPanel1.add(jSearchPanel);
 
         jPanel2.setPreferredSize(new java.awt.Dimension(0, 0));
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setRowHeaderView(jLineNumbersTextArea);
 
         jTraceTextArea.setColumns(20);
         jTraceTextArea.setFont(new java.awt.Font("Courier New", 0, 12));
@@ -216,8 +231,11 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         });
         jScrollPane1.setViewportView(jTraceTextArea);
 
-        jScrollHighlight.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jScrollHighlight.setPreferredSize(new java.awt.Dimension(12, 325));
+        jPanel2.add(jScrollPane1);
+
+        jScrollHighlight.setMaximumSize(new java.awt.Dimension(8, 32767));
+        jScrollHighlight.setMinimumSize(new java.awt.Dimension(8, 0));
+        jScrollHighlight.setPreferredSize(new java.awt.Dimension(8, 325));
 
         org.jdesktop.layout.GroupLayout jScrollHighlightLayout = new org.jdesktop.layout.GroupLayout(jScrollHighlight);
         jScrollHighlight.setLayout(jScrollHighlightLayout);
@@ -227,27 +245,14 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         );
         jScrollHighlightLayout.setVerticalGroup(
             jScrollHighlightLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 270, Short.MAX_VALUE)
+            .add(0, 274, Short.MAX_VALUE)
         );
 
-        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollHighlight, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jScrollHighlight, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
-        );
+        jPanel2.add(jScrollHighlight);
 
         jPanel1.add(jPanel2);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 7));
         jPanel3.setMinimumSize(new java.awt.Dimension(0, 29));
         jPanel3.setPreferredSize(new java.awt.Dimension(762, 29));
 
@@ -306,7 +311,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
                 .add(jWordWrapCheckbox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 103, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jOnTopCheckbox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 124, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 46, Short.MAX_VALUE)
                 .add(jClearTraceButton)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(logTypeCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 117, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -337,9 +342,18 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
 
         jMenu3.setText("View");
 
+        jLineNumbersCheckBoxMenuItem.setSelected(true);
+        jLineNumbersCheckBoxMenuItem.setText("Line Numbers");
+        jLineNumbersCheckBoxMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLineNumbersVisibleClicked(evt);
+            }
+        });
+        jMenu3.add(jLineNumbersCheckBoxMenuItem);
+
         jSearchVisibleMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
-        jSearchVisibleMenuItem.setSelected(true);
-        jSearchVisibleMenuItem.setText("Search Panel");
+        jSearchVisibleMenuItem.setSelected(false);
+        jSearchVisibleMenuItem.setText("Search Panel ");
         jSearchVisibleMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuSearchVisibleClicked(evt);
@@ -532,11 +546,17 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         controller.searchPanelVisibleClicked();
     }//GEN-LAST:event_menuSearchVisibleClicked
 
+    private void menuLineNumbersVisibleClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLineNumbersVisibleClicked
+        controller.lineNumbersVisibleClicked();
+    }//GEN-LAST:event_menuLineNumbersVisibleClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JCheckBox jAutorefreshCheckBox;
     public javax.swing.JButton jButton1;
     public javax.swing.JButton jClearTraceButton;
     public javax.swing.JCheckBox jFilterCheckbox;
+    private javax.swing.JCheckBoxMenuItem jLineNumbersCheckBoxMenuItem;
+    private javax.swing.JTextArea jLineNumbersTextArea;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -624,6 +644,57 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
                 }
             }
         });
+
+        jTraceTextArea.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                populateLineNumbers();
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                populateLineNumbers();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                populateLineNumbers();
+            }
+
+        });
+    }
+
+    private void populateLineNumbers(){
+        if (!settings.isLineNumbersVisible()) {
+            return;
+        }
+//        long currentTimeMillis = System.currentTimeMillis();
+        
+        int nativeLinesCount = jTraceTextArea.getLineCount();
+        Dimension preferredSize = jTraceTextArea.getPreferredSize();
+
+        int linesCount = preferredSize.height / ((LineHeightTextArea)jLineNumbersTextArea).getRowHeightPubl();
+        if (linesCount < nativeLinesCount) {
+            return;
+        }
+
+        int existingLinesCount = jLineNumbersTextArea.getLineCount();
+        if (existingLinesCount == linesCount) {
+            return;
+        }
+        
+        int startValue = 1;
+        StringBuilder sb = new StringBuilder();
+        if (existingLinesCount < linesCount) {
+            startValue = existingLinesCount;
+            for (int i = startValue; i <= linesCount; i++){
+                sb.append(i).append(Conf.newLine);
+            }
+            jLineNumbersTextArea.append(sb.toString());
+        } 
+        
+//        long currentTimeMillis2 = System.currentTimeMillis();
+//        System.out.println(existingLinesCount + ":" + linesCount +"," + (currentTimeMillis2 - currentTimeMillis));
     }
 
     private void initVars() {
@@ -700,6 +771,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     @Override
     public void onTraceFontChanged(Font traceFont) {
         jTraceTextArea.setFont(settings.getTraceFont());
+        jLineNumbersTextArea.setFont(settings.getTraceFont());
     }
     @Override
     public void onSearchKeywordsChanged(String[] searchKeywords, DefaultComboBoxModel searchKeywordsModel) {
@@ -792,6 +864,13 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
                 repaint();
             }
         }
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                populateLineNumbers();
+            }
+        });
+        
     }
     @Override
     public JTextArea getTextArea() {
@@ -962,6 +1041,21 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
             }
         }
         jSearchVisibleMenuItem.setSelected(searchVisible);
+    }
+
+    public void onLineNumbersVisible(boolean lineNumbersVisible) {
+        if (lineNumbersVisible) {
+            jScrollPane1.setRowHeaderView(jLineNumbersTextArea);
+        } else {
+            jScrollPane1.setRowHeaderView(null);
+        }
+        jPanel1.validate();
+        jPanel1.repaint();
+        jLineNumbersCheckBoxMenuItem.setSelected(lineNumbersVisible);
+
+        if (lineNumbersVisible) {
+            populateLineNumbers();
+        }
     }
 
 }
