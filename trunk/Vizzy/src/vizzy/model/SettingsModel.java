@@ -69,6 +69,7 @@ public class SettingsModel {
     private boolean enableCodePopup;
     private boolean enableParsingSourceLines = false;
     private boolean isSearchVisible = true;
+    private boolean isLineNumbersVisible = true;
     private Map<Integer, String> sourceLines;
     private Color bgColor = Color.white;
     private Color fontColor = Color.black;
@@ -717,6 +718,17 @@ public class SettingsModel {
         this.isSearchVisible = isSearchVisible;
         if (doFireEvent && listener != null) {
             getListener().onSearchVisible(this.isSearchVisible);
+        }
+    }
+
+    public boolean isLineNumbersVisible() {
+        return isLineNumbersVisible;
+    }
+
+    public void setLineNumbersVisible(boolean isLineNumbersVisible, boolean doFireEvent) {
+        this.isLineNumbersVisible = isLineNumbersVisible;
+        if (doFireEvent && listener != null) {
+            getListener().onLineNumbersVisible(this.isLineNumbersVisible);
         }
     }
     
