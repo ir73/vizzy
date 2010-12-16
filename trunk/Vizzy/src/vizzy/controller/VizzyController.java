@@ -628,6 +628,10 @@ public final class VizzyController implements ILogFileListener {
                             && e.getKeyCode() == KeyEvent.VK_F) {
                         searchPanelVisibleClicked();
                         return true;
+                    } else if ((e.isControlDown() || e.isMetaDown())
+                            && e.getKeyCode() == KeyEvent.VK_W) {
+                        wordWrapClicked();
+                        return true;
                     }
                 } 
                 return false;
@@ -709,8 +713,8 @@ public final class VizzyController implements ILogFileListener {
         settings.getSnapshotForms().add(snapshotForm);
     }
 
-    public void wordWrapClicked(boolean selected) {
-        settings.setWordWrap(selected, true);
+    public void wordWrapClicked() {
+        settings.setWordWrap(!settings.isWordWrap(), true);
         for (SnapshotForm snapshotForm : settings.getSnapshotForms()) {
             snapshotForm.setWordWrap(settings.isWordWrap());
         }
