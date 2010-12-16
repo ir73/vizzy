@@ -45,6 +45,7 @@ import vizzy.forms.panels.SnapshotForm;
 import vizzy.listeners.ILogFileListener;
 import vizzy.listeners.IUpdateCheckListener;
 import vizzy.listeners.IVizzyView;
+import vizzy.listeners.OutOfMemoryDisplayedListener;
 import vizzy.model.Conf;
 import vizzy.model.FlashPlayerFiles;
 import vizzy.model.SearchResult;
@@ -63,6 +64,7 @@ import vizzy.tasks.LoadFileTask;
 import vizzy.tasks.MMCFGInitializer;
 import vizzy.tasks.ShowCodePopupTask;
 import vizzy.tasks.ShowCodePopupTimerTask;
+import vizzy.tasks.ShowOutOfMemMessage;
 import vizzy.tasks.WordSearcher;
 import vizzy.util.OSXAdapter;
 import vizzy.util.PathUtils;
@@ -87,7 +89,8 @@ public final class VizzyController implements ILogFileListener {
     private Timer readFileTimer;
     private OptionsForm optionsForm;
     private AboutPanel aboutForm;
-
+    private ShowOutOfMemMessage showOutOfMemMessage;
+    
     public static void main(String args[]) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -99,6 +102,7 @@ public final class VizzyController implements ILogFileListener {
             }
         });
     }
+
 
     public VizzyController() {
         super();
@@ -164,7 +168,7 @@ public final class VizzyController implements ILogFileListener {
         initSettings(view.getBounds());
         initCurrentLogTimer();
         initCheckUpdates();
-        initNewFeatures();
+//        initNewFeatures();
         initKeyBindings();
         settings.setUIActionsAvailable(true);
         settings.onAfterInit();
@@ -453,15 +457,17 @@ public final class VizzyController implements ILogFileListener {
 
         stopReadLogFileTimer();
 
-        JOptionPane.showMessageDialog(null, "The log file is too big and Vizzy has\n"
-                + "run out of memory. Vizzy has set the limit\n"
-                + "of log file to 50KB. You can customize this\n"
-                + "value in Options menu.", "Warning", JOptionPane.ERROR_MESSAGE);
-
-        createReadLogTimerTask().run();
-        if (settings.isAutoRefresh()) {
-            startReadLogFileTimer();
-        }
+        showOutOfMemMessage = new ShowOutOfMemMessage(new OutOfMemoryDisplayedListener() {
+            @Override
+            public void messageDisplayed() {
+                JOptionPane.showMessageDialog(null, "The log file is too big and Vizzy has\n" + "run out of memory. Vizzy has set the limit\n" + "of log file to 50KB. You can customize this\n" + "value in Options menu.", "Warning", JOptionPane.ERROR_MESSAGE);
+                createReadLogTimerTask().run();
+                if (settings.isAutoRefresh()) {
+                    startReadLogFileTimer();
+                }
+            }
+        });
+        showOutOfMemMessage.start();
     }
 
     private void highlightStackTraceErrors() {
