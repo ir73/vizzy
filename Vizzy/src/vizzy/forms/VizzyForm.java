@@ -80,13 +80,13 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         jPanel3 = new javax.swing.JPanel();
         jClearTraceButton = new javax.swing.JButton();
         logTypeCombo = new javax.swing.JComboBox();
-        jWordWrapCheckbox = new javax.swing.JCheckBox();
         jOnTopCheckbox = new javax.swing.JCheckBox();
         jAutorefreshCheckBox = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jWordWrapCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
         jLineNumbersCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
         jSearchVisibleMenuItem = new javax.swing.JCheckBoxMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -270,16 +270,6 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
             }
         });
 
-        jWordWrapCheckbox.setSelected(true);
-        jWordWrapCheckbox.setText("Word Wrap");
-        jWordWrapCheckbox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        jWordWrapCheckbox.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jWordWrapCheckbox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jWordWrapCheckboxChecked(evt);
-            }
-        });
-
         jOnTopCheckbox.setText("Always on Top");
         jOnTopCheckbox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         jOnTopCheckbox.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -306,10 +296,8 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel3Layout.createSequentialGroup()
                 .add(jAutorefreshCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jWordWrapCheckbox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 103, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jOnTopCheckbox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 124, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 159, Short.MAX_VALUE)
                 .add(jClearTraceButton)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(logTypeCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 117, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -320,8 +308,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
                 .add(jAutorefreshCheckBox)
                 .add(logTypeCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(jClearTraceButton)
-                .add(jOnTopCheckbox)
-                .add(jWordWrapCheckbox))
+                .add(jOnTopCheckbox))
         );
 
         jPanel1.add(jPanel3);
@@ -339,6 +326,16 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         jMenuBar1.add(jMenu1);
 
         jMenu3.setText("View");
+
+        jWordWrapCheckBoxMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_MASK));
+        jWordWrapCheckBoxMenuItem.setSelected(true);
+        jWordWrapCheckBoxMenuItem.setText("Word Wrap");
+        jWordWrapCheckBoxMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jWordWrapCheckBoxMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jWordWrapCheckBoxMenuItem);
 
         jLineNumbersCheckBoxMenuItem.setSelected(true);
         jLineNumbersCheckBoxMenuItem.setText("Line Numbers");
@@ -428,11 +425,6 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         if (!settings.isUIActionsAvailable()) return;
         controller.autoRefreshClicked(jAutorefreshCheckBox.isSelected());
 }//GEN-LAST:event_jAutorefreshCheckBoxjAutorefreshCheckboxChecked
-
-    private void jWordWrapCheckboxChecked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWordWrapCheckboxChecked
-        if (!settings.isUIActionsAvailable()) return;
-        controller.wordWrapClicked(jWordWrapCheckbox.isSelected());
-}//GEN-LAST:event_jWordWrapCheckboxChecked
 
     private void jOnTopCheckboxChecked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOnTopCheckboxChecked
         if (!settings.isUIActionsAvailable()) return;
@@ -547,6 +539,11 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         controller.lineNumbersVisibleClicked();
     }//GEN-LAST:event_menuLineNumbersVisibleClicked
 
+    private void jWordWrapCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWordWrapCheckBoxMenuItemActionPerformed
+        if (!settings.isUIActionsAvailable()) return;
+        controller.wordWrapClicked();
+    }//GEN-LAST:event_jWordWrapCheckBoxMenuItemActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JCheckBox jAutorefreshCheckBox;
     public javax.swing.JButton jButton1;
@@ -575,7 +572,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     private javax.swing.JCheckBoxMenuItem jSearchVisibleMenuItem;
     private javax.swing.JSeparator jSeparator1;
     public javax.swing.JTextArea jTraceTextArea;
-    public javax.swing.JCheckBox jWordWrapCheckbox;
+    private javax.swing.JCheckBoxMenuItem jWordWrapCheckBoxMenuItem;
     public javax.swing.JComboBox logTypeCombo;
     // End of variables declaration//GEN-END:variables
 
@@ -810,7 +807,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     }
     @Override
     public void onWordWrapChanged(boolean wordWrap) {
-        jWordWrapCheckbox.setSelected(settings.isWordWrap());
+        jWordWrapCheckBoxMenuItem.setSelected(settings.isWordWrap());
         jTraceTextArea.setLineWrap(settings.isWordWrap());
     }
     @Override
