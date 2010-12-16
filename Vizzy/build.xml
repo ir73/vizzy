@@ -12,7 +12,7 @@
     <import file="nbproject/build-impl.xml"/>
     <import file="nbproject/profiler-build-impl.xml"/>
 
-    <property name="version" value="3.2"/>
+    <property name="version" value="3.3"/>
     <property name="vizzy_plugin_version" value="1.0"/>
     <property name="vizzy_trace_version" value="1.0"/>
     <property name="dist.dir" value="dist"/>
