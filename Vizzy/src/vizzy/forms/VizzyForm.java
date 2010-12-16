@@ -98,8 +98,8 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
 
         jLineNumbersTextArea.setBackground(new java.awt.Color(204, 204, 204));
         jLineNumbersTextArea.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
-        jLineNumbersTextArea.setMinimumSize(new java.awt.Dimension(40, 18));
-        jLineNumbersTextArea.setPreferredSize(new java.awt.Dimension(40, 2147483647));
+        jLineNumbersTextArea.setMinimumSize(new java.awt.Dimension(40, 2147483647));
+        jLineNumbersTextArea.setPreferredSize(new java.awt.Dimension(40, 500));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Vizzy Flash Tracer");
@@ -196,10 +196,8 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setRowHeaderView(jLineNumbersTextArea);
 
-        jTraceTextArea.setColumns(20);
-        jTraceTextArea.setFont(new java.awt.Font("Courier New", 0, 12));
+        jTraceTextArea.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
         jTraceTextArea.setLineWrap(true);
-        jTraceTextArea.setRows(5);
         jTraceTextArea.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
             public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
                 jTraceTextAreaMouseWheelMoved(evt);
@@ -352,7 +350,6 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         jMenu3.add(jLineNumbersCheckBoxMenuItem);
 
         jSearchVisibleMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
-        jSearchVisibleMenuItem.setSelected(false);
         jSearchVisibleMenuItem.setText("Search Panel ");
         jSearchVisibleMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -645,22 +642,29 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
             }
         });
 
-        jTraceTextArea.getDocument().addDocumentListener(new DocumentListener(){
+//        jTraceTextArea.getDocument().addDocumentListener(new DocumentListener(){
+//            @Override
+//            public void changedUpdate(DocumentEvent de) {
+//                populateLineNumbers();
+//            }
+//
+//            @Override
+//            public void insertUpdate(DocumentEvent de) {
+//                populateLineNumbers();
+//            }
+//
+//            @Override
+//            public void removeUpdate(DocumentEvent de) {
+//                populateLineNumbers();
+//            }
+//
+//        });
+
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void changedUpdate(DocumentEvent de) {
+            public void run() {
                 populateLineNumbers();
             }
-
-            @Override
-            public void insertUpdate(DocumentEvent de) {
-                populateLineNumbers();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent de) {
-                populateLineNumbers();
-            }
-
         });
     }
 
@@ -668,18 +672,27 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         if (!settings.isLineNumbersVisible()) {
             return;
         }
-//        long currentTimeMillis = System.currentTimeMillis();
         
-        int nativeLinesCount = jTraceTextArea.getLineCount();
-        Dimension preferredSize = jTraceTextArea.getPreferredSize();
+//        long currentTimeMillis = System.currentTimeMillis();
 
-        int linesCount = preferredSize.height / ((LineHeightTextArea)jLineNumbersTextArea).getRowHeightPubl();
-        if (linesCount < nativeLinesCount) {
+        int traceLinesCount = jTraceTextArea.getLineCount();
+        
+        Dimension tracePrefSize = jTraceTextArea.getPreferredSize();
+        Dimension lineNumbersPrefSize = jLineNumbersTextArea.getPreferredSize();
+        
+        jLineNumbersTextArea.setPreferredSize(new Dimension(lineNumbersPrefSize.width, tracePrefSize.height));
+
+        int linesCount = tracePrefSize.height / ((LineHeightTextArea)jLineNumbersTextArea).getRowHeightPubl();
+        if (linesCount < traceLinesCount) {
+//            long currentTimeMillis2 = System.currentTimeMillis();
+//            System.out.println("return 1: time:" + (currentTimeMillis2 - currentTimeMillis));
             return;
         }
 
         int existingLinesCount = jLineNumbersTextArea.getLineCount();
         if (existingLinesCount == linesCount) {
+//            long currentTimeMillis2 = System.currentTimeMillis();
+//            System.out.println("return 2: " + existingLinesCount + ":" + linesCount +", time:" + (currentTimeMillis2 - currentTimeMillis));
             return;
         }
         
@@ -692,9 +705,10 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
             }
             jLineNumbersTextArea.append(sb.toString());
         } 
-        
 //        long currentTimeMillis2 = System.currentTimeMillis();
-//        System.out.println(existingLinesCount + ":" + linesCount +"," + (currentTimeMillis2 - currentTimeMillis));
+//        System.out.println("return 1: time:" + (currentTimeMillis2 - currentTimeMillis));
+//        long currentTimeMillis2 = System.currentTimeMillis();
+//        System.out.println("return 3: " + existingLinesCount + ":" + linesCount +", time:" + (currentTimeMillis2 - currentTimeMillis));
     }
 
     private void initVars() {
@@ -781,6 +795,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     public void onFilterChanged(boolean filter) {
         if (!filter) {
             jTraceTextArea.setText(settings.getTraceContent());
+            populateLineNumbers();
         }
         jFilterCheckbox.setSelected(settings.isFilter());
         updateCommaTooltipCheckBox();
@@ -839,6 +854,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     public void onTraceContentChanged(String traceContent) {
         if ("".equals(traceContent) || traceContent == null) {
             jTraceTextArea.setText(settings.getTraceContent());
+            populateLineNumbers();
             needToScrolldown = true;
             ((JScrollHighlightPanel) jScrollHighlight).setIndexes(null);
         } else {
@@ -847,6 +863,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
             boolean filteringOff = !(settings.getSearcher().isWasSearching() && settings.isFilter());
             if (filteringOff) {
                 jTraceTextArea.setText(traceContent);
+                populateLineNumbers();
             }
             if (needToScrolldown) {
                 jTraceTextArea.setCaretPosition(jTraceTextArea.getDocument().getLength());
@@ -864,13 +881,6 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
                 repaint();
             }
         }
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                populateLineNumbers();
-            }
-        });
-        
     }
     @Override
     public JTextArea getTextArea() {
@@ -900,6 +910,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
             if (needToScrolldown) {
                 jTraceTextArea.setCaretPosition(jTraceTextArea.getDocument().getLength());
             }
+            populateLineNumbers();
         } catch (Exception ex) {
             log.warn("onSearch()", ex);
         }
@@ -911,6 +922,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
             jTraceTextArea.setText(settings.getTraceContent());
             jTraceTextArea.repaint();
             jTraceTextArea.validate();
+            populateLineNumbers();
         } catch (Exception ex) {
             log.warn("onSearch()", ex);
         }
@@ -930,6 +942,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         jSearchComboBox.setSelectedItem("");
         highlightSearchComboBox(false, false);
         ((JScrollHighlightPanel)jScrollHighlight).setIndexes(null);
+        populateLineNumbers();
     }
 
     @Override
