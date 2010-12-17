@@ -31,6 +31,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Timer;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -86,10 +89,11 @@ public final class VizzyController implements ILogFileListener {
     private Timer showCodePopupTimer;
     private Timer hideCodePopupTimer;
     private Properties props;
-    private Timer readFileTimer;
     private OptionsForm optionsForm;
     private AboutPanel aboutForm;
     private ShowOutOfMemMessage showOutOfMemMessage;
+    private ScheduledExecutorService readFilescheduler;
+
     
     public static void main(String args[]) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -359,14 +363,13 @@ public final class VizzyController implements ILogFileListener {
 
     public void startReadLogFileTimer() {
         stopReadLogFileTimer();
-        readFileTimer = new Timer();
-        readFileTimer.schedule(createReadLogTimerTask(), 1000, settings.getRefreshFreq());
+        readFilescheduler = Executors.newSingleThreadScheduledExecutor();
+        readFilescheduler.scheduleWithFixedDelay(createReadLogTimerTask(), 1000, settings.getRefreshFreq(), TimeUnit.MILLISECONDS);
     }
 
     public void stopReadLogFileTimer() {
-        if (readFileTimer != null) {
-            readFileTimer.cancel();
-            readFileTimer = null;
+        if (readFilescheduler != null && !readFilescheduler.isShutdown()) {
+            readFilescheduler.shutdown();
         }
     }
     
@@ -428,7 +431,7 @@ public final class VizzyController implements ILogFileListener {
             return;
         }
 
-        CheckLogReadTime check = new CheckLogReadTime(this, settings.getRefreshFreq());
+        CheckLogReadTime check = new CheckLogReadTime(this, Conf.MAX_TIMER_BEFORE_OUTOFMEMORY);
         check.start();
 
         if (settings.isEnableParsingSourceLines()) {
@@ -497,7 +500,7 @@ public final class VizzyController implements ILogFileListener {
             return;
         }
         stopShowCodeTimer();
-        showCodePopupTimer = new Timer();
+        showCodePopupTimer = new Timer("startShowCodePopupTimer", true);
         showCodePopupTimer.schedule(new ShowCodePopupTimerTask(this, pt), 500, 500);
     }
     public void startHideCodePopupTimer() {
@@ -505,7 +508,7 @@ public final class VizzyController implements ILogFileListener {
             return;
         }
         stopHideCodePopupTimer();
-        hideCodePopupTimer = new Timer();
+        hideCodePopupTimer = new Timer("startHideCodePopupTimer", true);
         hideCodePopupTimer.schedule(new HideCodePopupTimerTask(this), 500, 500);
     }
     public void stopHideCodePopupTimer() {

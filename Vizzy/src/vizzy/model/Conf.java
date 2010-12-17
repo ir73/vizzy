@@ -65,5 +65,6 @@ public class Conf {
     public static final String WEBSITE_UPDATE_PHRASE = "Current version is: ";
     public static final String WEBSITE_FEATURES_PHRASE = "Current version features: ";
     public static final long MAX_NUM_LINES_OUTOFMEMORY = 50000;
+    public static final long MAX_TIMER_BEFORE_OUTOFMEMORY = 3000;
 
 }

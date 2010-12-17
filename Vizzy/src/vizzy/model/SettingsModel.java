@@ -44,8 +44,8 @@ public class SettingsModel {
     private boolean isAutoRefresh = true;
     private boolean isUTF = true;
     private boolean isCheckUpdates = true;
-    private boolean maxNumLinesEnabled = false;
-    private long maxNumLines = 20;
+    private volatile boolean maxNumLinesEnabled = false;
+    private volatile long maxNumLines = 20;
     private boolean restoreOnUpdate = false;
     private long refreshFreq = 500;
     private boolean isAlwaysOnTop;
