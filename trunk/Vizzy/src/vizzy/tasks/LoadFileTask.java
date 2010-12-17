@@ -12,7 +12,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.RandomAccessFile;
-import java.util.TimerTask;
 import org.apache.log4j.Logger;
 import vizzy.listeners.ILogFileListener;
 import vizzy.model.SettingsModel;
@@ -21,7 +20,7 @@ import vizzy.model.SettingsModel;
  *
  * @author Admin
  */
-public class LoadFileTask extends TimerTask {
+public class LoadFileTask extends Thread {
 
     private static final Logger log = Logger.getLogger(LoadFileTask.class);
 

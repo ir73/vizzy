@@ -38,6 +38,7 @@ public class CheckLogReadTime extends Thread {
         }
 
         listener.onOutOfMemory();
+        dispose();
     }
 
     private void dispose() {
