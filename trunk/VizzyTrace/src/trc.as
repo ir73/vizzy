@@ -20,6 +20,7 @@
  * @author Sergei Ledvanov
  */
 package {
+	import flash.system.Capabilities;
 	
 	/**
 	 * Traces lines with Vizzy debug information depending 
@@ -29,7 +30,8 @@ package {
 	 * comma separated objects to trace
 	 */
 	public function trc(...strings):void {
-		if (VizzyTrace.mode == VizzyTrace.SIMPLE) {
+		if (!Capabilities.isDebugger 
+					|| VizzyTrace.mode == VizzyTrace.SIMPLE) {
 			trace.apply(null, strings);
 			return;
 		}

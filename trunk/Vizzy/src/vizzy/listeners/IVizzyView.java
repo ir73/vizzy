@@ -8,6 +8,7 @@ package vizzy.listeners;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import vizzy.comp.JScrollHighlightPanel;
 
@@ -28,5 +29,7 @@ public interface IVizzyView extends ISettingsListener {
     public JTextArea getTextArea();
 
     public JScrollHighlightPanel getHighLightScroll();
+
+    public JScrollPane getScrollPane();
 
 }
