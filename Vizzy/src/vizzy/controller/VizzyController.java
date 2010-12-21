@@ -311,7 +311,8 @@ public final class VizzyController implements ILogFileListener {
         settings.getSearcher().setHighlightPanel(view.getHighLightScroll());
         settings.getKeywordsHighlighter().setTextArea(view.getTextArea());
         settings.getHandleWordAtPosition().setTextArea(view.getTextArea());
-        settings.getCodePopupHandler().setOwner(view.getTextArea());
+        settings.getCodePopupHandler().setTextArea(view.getTextArea());
+        settings.getCodePopupHandler().setOwner(view.getScrollPane());
         
         String defaultFont = "Courier New";
         Font[] fonts = settings.getFonts();
@@ -556,12 +557,23 @@ public final class VizzyController implements ILogFileListener {
         try {
             source = settings.getHandleWordAtPosition().checkSourceFile(offset, false);
         } catch (Exception ex) {
-//            log.warn("checkSourceFile()", ex);
+            log.warn("onShowCodePopup 1()", ex);
         }
-        if (source == null) {
+        if (source != null) {
+            settings.getCodePopupHandler().show(pt, source);
             return;
         }
-        settings.getCodePopupHandler().show(pt, source);
+
+        String checkJSON = null;
+        try {
+            checkJSON = settings.getHandleWordAtPosition().checkJSON(offset);
+        } catch (Exception ex) {
+            log.warn("onShowCodePopup 2()", ex);
+        }
+        if (checkJSON != null) {
+            settings.getCodePopupHandler().show(pt, checkJSON);
+            return;
+        }
     }
 
 

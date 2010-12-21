@@ -17,7 +17,7 @@
     <use-resource-bundle-metadata>true</use-resource-bundle-metadata>
     <verbose-stacktraces>false</verbose-stacktraces>
     <source-path>
-      <path-element>C:\svn-projects-repos\Vizzy2\vizzy\VizzyTrace\src</path-element>
+      <path-element>C:\svn-projects-repos\Vizzy\vizzy\VizzyTrace\src</path-element>
     </source-path>
   </compiler>
   <include-classes>

@@ -34,7 +34,6 @@ import vizzy.util.StringUtils;
 public class CodeForm extends JPanel {
     private static final Logger log = Logger.getLogger(CodeForm.class);
 
-    private int scrollPos;
     private int highlightedLinePos;
 
     /** Creates new form CodeForm */
@@ -57,6 +56,7 @@ public class CodeForm extends JPanel {
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setViewportView(jCodeTextPane);
 
@@ -78,12 +78,13 @@ public class CodeForm extends JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-    public void updateSize() {
+    public void updateSize(int height) {
         Dimension dim = jCodeTextPane.getPreferredScrollableViewportSize();
         jCodeTextPane.setPreferredSize(dim);
-        dim = new Dimension(Math.min(400, dim.width)
+        int w = Math.max(Math.min(400, dim.width), 100);
+        dim = new Dimension(w
                 + jScrollPane1.getVerticalScrollBar().getPreferredSize().width,
-                getPreferredSize().height);
+                height);
         setPreferredSize(dim);
         setBounds(0, 0, dim.width, dim.height);
     }
@@ -103,7 +104,6 @@ public class CodeForm extends JPanel {
     public void setText(List<String> lines, int boldLineNum) {
         try {
             StyledDocument doc = jCodeTextPane.getStyledDocument();
-            scrollPos = -1;
             highlightedLinePos = -1;
             for (int i = 0; i < lines.size(); i++) {
                 String line = lines.get(i) + Conf.newLine;
@@ -114,9 +114,6 @@ public class CodeForm extends JPanel {
                 } else {
                     int len = doc.getLength();
                     doc.insertString(len, line, doc.getStyle("regular"));
-                    if (i == boldLineNum + 3) {
-                        scrollPos = len;
-                    }
                 }
             }
         } catch (BadLocationException ex) {
@@ -129,27 +126,27 @@ public class CodeForm extends JPanel {
     }
 
     public void scrollText() {
-        if (scrollPos == -1) {
-            jCodeTextPane.setCaretPosition(jCodeTextPane.getDocument().getLength());
-        } else {
-            jCodeTextPane.setCaretPosition(scrollPos);
-            if (highlightedLinePos != -1) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        try {
-                            Rectangle rect = jCodeTextPane.modelToView(highlightedLinePos);
-                            jScrollPane1.getHorizontalScrollBar().setValue((int)(rect.getX()/3*2));
-                        } catch (BadLocationException ex) {
+        if (highlightedLinePos != -1) {
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    try {
+                        Rectangle rect = jCodeTextPane.modelToView(highlightedLinePos);
+                        jScrollPane1.getHorizontalScrollBar().setValue((int) (rect.getX() / 3 * 2));
+                        jScrollPane1.getVerticalScrollBar().setValue((int) (rect.getY() - getHeight() / 2));
+                    } catch (BadLocationException ex) {
 //                            log.warn("cannot scroll text, scrollText()", ex);
-                        }
                     }
-                });
-            }
+                }
+            });
         }
     }
 
     public void setFocus() {
         jCodeTextPane.requestFocus();
+    }
+
+    public void setText(String content) {
+        jCodeTextPane.setText(content);
     }
 
 }

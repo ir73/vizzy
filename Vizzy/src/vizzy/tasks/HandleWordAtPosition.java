@@ -11,6 +11,8 @@ import java.net.URI;
 import javax.swing.JTextArea;
 import javax.swing.text.BadLocationException;
 import org.apache.log4j.Logger;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import vizzy.model.Conf;
 import vizzy.model.SettingsModel;
 import vizzy.model.SourceAndLine;
@@ -35,7 +37,7 @@ public class HandleWordAtPosition {
     public void setTextArea(JTextArea textArea) {
         this.textArea = textArea;
     }
-    
+
     class MinPositionParam {
         public String separator;
         public boolean substract;
@@ -74,6 +76,7 @@ public class HandleWordAtPosition {
         } catch (Exception ex) {
 //            log.warn("findObjectAtPositionAndExecute() checkSourceFile failed", ex);
         }
+
         return false;
     }
 
@@ -171,6 +174,32 @@ public class HandleWordAtPosition {
         }
 
         return source;
+    }
+
+    public String checkJSON(int offset) throws Exception {
+        String selectedText = textArea.getSelectedText();
+
+        if (selectedText == null || selectedText.isEmpty()) {
+            return null;
+        }
+
+        if (textArea.getSelectionStart() > offset
+                || textArea.getSelectionEnd() < offset) {
+            return null;
+        }
+
+        JSONObject parse = null;
+        try {
+            parse = (JSONObject) new JSONParser().parse(selectedText);
+        } catch (Exception e) {
+
+        }
+        if (parse == null) {
+            return null;
+        }
+        JSONObject.inline = 0;
+        String toJSONString = parse.toJSONString();
+        return toJSONString;
     }
 
     private SourceAndLine extractSourceFile(int currentIndex, String text, int taLineNum, int taTotalLines) {

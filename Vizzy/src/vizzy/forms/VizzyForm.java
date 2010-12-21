@@ -29,11 +29,10 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import org.apache.log4j.Logger;
 import vizzy.comp.JScrollHighlightPanel;
@@ -1066,6 +1065,10 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         if (lineNumbersVisible) {
             populateLineNumbers();
         }
+    }
+
+    public JScrollPane getScrollPane() {
+        return jScrollPane1;
     }
 
 }
