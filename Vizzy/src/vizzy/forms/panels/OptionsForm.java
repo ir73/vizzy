@@ -199,7 +199,7 @@ public class OptionsForm extends javax.swing.JFrame {
             }
         });
 
-        jEnablePopupsCheckBox.setText("<html>Enable code popup when mouse is over the stack-trace source file</html>");
+        jEnablePopupsCheckBox.setText("<html>Enable code popup on right click to explore stack-traces and JSON</html>");
         jEnablePopupsCheckBox.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabelCodePopupInfo.setText("<html>(<a href=\"http://code.google.com/p/flash-tracer/wiki/Features#Explore_Source_Code_(since_2.3)\">what's this?</a>)</html>");

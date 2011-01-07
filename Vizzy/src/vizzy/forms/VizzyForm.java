@@ -516,8 +516,10 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
 
     private void jTraceTextAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTraceTextAreaMouseClicked
         if (!settings.isUIActionsAvailable()) return;
-        if ((evt.getClickCount() == 2)) {
+        if (evt.getClickCount() == 2) {
             controller.textAreaDoubleClicked(evt.getPoint());
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {
+            controller.textAreaRightClicked(evt.getPoint());
         }
     }//GEN-LAST:event_jTraceTextAreaMouseClicked
 
@@ -959,14 +961,14 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     @Override
     public void onShowNewFeaturesPanel() {
         if (newFeaturesPanel == null) {
-            newFeaturesPanel = new NewFeaturesPanel("<html>Now you can hide or show search panel by pressing Ctrl(Command)+F "
-                    + "<a href=\"" + Conf.URL_PROJECT_HOME + "wiki/Features\">Read more...</a></html>",
+            newFeaturesPanel = new NewFeaturesPanel("<html>Code popup id now enabled "
+                    + "by right click. Also, check how to explore JSON...</html>",
                     new INewFeaturesListener() {
                 public void click() {
                     removeNewFeaturesPanel();
                     if (Desktop.isDesktopSupported()) {
                         try {
-                            Desktop.getDesktop().browse(new URI(Conf.URL_PROJECT_HOME + "wiki/Features"));
+                            Desktop.getDesktop().browse(new URI(Conf.URL_PROJECT_HOME + "wiki/Features#JSON_parser"));
                         } catch (Exception ex) {
 //                            log.warn("browse()", ex);
                         }

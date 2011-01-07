@@ -166,7 +166,7 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="jEnablePopupsCheckBox">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;Enable code popup when mouse is over the stack-trace source file&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;Enable code popup on right click to explore stack-traces and JSON&lt;/html&gt;"/>
             <Property name="verticalAlignment" type="int" value="3"/>
           </Properties>
         </Component>
