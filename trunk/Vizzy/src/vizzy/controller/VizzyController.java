@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package vizzy.controller;
 
 import java.awt.Font;
@@ -66,7 +65,6 @@ import vizzy.tasks.KeywordsHighlighter;
 import vizzy.tasks.LoadFileTask;
 import vizzy.tasks.MMCFGInitializer;
 import vizzy.tasks.ShowCodePopupTask;
-import vizzy.tasks.ShowCodePopupTimerTask;
 import vizzy.tasks.ShowOutOfMemMessage;
 import vizzy.tasks.WordSearcher;
 import vizzy.util.OSXAdapter;
@@ -82,11 +80,9 @@ public final class VizzyController implements ILogFileListener {
     private static final Logger log = Logger.getLogger(VizzyController.class.getName());
     private static IVizzyView view;
     private static VizzyController controller;
-
     private SettingsModel settings;
     private MMCFGInitializer mmcfgInitializer;
     private CheckUpdates checkUpdatesThread;
-    private Timer showCodePopupTimer;
     private Timer hideCodePopupTimer;
     private Properties props;
     private OptionsForm optionsForm;
@@ -94,9 +90,9 @@ public final class VizzyController implements ILogFileListener {
     private ShowOutOfMemMessage showOutOfMemMessage;
     private ScheduledExecutorService readFilescheduler;
 
-    
     public static void main(String args[]) {
         SwingUtilities.invokeLater(new Runnable() {
+
             public void run() {
                 try {
                     VizzyController.controller = new VizzyController();
@@ -106,7 +102,6 @@ public final class VizzyController implements ILogFileListener {
             }
         });
     }
-
 
     public VizzyController() {
         super();
@@ -157,7 +152,7 @@ public final class VizzyController implements ILogFileListener {
         view = new VizzyForm(this, settings);
         settings.setListener(view);
         settings.setUIActionsAvailable(false);
-        
+
         settings.onInit();
         init();
     }
@@ -172,7 +167,7 @@ public final class VizzyController implements ILogFileListener {
         initSettings(view.getBounds());
         initCurrentLogTimer();
         initCheckUpdates();
-//        initNewFeatures();
+        initNewFeatures();
         initKeyBindings();
         settings.setUIActionsAvailable(true);
         settings.onAfterInit();
@@ -255,7 +250,6 @@ public final class VizzyController implements ILogFileListener {
         settings.setFontNames(f.getFontNames(), false);
     }
 
-
     /**
      * Get flashlog.txt file location depending on user's
      * operation system
@@ -284,9 +278,9 @@ public final class VizzyController implements ILogFileListener {
 //                    "Info", JOptionPane.INFORMATION_MESSAGE);
 //        }
         if (mmcfgInitializer.getTraceFileLocation() != null) {
-             settings.setFlashLogFileName(mmcfgInitializer.getTraceFileLocation(), false);
+            settings.setFlashLogFileName(mmcfgInitializer.getTraceFileLocation(), false);
         }
-        
+
     }
 
     /**
@@ -313,7 +307,7 @@ public final class VizzyController implements ILogFileListener {
         settings.getHandleWordAtPosition().setTextArea(view.getTextArea());
         settings.getCodePopupHandler().setTextArea(view.getTextArea());
         settings.getCodePopupHandler().setOwner(view.getScrollPane());
-        
+
         String defaultFont = "Courier New";
         Font[] fonts = settings.getFonts();
         for (Font font : fonts) {
@@ -334,9 +328,11 @@ public final class VizzyController implements ILogFileListener {
             if (diff > 0) {
                 settings.setLastUpdateDate(nowDate, false);
                 checkUpdatesThread = new CheckUpdates(false, new IUpdateCheckListener() {
+
                     public void offerUpdate() {
                         settings.setAlwaysOnTopUI(false, true);
                     }
+
                     public void updateFinished(boolean downloaded) {
                         settings.setAlwaysOnTopUI(settings.isAlwaysOnTop(), true);
                         if (downloaded) {
@@ -373,7 +369,7 @@ public final class VizzyController implements ILogFileListener {
             readFilescheduler.shutdown();
         }
     }
-    
+
     private void initSettings(Rectangle rect) {
         settings.setLastUpdateDate(props.getProperty("settings.update.last"), true);
         settings.setCheckUpdates(props.getProperty("settings.update.autoupdates", "true").equals("true"), true);
@@ -394,9 +390,9 @@ public final class VizzyController implements ILogFileListener {
         settings.setCustomASEditor(props.getProperty("settings.custom_as_editor", null), true);
         settings.setSearchVisible(props.getProperty("settings.search_panel_visible", "true").equals("true"), true);
         settings.setLineNumbersVisible(props.getProperty("settings.line_numbers_visible", "true").equals("true"), true);
-        
+
         settings.setNewFeaturesPanelShown(props.getProperty("settings.new_features_shown" + Conf.VERSION, "false").equals("true"), true);
-        settings.setTraceFont(props.getProperty("settings.font.name", settings.getDefaultFont()), 
+        settings.setTraceFont(props.getProperty("settings.font.name", settings.getDefaultFont()),
                 props.getProperty("settings.font.size", "12"), true);
         settings.setFontColor(props.getProperty("settings.font.color"), true);
         settings.setBgColor(props.getProperty("settings.text_area.color"), true);
@@ -438,7 +434,7 @@ public final class VizzyController implements ILogFileListener {
         if (settings.isEnableParsingSourceLines()) {
             log = parseLogSourceData(log);
         }
-        
+
         settings.setRecentHash(currentHash, false);
         settings.setTraceContent(log, true);
 
@@ -462,6 +458,7 @@ public final class VizzyController implements ILogFileListener {
         stopReadLogFileTimer();
 
         showOutOfMemMessage = new ShowOutOfMemMessage(new OutOfMemoryDisplayedListener() {
+
             @Override
             public void messageDisplayed() {
                 JOptionPane.showMessageDialog(null, "The log file is too big and Vizzy has\n" + "run out of memory. Vizzy has set the limit\n" + "of log file to 50KB. You can customize this\n" + "value in Options menu.", "Warning", JOptionPane.ERROR_MESSAGE);
@@ -487,23 +484,6 @@ public final class VizzyController implements ILogFileListener {
         return false;
     }
 
-    public void stopShowCodeTimer() {
-        if (!settings.isEnableCodePopup()) {
-            return;
-        }
-        if (showCodePopupTimer != null) {
-            showCodePopupTimer.cancel();
-            showCodePopupTimer = null;
-        }
-    }
-    public void startShowCodePopupTimer(Point pt) {
-        if (!settings.isEnableCodePopup()) {
-            return;
-        }
-        stopShowCodeTimer();
-        showCodePopupTimer = new Timer("startShowCodePopupTimer", true);
-        showCodePopupTimer.schedule(new ShowCodePopupTimerTask(this, pt), 500, 500);
-    }
     public void startHideCodePopupTimer() {
         if (!settings.isEnableCodePopup()) {
             return;
@@ -512,6 +492,7 @@ public final class VizzyController implements ILogFileListener {
         hideCodePopupTimer = new Timer("startHideCodePopupTimer", true);
         hideCodePopupTimer.schedule(new HideCodePopupTimerTask(this), 500, 500);
     }
+
     public void stopHideCodePopupTimer() {
         if (!settings.isEnableCodePopup()) {
             return;
@@ -521,6 +502,7 @@ public final class VizzyController implements ILogFileListener {
             hideCodePopupTimer = null;
         }
     }
+
     public void hideCodePopup() {
         if (!settings.isEnableCodePopup()) {
             return;
@@ -531,6 +513,7 @@ public final class VizzyController implements ILogFileListener {
         settings.getHandleWordAtPosition().removeHighlight();
         settings.getCodePopupHandler().hide();
     }
+
     public void onHideCodePopup() {
         if (!settings.isEnableCodePopup()) {
             return;
@@ -539,54 +522,8 @@ public final class VizzyController implements ILogFileListener {
         Point mouseLocation = MouseInfo.getPointerInfo().getLocation();
         if (mouseLocation == null || !settings.getCodePopupHandler().isMouseAtCodePopup(mouseLocation)) {
             hideCodePopup();
-            Point mousePosition = view.getTextArea().getMousePosition();
-            if (mousePosition != null) {
-                startShowCodePopupTimer(mousePosition);
-            }
         }
     }
-    public void onShowCodePopup(Point pt) {
-        if (!settings.isEnableCodePopup()) {
-            return;
-        }
-        stopShowCodeTimer();
-        hideCodePopup();
-
-        int offset = view.getTextArea().viewToModel(pt);
-        SourceAndLine source = null;
-        try {
-            source = settings.getHandleWordAtPosition().checkSourceFile(offset, false);
-        } catch (Exception ex) {
-            log.warn("onShowCodePopup 1()", ex);
-        }
-        if (source != null) {
-            settings.getCodePopupHandler().show(pt, source);
-            return;
-        }
-
-        String checkJSON = null;
-        try {
-            checkJSON = settings.getHandleWordAtPosition().checkJSON(offset);
-        } catch (Exception ex) {
-            log.warn("onShowCodePopup 2()", ex);
-        }
-        if (checkJSON != null) {
-            settings.getCodePopupHandler().show(pt, checkJSON);
-            return;
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
 
     private void setLogType(String property, boolean uiTrigger) {
         settings.setLogType(property, uiTrigger);
@@ -597,7 +534,7 @@ public final class VizzyController implements ILogFileListener {
                 JOptionPane.showMessageDialog(null, "Vizzy has updated mm.cfg file to enable\n"
                         + "policy logging. Please restart all your browsers\n"
                         + "for the changes to take effect.",
-                    "Info", JOptionPane.INFORMATION_MESSAGE);
+                        "Info", JOptionPane.INFORMATION_MESSAGE);
             }
         }
         if (settings.getLogType() == 0) {
@@ -624,9 +561,39 @@ public final class VizzyController implements ILogFileListener {
         if (settings.isAutoRefresh()) {
             stopReadLogFileTimer();
         }
-        stopShowCodeTimer();
         hideCodePopup();
         stopHideCodePopupTimer();
+    }
+
+    public void textAreaRightClicked(Point pt) {
+        if (!settings.isEnableCodePopup()) {
+            return;
+        }
+
+        hideCodePopup();
+
+        int offset = view.getTextArea().viewToModel(pt);
+        SourceAndLine source = null;
+        try {
+            source = settings.getHandleWordAtPosition().checkSourceFile(offset, false);
+        } catch (Exception ex) {
+            log.warn("onShowCodePopup 1()", ex);
+        }
+        if (source != null) {
+            settings.getCodePopupHandler().show(pt, source);
+            return;
+        }
+
+        String checkJSON = null;
+        try {
+            checkJSON = settings.getHandleWordAtPosition().checkJSON(offset);
+        } catch (Exception ex) {
+            log.warn("onShowCodePopup 2()", ex);
+        }
+        if (checkJSON != null) {
+            settings.getCodePopupHandler().show(pt, checkJSON);
+            return;
+        }
     }
 
     public void textAreaDoubleClicked(Point pt) {
@@ -642,6 +609,7 @@ public final class VizzyController implements ILogFileListener {
     private void initKeyBindings() {
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(new KeyEventDispatcher() {
+
             @Override
             public boolean dispatchKeyEvent(KeyEvent e) {
                 if (e.getID() == KeyEvent.KEY_PRESSED) {
@@ -654,7 +622,7 @@ public final class VizzyController implements ILogFileListener {
                         wordWrapClicked();
                         return true;
                     }
-                } 
+                }
                 return false;
             }
         });
@@ -662,10 +630,13 @@ public final class VizzyController implements ILogFileListener {
     }
 
     class HW implements Runnable {
+
         private final int offset;
+
         public HW(int offset) {
             this.offset = offset;
         }
+
         public void run() {
 //            int selectionStart = view.getTextArea().getSelectionStart();
 //            int selectionEnd = view.getTextArea().getSelectionEnd();
@@ -722,12 +693,11 @@ public final class VizzyController implements ILogFileListener {
         settings.setLineNumbersVisible(!settings.isLineNumbersVisible(), true);
     }
 
-
     public void snapshotClicked(String text) {
         Point location = view.getLocation();
         SnapshotForm snapshotForm = new SnapshotForm(this, settings);
         snapshotForm.setLocation(location.x - snapshotForm.getWidth() - settings.getSnapshotForms().size() * 20,
-                location.y  - settings.getSnapshotForms().size() * 20);
+                location.y - settings.getSnapshotForms().size() * 20);
         snapshotForm.setSize(snapshotForm.getWidth(), view.getHeight());
         snapshotForm.init(text);
 
@@ -742,6 +712,7 @@ public final class VizzyController implements ILogFileListener {
 
         if (settings.getSearcher().isWasSearching()) {
             SwingUtilities.invokeLater(new Runnable() {
+
                 public void run() {
                     startSearch(settings.getSearcher().getLastSearchPos(), false);
                     highlightStackTraceErrors();
@@ -761,18 +732,17 @@ public final class VizzyController implements ILogFileListener {
 
     public void textAreaMouseMoved(MouseEvent evt) {
         if (!settings.getCodePopupHandler().isVisible()) {
-            startShowCodePopupTimer(new Point(evt.getX(), evt.getY()));
-        } else if(hideCodePopupTimer == null) {
+            // empty
+        } else if (hideCodePopupTimer == null) {
             startHideCodePopupTimer();
         }
     }
 
     public void textAreaMouseExited(MouseEvent evt) {
-        stopShowCodeTimer();
+
     }
 
     public void formWindowDeactivated() {
-        stopShowCodeTimer();
         stopHideCodePopupTimer();
         hideCodePopup();
     }
@@ -854,11 +824,11 @@ public final class VizzyController implements ILogFileListener {
 //            settings.setUIActionsAvailable(true);
 //        }
 //    }
-
     public void highlightAllClicked(boolean selected) {
         setHighlightAll(selected, true);
         if (settings.getSearcher().isWasSearching()) {
             SwingUtilities.invokeLater(new Runnable() {
+
                 public void run() {
                     startSearch(settings.getSearcher().getLastSearchPos(), true);
                     highlightStackTraceErrors();
@@ -871,6 +841,7 @@ public final class VizzyController implements ILogFileListener {
         setFilter(selected, true);
         if (settings.getSearcher().isWasSearching()) {
             SwingUtilities.invokeLater(new Runnable() {
+
                 public void run() {
                     startSearch(settings.getSearcher().getLastSearchPos(), true);
                     highlightStackTraceErrors();
@@ -903,9 +874,6 @@ public final class VizzyController implements ILogFileListener {
         }
     }
 
-
-    
-
     public void textAreaKeyPressed(String text, KeyEvent evt) {
         if (evt.getKeyCode() == KeyEvent.VK_F3
                 && text != null
@@ -915,7 +883,7 @@ public final class VizzyController implements ILogFileListener {
             settings.setUIActionsAvailable(false);
             settings.highlightTraceKeyword(text);
             addSearchKeyword(text);
-            startSearch(text, 
+            startSearch(text,
                     isNewSearch ? view.getTextArea().getCaretPosition() : settings.getSearcher().getNextSearchPos(),
                     true);
             highlightStackTraceErrors();
@@ -1006,8 +974,10 @@ public final class VizzyController implements ILogFileListener {
     public void checkForUpdatesClicked() {
         settings.setLastUpdateDate(new Date(), false);
         checkUpdatesThread = new CheckUpdates(true, new IUpdateCheckListener() {
+
             public void offerUpdate() {
             }
+
             public void updateFinished(boolean downloaded) {
                 if (downloaded) {
                     saveAndExit();
@@ -1051,6 +1021,7 @@ public final class VizzyController implements ILogFileListener {
         settings.setRegexp(selected, true);
         if (settings.getSearcher().isWasSearching()) {
             SwingUtilities.invokeLater(new Runnable() {
+
                 public void run() {
                     startSearch(settings.getSearcher().getLastSearchPos(), true);
                     highlightStackTraceErrors();
