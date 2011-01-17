@@ -665,7 +665,6 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jCheckUpdatesButton" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jUpdatesCheckBox" alignment="0" min="-2" pref="353" max="-2" attributes="0"/>
                       <Component id="jVersionLabel" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
                   </Group>
@@ -680,9 +679,7 @@
                   <Component id="jUpdatesCheckBox" min="-2" pref="15" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jVersionLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jCheckUpdatesButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="248" max="32767" attributes="0"/>
+                  <EmptySpace pref="277" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -706,14 +703,6 @@
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jCheckUpdatesButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Check now"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckUpdatesButtonActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

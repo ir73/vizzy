@@ -116,7 +116,6 @@ public class OptionsForm extends javax.swing.JFrame {
         jPanelUpdates = new javax.swing.JPanel();
         jVersionLabel = new javax.swing.JLabel();
         jUpdatesCheckBox = new javax.swing.JCheckBox();
-        jCheckUpdatesButton = new javax.swing.JButton();
         jOKButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -526,13 +525,6 @@ public class OptionsForm extends javax.swing.JFrame {
         jUpdatesCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         jUpdatesCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
-        jCheckUpdatesButton.setText("Check now");
-        jCheckUpdatesButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckUpdatesButtonActionPerformed(evt);
-            }
-        });
-
         org.jdesktop.layout.GroupLayout jPanelUpdatesLayout = new org.jdesktop.layout.GroupLayout(jPanelUpdates);
         jPanelUpdates.setLayout(jPanelUpdatesLayout);
         jPanelUpdatesLayout.setHorizontalGroup(
@@ -540,7 +532,6 @@ public class OptionsForm extends javax.swing.JFrame {
             .add(jPanelUpdatesLayout.createSequentialGroup()
                 .add(21, 21, 21)
                 .add(jPanelUpdatesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jCheckUpdatesButton)
                     .add(jUpdatesCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 353, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jVersionLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 230, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
@@ -552,9 +543,7 @@ public class OptionsForm extends javax.swing.JFrame {
                 .add(jUpdatesCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(18, 18, 18)
                 .add(jVersionLabel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jCheckUpdatesButton)
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addContainerGap(277, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -687,10 +676,6 @@ public class OptionsForm extends javax.swing.JFrame {
         cancelOptions();
     }//GEN-LAST:event_formWindowClosing
 
-    private void jCheckUpdatesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckUpdatesButtonActionPerformed
-        controller.checkForUpdatesClicked();
-    }//GEN-LAST:event_jCheckUpdatesButtonActionPerformed
-
     private void jFlashDevelopIntegrLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFlashDevelopIntegrLabelMouseClicked
         try {
             if (Desktop.isDesktopSupported())
@@ -770,7 +755,6 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBoxStatic;
     private javax.swing.JCheckBox jCheckBoxTraceAll;
     private javax.swing.JCheckBox jCheckBoxVerbose;
-    private javax.swing.JButton jCheckUpdatesButton;
     private javax.swing.JTextField jCustomASEditorTextFiled;
     private javax.swing.JRadioButton jCustomEditorRadioButton;
     private javax.swing.JRadioButton jDefaultRadioButton;

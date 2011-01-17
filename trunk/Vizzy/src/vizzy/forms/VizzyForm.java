@@ -412,7 +412,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
 
     private void jFilterCheckboxChecked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFilterCheckboxChecked
         if (!settings.isUIActionsAvailable()) return;
-        controller.filterClicked(jFilterCheckbox.isSelected());
+        controller.filterClicked(jFilterCheckbox.isSelected(), (String)jSearchComboBox.getSelectedItem());
 }//GEN-LAST:event_jFilterCheckboxChecked
 
     private void jTraceTextAreaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTraceTextAreaKeyPressed
@@ -961,8 +961,8 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     @Override
     public void onShowNewFeaturesPanel() {
         if (newFeaturesPanel == null) {
-            newFeaturesPanel = new NewFeaturesPanel("<html>Code popup id now enabled "
-                    + "by right click. Also, check how to explore JSON...</html>",
+            newFeaturesPanel = new NewFeaturesPanel("<html>Code popup is now enabled "
+                    + "by right click. Also, learn how to use JSON formatter...</html>",
                     new INewFeaturesListener() {
                 public void click() {
                     removeNewFeaturesPanel();

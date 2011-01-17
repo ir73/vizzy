@@ -327,14 +327,9 @@ public final class VizzyController implements ILogFileListener {
             int diff = weekAgoDate.compareTo(lastUpdateDate);
             if (diff > 0) {
                 settings.setLastUpdateDate(nowDate, false);
-                checkUpdatesThread = new CheckUpdates(false, new IUpdateCheckListener() {
-
-                    public void offerUpdate() {
-                        settings.setAlwaysOnTopUI(false, true);
-                    }
+                checkUpdatesThread = new CheckUpdates(new IUpdateCheckListener() {
 
                     public void updateFinished(boolean downloaded) {
-                        settings.setAlwaysOnTopUI(settings.isAlwaysOnTop(), true);
                         if (downloaded) {
                             saveAndExit();
                         }
@@ -837,8 +832,14 @@ public final class VizzyController implements ILogFileListener {
         }
     }
 
-    public void filterClicked(boolean selected) {
+    public void filterClicked(boolean selected, String text) {
+        DefaultComboBoxModel searchKeywordsModel = settings.getSearchKeywordsModel();
+        if (searchKeywordsModel.getIndexOf(text) == -1) {
+            searchComboboxChanged(text);
+        }
+
         setFilter(selected, true);
+
         if (settings.getSearcher().isWasSearching()) {
             SwingUtilities.invokeLater(new Runnable() {
 
@@ -973,7 +974,7 @@ public final class VizzyController implements ILogFileListener {
 
     public void checkForUpdatesClicked() {
         settings.setLastUpdateDate(new Date(), false);
-        checkUpdatesThread = new CheckUpdates(true, new IUpdateCheckListener() {
+        checkUpdatesThread = new CheckUpdates(new IUpdateCheckListener() {
 
             public void offerUpdate() {
             }
