@@ -45,7 +45,7 @@ public class Conf {
     public static final Color FOUND_SEARCH_COMBO_COLOR = new Color(150, 255, 150);
     public static final Color NOTFOUND_SEARCH_COMBO_COLOR = new Color(255, 150, 150);
 
-    public static final String VERSION = "3.3";
+    public static final String VERSION = "3.4";
     public static final String VIZZY_PROPERTIES_FILENAME = "vizzy-settings.pro";
     public static String vizzyRootDir;
     public static final String URL_PROJECT_HOME = "http://code.google.com/p/flash-tracer/";
@@ -60,6 +60,7 @@ public class Conf {
     public static final String DEFAULT_WINDOWS_EDITOR_PATH = "\"" + FLASHDEVELOP_PATH + "\" \"%file%\" -line %line%";
     public static final String DEFAULT_MAC_EDITOR_PATH = "/Applications/TextEdit.app/Contents/MacOS/TextEdit %file%";
     public static final String DEFAULT_LINUX_EDITOR_PATH = "gedit %file%";
+    public static final String UPDATE_FOLDER = "/.update";
     public static final long UPDATE_CHECK_FREQ = 7L * 24L * 60L * 60L * 1000L;
 
     public static final String WEBSITE_UPDATE_PHRASE = "Current version is: ";

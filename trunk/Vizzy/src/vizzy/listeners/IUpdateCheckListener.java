@@ -11,6 +11,6 @@ package vizzy.listeners;
  */
 public interface IUpdateCheckListener {
 
-    public void updateFinished(boolean downloaded);
+    public void exit();
 
 }
