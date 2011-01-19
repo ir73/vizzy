@@ -328,11 +328,8 @@ public final class VizzyController implements ILogFileListener {
             if (diff > 0) {
                 settings.setLastUpdateDate(nowDate, false);
                 checkUpdatesThread = new CheckUpdates(new IUpdateCheckListener() {
-
-                    public void updateFinished(boolean downloaded) {
-                        if (downloaded) {
-                            saveAndExit();
-                        }
+                    public void exit() {
+                        saveBeforeExit();
                     }
                 });
                 checkUpdatesThread.start();
@@ -972,22 +969,6 @@ public final class VizzyController implements ILogFileListener {
         settings.optionsClosed();
     }
 
-    public void checkForUpdatesClicked() {
-        settings.setLastUpdateDate(new Date(), false);
-        checkUpdatesThread = new CheckUpdates(new IUpdateCheckListener() {
-
-            public void offerUpdate() {
-            }
-
-            public void updateFinished(boolean downloaded) {
-                if (downloaded) {
-                    saveAndExit();
-                }
-            }
-        });
-        checkUpdatesThread.start();
-    }
-
     public void traceAreaMouseWheel(MouseWheelEvent evt) {
         hideCodePopup();
     }
@@ -1031,7 +1012,7 @@ public final class VizzyController implements ILogFileListener {
         }
     }
 
-    private void saveAndExit() {
+    private void saveBeforeExit() {
         onClose();
         settings.closeApp();
         System.exit(0);

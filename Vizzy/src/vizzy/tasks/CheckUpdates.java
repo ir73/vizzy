@@ -7,14 +7,13 @@ package vizzy.tasks;
 import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import javax.swing.JOptionPane;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import vizzy.listeners.IUpdateCheckListener;
 import vizzy.model.Conf;
@@ -27,21 +26,16 @@ public class CheckUpdates extends Thread {
 
     private static final Logger log = Logger.getLogger(CheckUpdates.class);
     
-    private boolean isSilent;
     private IUpdateCheckListener listener;
-    private boolean downloaded;
+    private File updateDir;
 
     public CheckUpdates(IUpdateCheckListener listener) {
-        this.isSilent = true;
         this.listener = listener;
     }
 
     @Override
     public void run() {
-        downloaded = false;
-
         try {
-
 
             String content = getPageContent();
             if (content == null) {
@@ -49,83 +43,79 @@ public class CheckUpdates extends Thread {
                 return;
             }
 
-            String nw = getNewVersion(content);
-            if (nw == null) {
+            String newVersion = getNewVersion(content);
+            if (newVersion == null) {
                 cleanUp();
                 return;
             }
 
-            double newVerd = Double.parseDouble(nw);
-            double verd = Double.parseDouble(Conf.VERSION);
+            double dNewVersion = Double.parseDouble(newVersion);
+            double dCurrentVersion = Double.parseDouble(Conf.VERSION);
 
-            if (newVerd > verd) {
+            if (dNewVersion <= dCurrentVersion) {
+                cleanUp();
+                return;
+            }
 
-                File tmpFile = null;
-                try {
-                    tmpFile = downloadNewVersion(nw);
-                } catch (Exception ex) {
-                    log.warn("run() failed to run 'downloadNewVersion'", ex);
-                    showFailedToDownloadAutomatically();
-                }
+            updateDir = new File(Conf.vizzyRootDir, Conf.UPDATE_FOLDER);
+            if (updateDir.exists() && updateDir.list().length > 0) {
+                showPendingUpdateMessage();
+                return;
+            }
+            updateDir.mkdirs();
 
-                if (tmpFile == null) {
-                    cleanUp();
-                    return;
-                }
+            File downloadedZip = null;
+            try {
+                downloadedZip = downloadNewVersion(newVersion);
+            } catch (Exception ex) {
+                log.warn("run() failed to run 'downloadNewVersion'", ex);
+                downloadedZip = null;
+            }
 
-                String message = null;
-                String newFeatures = null;
-                try {
-                    int i = content.indexOf(Conf.WEBSITE_FEATURES_PHRASE);
-                    int i2 = content.indexOf(";", i);
-                    newFeatures = content.substring(i + Conf.WEBSITE_FEATURES_PHRASE.length(), i2);
+            if (downloadedZip == null) {
+                showFailedToDownloadAutomatically();
+                return;
+            }
 
-                    if (newFeatures == null) {
-                        if (Desktop.isDesktopSupported()) {
-                            try {
-                                Desktop.getDesktop().open(tmpFile);
-                                downloaded = true;
-                            } catch (IOException ex) {
-                            }
-                        }
-                        cleanUp();
-                        return;
-                    }
-                } catch (Exception e) {
-                    log.warn("run() update error 2", e);
-                }
+            String message = null;
+            String newFeatures = null;
+            try {
+                newFeatures = getNewFeatures(content);
+            } catch (Exception ex) {
+                log.warn("run() failed to get new features", ex);
+            }
 
-                if (newFeatures == null) {
-                    message = "New version has been downloaded (" + nw + ")!\n"
+            if (newFeatures == null) {
+                message = "New version has been downloaded (" + newVersion + ")!\n"
                         + "Click OK to install new version.";
-                } else {
-
-                    newFeatures = newFeatures.replaceAll("\\|", "\n");
-
-                    message = "New version has been downloaded (" + nw + ")!\n"
+            } else {
+                newFeatures = newFeatures.replaceAll("\\|", "\n");
+                message = "New version has been downloaded (" + newVersion + ")!\n"
                         + "Click OK to install new version.\n\n"
                         + "New features:\n"
                         + newFeatures;
-                }
+            }
 
-                Object[] options = {"OK",
-                    "Cancel",};
+            Object[] options = {"OK",
+                "Cancel",};
 
-                int reply = JOptionPane.showOptionDialog(null, message,
-                        "Update",
-                        JOptionPane.OK_CANCEL_OPTION,
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        options,
-                        options[0]);
+            int reply = JOptionPane.showOptionDialog(null, message,
+                    "Update",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
 
-                if (reply == JOptionPane.OK_OPTION) {
-                    if (Desktop.isDesktopSupported()) {
-                        try {
-                            Desktop.getDesktop().open(tmpFile);
-                            downloaded = true;
-                        } catch (IOException ex) {
-                        }
+            if (reply == JOptionPane.OK_OPTION) {
+                if (Desktop.isDesktopSupported()) {
+                    try {
+                        Desktop.getDesktop().open(downloadedZip);
+                        exit();
+                    } catch (IOException ex) {
+                        log.warn("error opening downloaded update " + downloadedZip.getAbsolutePath());
+                        JOptionPane.showMessageDialog(null, "Cannot execute downloaded update. Please open it manually:\n"
+                                + downloadedZip.getAbsolutePath(), "Update", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -138,28 +128,17 @@ public class CheckUpdates extends Thread {
     private File downloadNewVersion(String newVer) throws Exception {
         String filename = String.format("Vizzy-%s-%s.zip", Conf.OSShortName, newVer);
         String fileUrl = "http://flash-tracer.googlecode.com/files/" + filename;
+        File f = new File(updateDir.getAbsolutePath(), filename);
         try {
-
-            byte[] bytes = new byte[1024];
-            URL u = new URL(fileUrl);
-            URLConnection openConnection = u.openConnection();
-            InputStream isr = openConnection.getInputStream();
-
-            File tmpFile = File.createTempFile("Vizzy-" + newVer, ".zip");
-            FileOutputStream fos = new FileOutputStream(tmpFile);
-            int len = 0;
-            while ((len = isr.read(bytes)) != -1) {
-                fos.write(bytes, 0, len);
-            }
-
-            fos.close();
-            isr.close();
-
-            return tmpFile;
-        } catch (Exception ex) {
-            throw ex;
+            FileUtils.copyURLToFile(new URL(fileUrl), f);
+        } catch (Exception e) {
+            log.warn("downloadNewVersion() cannot create temp file :"  + f.getAbsolutePath());
+            f = File.createTempFile(filename, ".zip");
+            FileUtils.copyURLToFile(new URL(fileUrl), f);
         }
+        return f;
     }
+        
 
     private String getPageContent() {
         try {
@@ -197,22 +176,70 @@ public class CheckUpdates extends Thread {
     }
 
     private void showFailedToDownloadAutomatically() {
-        JOptionPane.showMessageDialog(null, "Failed to download update. Please visit product's home page\n"
+        Object[] options = {"OK",
+            "Cancel",};
+        int reply = JOptionPane.showOptionDialog(null, "Failed to download update. Click OK to visit product's home page\n"
                 + "and download new version manually.",
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
+                "Update",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
 
-        try {
-            if (Desktop.isDesktopSupported()) {
-                Desktop.getDesktop().browse(new URI(Conf.URL_PROJECT_DOWNLOAD));
+        if (reply == JOptionPane.OK_OPTION) {
+            try {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().browse(new URI(Conf.URL_PROJECT_DOWNLOAD));
+                }
+                exit();
+            } catch (Exception ex1) {
+                //                log.warn("showFailedToDownloadAutomatically() desktop not supported", ex);
             }
-        } catch (Exception ex1) {
-            //                log.warn("downloadNewVersion() desktop not supported", ex);
+        } else {
+            cleanUp();
         }
     }
 
+    private void exit() {
+        listener.exit();
+        cleanUp();
+    }
+
     private void cleanUp() {
-        listener.updateFinished(downloaded);
         listener = null;
+    }
+
+    private String getNewFeatures(String content) throws Exception {
+        int i = content.indexOf(Conf.WEBSITE_FEATURES_PHRASE);
+        int i2 = content.indexOf(";", i);
+        return content.substring(i + Conf.WEBSITE_FEATURES_PHRASE.length(), i2);
+    }
+
+    private void showPendingUpdateMessage() {
+        Object[] options = {"OK",
+            "Cancel",};
+        int reply = JOptionPane.showOptionDialog(null, "You have a pending update located in\n"
+                + updateDir.getAbsolutePath() + "\n"
+                + "Would you like to install it now?",
+                "Update",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
+
+        if (reply == JOptionPane.OK_OPTION) {
+            try {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(updateDir);
+                }
+                exit();
+            } catch (Exception ex1) {
+                //                log.warn("showPendingUpdateMessage() desktop not supported", ex);
+            }
+        } else {
+            cleanUp();
+        }
     }
 }
