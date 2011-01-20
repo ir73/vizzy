@@ -97,7 +97,7 @@ public class AboutPanel extends javax.swing.JFrame {
         });
 
         jLabel4.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel4.setText("<html>Do you want me not to jump out of the window? Please, donate $5!</html>");
+        jLabel4.setText("<html>If you donate me some money I promise to be a good boy this year.</html>");
         jLabel4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
