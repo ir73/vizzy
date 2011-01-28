@@ -661,52 +661,53 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                populateLineNumbers();
+                populateLineNumbersDeloayed();
             }
         });
     }
 
-    private void populateLineNumbers(){
-        if (!settings.isLineNumbersVisible()) {
-            return;
-        }
-        
-//        long currentTimeMillis = System.currentTimeMillis();
-
-        int traceLinesCount = jTraceTextArea.getLineCount();
-        
-        Dimension tracePrefSize = jTraceTextArea.getPreferredSize();
-        Dimension lineNumbersPrefSize = jLineNumbersTextArea.getPreferredSize();
-        
-        jLineNumbersTextArea.setPreferredSize(new Dimension(lineNumbersPrefSize.width, tracePrefSize.height));
-
-        int linesCount = tracePrefSize.height / ((LineHeightTextArea)jLineNumbersTextArea).getRowHeightPubl();
-        if (linesCount < traceLinesCount) {
-//            long currentTimeMillis2 = System.currentTimeMillis();
-//            System.out.println("return 1: time:" + (currentTimeMillis2 - currentTimeMillis));
-            return;
-        }
-
-        int existingLinesCount = jLineNumbersTextArea.getLineCount();
-        if (existingLinesCount == linesCount) {
-//            long currentTimeMillis2 = System.currentTimeMillis();
-//            System.out.println("return 2: " + existingLinesCount + ":" + linesCount +", time:" + (currentTimeMillis2 - currentTimeMillis));
-            return;
-        }
-        
-        int startValue = 1;
-        StringBuilder sb = new StringBuilder();
-        if (existingLinesCount < linesCount) {
-            startValue = existingLinesCount;
-            for (int i = startValue; i <= linesCount; i++){
-                sb.append(i).append(Conf.newLine);
+    private void populateLineNumbers() {
+        try {
+            if (!settings.isLineNumbersVisible()) {
+                return;
             }
-            jLineNumbersTextArea.append(sb.toString());
-        } 
-//        long currentTimeMillis2 = System.currentTimeMillis();
-//        System.out.println("return 1: time:" + (currentTimeMillis2 - currentTimeMillis));
-//        long currentTimeMillis2 = System.currentTimeMillis();
-//        System.out.println("return 3: " + existingLinesCount + ":" + linesCount +", time:" + (currentTimeMillis2 - currentTimeMillis));
+
+            int traceLinesCount = jTraceTextArea.getLineCount();
+
+            Dimension tracePrefSize = jTraceTextArea.getPreferredSize();
+            Dimension lineNumbersPrefSize = jLineNumbersTextArea.getPreferredSize();
+
+            jLineNumbersTextArea.setPreferredSize(new Dimension(lineNumbersPrefSize.width, tracePrefSize.height));
+
+            int linesCount = tracePrefSize.height / ((LineHeightTextArea) jLineNumbersTextArea).getRowHeightPubl();
+            if (linesCount < traceLinesCount) {
+                return;
+            }
+
+            int existingLinesCount = jLineNumbersTextArea.getLineCount();
+            if (existingLinesCount == linesCount) {
+                return;
+            }
+
+            int startValue = 1;
+            StringBuilder sb = new StringBuilder();
+            if (existingLinesCount < linesCount) {
+                startValue = existingLinesCount;
+                for (int i = startValue; i <= linesCount; i++) {
+                    sb.append(i).append(Conf.newLine);
+                }
+                jLineNumbersTextArea.append(sb.toString());
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    private void populateLineNumbersDeloayed(){
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                populateLineNumbers();
+            }
+        });
     }
 
     private void initVars() {
@@ -793,7 +794,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     public void onFilterChanged(boolean filter) {
         if (!filter) {
             jTraceTextArea.setText(settings.getTraceContent());
-            populateLineNumbers();
+            populateLineNumbersDeloayed();
         }
         jFilterCheckbox.setSelected(settings.isFilter());
         updateCommaTooltipCheckBox();
@@ -852,7 +853,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     public void onTraceContentChanged(String traceContent) {
         if ("".equals(traceContent) || traceContent == null) {
             jTraceTextArea.setText(settings.getTraceContent());
-            populateLineNumbers();
+            populateLineNumbersDeloayed();
             needToScrolldown = true;
             ((JScrollHighlightPanel) jScrollHighlight).setIndexes(null);
         } else {
@@ -861,7 +862,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
             boolean filteringOff = !(settings.getSearcher().isWasSearching() && settings.isFilter());
             if (filteringOff) {
                 jTraceTextArea.setText(traceContent);
-                populateLineNumbers();
+                populateLineNumbersDeloayed();
             }
             if (needToScrolldown) {
                 jTraceTextArea.setCaretPosition(jTraceTextArea.getDocument().getLength());
@@ -908,7 +909,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
             if (needToScrolldown) {
                 jTraceTextArea.setCaretPosition(jTraceTextArea.getDocument().getLength());
             }
-            populateLineNumbers();
+            populateLineNumbersDeloayed();
         } catch (Exception ex) {
             log.warn("onSearch()", ex);
         }
@@ -920,7 +921,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
             jTraceTextArea.setText(settings.getTraceContent());
             jTraceTextArea.repaint();
             jTraceTextArea.validate();
-            populateLineNumbers();
+            populateLineNumbersDeloayed();
         } catch (Exception ex) {
             log.warn("onSearch()", ex);
         }
@@ -940,7 +941,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         jSearchComboBox.setSelectedItem("");
         highlightSearchComboBox(false, false);
         ((JScrollHighlightPanel)jScrollHighlight).setIndexes(null);
-        populateLineNumbers();
+        populateLineNumbersDeloayed();
     }
 
     @Override
@@ -1065,7 +1066,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         jLineNumbersCheckBoxMenuItem.setSelected(lineNumbersVisible);
 
         if (lineNumbersVisible) {
-            populateLineNumbers();
+            populateLineNumbersDeloayed();
         }
     }
 

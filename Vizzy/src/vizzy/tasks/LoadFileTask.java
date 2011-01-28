@@ -69,6 +69,7 @@ public class LoadFileTask extends Thread {
             listener.onLogFileRead("");
         } catch (Exception ex) {
             log.warn("run() ", ex);
+            listener.onLogFileRead("");
         } finally {
             try {
                 bo.close();
