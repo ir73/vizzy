@@ -45,7 +45,7 @@ public class Conf {
     public static final Color FOUND_SEARCH_COMBO_COLOR = new Color(150, 255, 150);
     public static final Color NOTFOUND_SEARCH_COMBO_COLOR = new Color(255, 150, 150);
 
-    public static final String VERSION = "3.4";
+    public static final String VERSION = "3.5";
     public static final String VIZZY_PROPERTIES_FILENAME = "vizzy-settings.pro";
     public static String vizzyRootDir;
     public static final String URL_PROJECT_HOME = "http://code.google.com/p/flash-tracer/";
