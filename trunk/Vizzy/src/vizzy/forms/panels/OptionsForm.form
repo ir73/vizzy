@@ -586,7 +586,10 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="20" pref="20" max="20" attributes="0"/>
-                          <Component id="jFlashDevelopIntegrLabel" min="-2" pref="310" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jFlashDevelopIntegrLabel1" alignment="0" min="-2" pref="310" max="-2" attributes="0"/>
+                              <Component id="jFlashDevelopIntegrLabel" alignment="0" min="-2" pref="310" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace pref="43" max="32767" attributes="0"/>
@@ -607,7 +610,9 @@
                   </Group>
                   <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                   <Component id="jFlashDevelopIntegrLabel" min="-2" pref="33" max="-2" attributes="0"/>
-                  <EmptySpace pref="342" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jFlashDevelopIntegrLabel1" min="-2" pref="106" max="-2" attributes="0"/>
+                  <EmptySpace pref="110" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -653,6 +658,16 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jFlashDevelopIntegrLabelMouseClicked"/>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jFlashDevelopIntegrLabelMouseEntered"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jFlashDevelopIntegrLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;FDT, FlashBuilder and Eclipse users:&lt;br&gt;&quot;c:\eclipse\eclipse.exe&quot; --launcher.openFile &quot;%file%&quot;&lt;br&gt;&lt;br&gt;Only valid for Eclipse 3.6+&lt;/html&gt;"/>
+            <Property name="verticalAlignment" type="int" value="1"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jFlashDevelopIntegrLabel1MouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jFlashDevelopIntegrLabel1MouseEntered"/>
           </Events>
         </Component>
       </SubComponents>

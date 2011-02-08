@@ -21,7 +21,16 @@ public class Conf {
 
     public static final String OSName = System.getProperty("os.name").toLowerCase();
     public static final String newLine = System.getProperty("line.separator");
-    public static final String userHome = System.getProperty("user.home");
+
+    public static String userHome;
+    static {
+        if (Conf.OSName.indexOf(Conf.OS_WINDOWS) > -1) {
+            userHome = System.getenv("HOMEDRIVE") + System.getenv("HOMEPATH");
+        } else {
+            userHome = System.getProperty("user.home");
+        }
+    }
+    
     public static String OSShortName;
 
     static {
