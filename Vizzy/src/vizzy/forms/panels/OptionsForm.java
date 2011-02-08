@@ -113,6 +113,7 @@ public class OptionsForm extends javax.swing.JFrame {
         jCustomEditorRadioButton = new javax.swing.JRadioButton();
         jCustomASEditorTextFiled = new javax.swing.JTextField();
         jFlashDevelopIntegrLabel = new javax.swing.JLabel();
+        jFlashDevelopIntegrLabel1 = new javax.swing.JLabel();
         jPanelUpdates = new javax.swing.JPanel();
         jVersionLabel = new javax.swing.JLabel();
         jUpdatesCheckBox = new javax.swing.JCheckBox();
@@ -484,6 +485,17 @@ public class OptionsForm extends javax.swing.JFrame {
             }
         });
 
+        jFlashDevelopIntegrLabel1.setText("<html>FDT, FlashBuilder and Eclipse users:<br>\"c:\\eclipse\\eclipse.exe\" --launcher.openFile \"%file%\"<br><br>Only valid for Eclipse 3.6+</html>");
+        jFlashDevelopIntegrLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jFlashDevelopIntegrLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jFlashDevelopIntegrLabel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jFlashDevelopIntegrLabel1MouseEntered(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout jPanelApplicationsLayout = new org.jdesktop.layout.GroupLayout(jPanelApplications);
         jPanelApplications.setLayout(jPanelApplicationsLayout);
         jPanelApplicationsLayout.setHorizontalGroup(
@@ -499,7 +511,9 @@ public class OptionsForm extends javax.swing.JFrame {
                         .add(jCustomASEditorTextFiled, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 300, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(jPanelApplicationsLayout.createSequentialGroup()
                         .add(20, 20, 20)
-                        .add(jFlashDevelopIntegrLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 310, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(jPanelApplicationsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jFlashDevelopIntegrLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 310, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jFlashDevelopIntegrLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 310, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanelApplicationsLayout.setVerticalGroup(
@@ -515,7 +529,9 @@ public class OptionsForm extends javax.swing.JFrame {
                     .add(jCustomEditorRadioButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(7, 7, 7)
                 .add(jFlashDevelopIntegrLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 33, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(342, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jFlashDevelopIntegrLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 106, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         jVersionLabel.setText("Current version is: 1.19");
@@ -743,6 +759,14 @@ public class OptionsForm extends javax.swing.JFrame {
         }
 }//GEN-LAST:event_jLabelClickInfoMouseClicked
 
+    private void jFlashDevelopIntegrLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFlashDevelopIntegrLabel1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFlashDevelopIntegrLabel1MouseClicked
+
+    private void jFlashDevelopIntegrLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFlashDevelopIntegrLabel1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFlashDevelopIntegrLabel1MouseEntered
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup ASEditorButtonGroup;
     private javax.swing.JLabel bgColorLabel;
@@ -763,6 +787,7 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JCheckBox jEnablePopupsCheckBox;
     private javax.swing.JCheckBox jEnableVizzyTraceCheckBox;
     private javax.swing.JLabel jFlashDevelopIntegrLabel;
+    private javax.swing.JLabel jFlashDevelopIntegrLabel1;
     private javax.swing.JTextField jFlashLogTextField;
     private javax.swing.JComboBox jFontComboBox;
     private javax.swing.JTextField jFontSizeTextField;
