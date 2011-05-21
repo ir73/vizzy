@@ -88,19 +88,6 @@ namespace VizzyPlugin
 		/// </summary>
 		public void HandleEvent(Object sender, NotifyEvent e, HandlingPriority prority)
 		{
-            if (e.Type == EventType.Command)
-            {
-                string cmd = (e as DataEvent).Action;
-                if (cmd != "FlashDevelop.StartArgs")
-                {
-                    return;
-                }
-            }
-            else if (e.Type != EventType.UIStarted)
-            {
-                return;
-            }
-
             try
             {
                 String[] args = PluginBase.MainForm.StartArguments;
@@ -141,7 +128,7 @@ namespace VizzyPlugin
         /// </summary> 
         public void AddEventHandlers()
         {
-            EventManager.AddEventHandler(this, EventType.Command | EventType.UIStarted);
+            EventManager.AddEventHandler(this, EventType.StartArgs | EventType.UIStarted);
         }
 
 		#endregion

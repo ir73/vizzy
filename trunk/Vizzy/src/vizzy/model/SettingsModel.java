@@ -477,6 +477,9 @@ public class SettingsModel {
 
     public void setHandleWordAtPosition(HandleWordAtPosition handleWordAtPosition) {
         this.handleWordAtPosition = handleWordAtPosition;
+        if (handleWordAtPosition != null && customASEditor != null) {
+            handleWordAtPosition.setCustomASEditor(customASEditor);
+        }
     }
 
     public ShowCodePopupTask getCodePopupHandler() {

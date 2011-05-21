@@ -11,8 +11,8 @@
     <description>Builds, tests, and runs the project Vizzy.</description>
     <import file="nbproject/build-impl.xml"/>
 
-    <property name="version" value="3.5"/>
-    <property name="vizzy_plugin_version" value="1.0"/>
+    <property name="version" value="3.6"/>
+    <property name="vizzy_plugin_version" value="1.1"/>
     <property name="vizzy_trace_version" value="1.1"/>
     <property name="dist.dir" value="dist"/>
     <property name="dist.dir.win" value="${dist.dir}/win"/>
