@@ -12,9 +12,15 @@
 package vizzy.forms.panels;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.util.Calendar;
+import java.util.logging.Level;
+import javax.swing.text.BadLocationException;
 import org.apache.log4j.Logger;
 import vizzy.controller.VizzyController;
+import vizzy.model.SearchResult;
 import vizzy.model.SettingsModel;
+import vizzy.tasks.WordSearcher;
 
 /**
  *
@@ -25,12 +31,18 @@ public class SnapshotForm extends javax.swing.JFrame {
 
     private VizzyController controller;
     private SettingsModel settings;
+    private WordSearcher wordSearcher;
 
     /** Creates new form OptionsForm */
     public SnapshotForm(VizzyController controller, SettingsModel settings) {
         this.controller = controller;
         this.settings = settings;
+        this.wordSearcher = new WordSearcher(settings);
         initComponents();
+        
+        wordSearcher.setTextArea(jTextArea);
+        
+        setTitle("Log snapshot (" + Calendar.getInstance().getTime() + ")");
 
         try {
             this.setIconImage(settings.getAppIcon());
@@ -51,6 +63,7 @@ public class SnapshotForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea = new javax.swing.JTextArea();
+        jTextFieldSearch = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Log snapshot");
@@ -64,15 +77,30 @@ public class SnapshotForm extends javax.swing.JFrame {
         jTextArea.setRows(5);
         jScrollPane1.setViewportView(jTextArea);
 
+        jTextFieldSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldSearchActionPerformed(evt);
+            }
+        });
+        jTextFieldSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldSearchKeyPressed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .add(jTextFieldSearch, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
+                .add(jTextFieldSearch, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -94,10 +122,30 @@ public class SnapshotForm extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_onWindowClose
 
+    private void jTextFieldSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldSearchActionPerformed
+
+    private void jTextFieldSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldSearchKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_F3) {
+            if (jTextFieldSearch.getText() != null && !jTextFieldSearch.getText().equals("")) {
+                SearchResult search = wordSearcher.search(jTextFieldSearch.getText(), jTextArea.getText(), wordSearcher.getLastSearchPos() + 1);
+                try {
+                    jTextArea.scrollRectToVisible(jTextArea.modelToView(search.offset));
+                } catch (BadLocationException ex) {
+                    java.util.logging.Logger.getLogger(SnapshotForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (jTextFieldSearch.getText().equals("")) {
+                wordSearcher.clearSearch();
+            }
+        }
+    }//GEN-LAST:event_jTextFieldSearchKeyPressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea;
+    private javax.swing.JTextField jTextFieldSearch;
     // End of variables declaration//GEN-END:variables
 
     public void setWordWrap(boolean b) {
@@ -117,6 +165,7 @@ public class SnapshotForm extends javax.swing.JFrame {
     public void dispose() {
         controller = null;
         settings = null;
+        wordSearcher = null;
         super.dispose();
     }
 
