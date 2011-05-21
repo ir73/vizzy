@@ -152,8 +152,10 @@ public class WordSearcher {
             }
             firstOffset = lastIndex;
         } else {
-            highlightPanel.setIndexes(indexes);
-            highlightPanel.repaint();
+            if (highlightPanel != null) {
+                highlightPanel.setIndexes(indexes);
+                highlightPanel.repaint();
+            }
             return null;
         }
 
@@ -193,9 +195,11 @@ public class WordSearcher {
             }
         }
 
-        highlightPanel.setIndexes(indexes);
-        highlightPanel.repaint();
-
+        if (highlightPanel != null) {
+            highlightPanel.setIndexes(indexes);
+            highlightPanel.repaint();
+        }
+        
         nextSearchPos = firstOffset + wordSize;
         lastSearchPos = firstOffset;
 

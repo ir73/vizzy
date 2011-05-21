@@ -919,9 +919,6 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     public void beforeFilter() {
         try {
             jTraceTextArea.setText(settings.getTraceContent());
-            jTraceTextArea.repaint();
-            jTraceTextArea.validate();
-            populateLineNumbersDeloayed();
         } catch (Exception ex) {
             log.warn("onSearch()", ex);
         }
