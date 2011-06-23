@@ -169,6 +169,10 @@ public final class VizzyController implements ILogFileListener {
         initCheckUpdates();
         initNewFeatures();
         initKeyBindings();
+        if (!(new File(settings.getCurrentLogFile()).exists())) {
+            settings.setTraceContent("Seems that your Flash Player is not ready to debug. "
+                    + "Click Extra -> Detect Flash Player in the menu and follow instructions.", true);
+        }
         settings.setUIActionsAvailable(true);
         settings.onAfterInit();
     }
@@ -832,7 +836,7 @@ public final class VizzyController implements ILogFileListener {
     public void filterClicked(boolean selected, String text) {
         DefaultComboBoxModel searchKeywordsModel = settings.getSearchKeywordsModel();
         if (searchKeywordsModel.getIndexOf(text) == -1) {
-            searchComboboxChanged(text);
+            searchComboboxChanged(text, true);
         }
 
         setFilter(selected, true);
@@ -977,7 +981,7 @@ public final class VizzyController implements ILogFileListener {
         settings.setNewFeaturesPanelShown(true, true);
     }
 
-    public void searchComboboxChanged(String text) {
+    public void searchComboboxChanged(String text, boolean enterKey) {
         if (text == null) {
             return;
         }
@@ -993,7 +997,9 @@ public final class VizzyController implements ILogFileListener {
             position = settings.getSearcher().getNextSearchPos();
         }
         settings.setUIActionsAvailable(false);
-        addSearchKeyword(text);
+        if (enterKey) {
+            addSearchKeyword(text);
+        }
         startSearch(text, position, true);
         highlightStackTraceErrors();
         settings.setUIActionsAvailable(true);
