@@ -30,6 +30,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+Ctrl+A"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Copy All to Clipboard"/>
               </Properties>
               <Events>
@@ -57,6 +60,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jLineNumbersCheckBoxMenuItem">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+L"/>
+                </Property>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Line Numbers"/>
               </Properties>
