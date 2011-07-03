@@ -81,7 +81,7 @@ public class CodeForm extends JPanel {
     public void updateSize(int height) {
         Dimension dim = jCodeTextPane.getPreferredScrollableViewportSize();
         jCodeTextPane.setPreferredSize(dim);
-        int w = Math.max(Math.min(400, dim.width), 100);
+        int w = Math.max(Math.min(400, dim.width) + 50, 100);
         dim = new Dimension(w
                 + jScrollPane1.getVerticalScrollBar().getPreferredSize().width,
                 height);

@@ -16,21 +16,28 @@ import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.beans.PropertyChangeListener;
 import java.net.URI;
 import java.util.Date;
+import javax.swing.Action;
+import javax.swing.ActionMap;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
@@ -319,6 +326,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
 
         jMenu1.setText("Edit");
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Copy All to Clipboard");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -341,6 +349,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         });
         jMenu3.add(jWordWrapCheckBoxMenuItem);
 
+        jLineNumbersCheckBoxMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
         jLineNumbersCheckBoxMenuItem.setSelected(true);
         jLineNumbersCheckBoxMenuItem.setText("Line Numbers");
         jLineNumbersCheckBoxMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -647,6 +656,33 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
                 if (!settings.isUIActionsAvailable()) return;
                 controller.searchComboboxChanged((String)jSearchComboBox.getEditor().getItem(), 
                         e.getKeyCode() == KeyEvent.VK_ENTER);
+            }
+            
+            
+        });
+        
+        KeyStroke ctrlH = KeyStroke.getKeyStroke(KeyEvent.VK_E,
+                InputEvent.CTRL_DOWN_MASK, true);
+        InputMap inputMap = jPanel1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        inputMap.put(ctrlH, "my_action");
+        ActionMap actionMap = jPanel1.getActionMap();
+        actionMap.put("my_action", new Action() {
+            public Object getValue(String key) {
+                return "";
+            }
+            public void putValue(String key, Object value) {
+            }
+            public void setEnabled(boolean b) {
+            }
+            public boolean isEnabled() {
+                return true;
+            }
+            public void addPropertyChangeListener(PropertyChangeListener listener) {
+            }
+            public void removePropertyChangeListener(PropertyChangeListener listener) {
+            }
+            public void actionPerformed(ActionEvent e) {
+                controller.clearTraceClicked();
             }
         });
 
@@ -971,14 +1007,14 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     @Override
     public void onShowNewFeaturesPanel() {
         if (newFeaturesPanel == null) {
-            newFeaturesPanel = new NewFeaturesPanel("<html>Code popup is now enabled "
-                    + "by right click. Also, learn how to use JSON formatter...</html>",
+            newFeaturesPanel = new NewFeaturesPanel("<html>You can now delete log content "
+                    + "by pressing Ctrl+E.</html>",
                     new INewFeaturesListener() {
                 public void click() {
                     removeNewFeaturesPanel();
                     if (Desktop.isDesktopSupported()) {
                         try {
-                            Desktop.getDesktop().browse(new URI(Conf.URL_PROJECT_HOME + "wiki/Features#JSON_parser"));
+                            Desktop.getDesktop().browse(new URI(Conf.URL_PROJECT_HOME + "wiki/Features#Hotkeys"));
                         } catch (Exception ex) {
 //                            log.warn("browse()", ex);
                         }
@@ -988,6 +1024,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
                     removeNewFeaturesPanel();
                 }
             });
+            
             jPanel1.add(newFeaturesPanel, jPanel1.getComponentCount() - 2);
             jPanel1.validate();
             jPanel1.repaint();
