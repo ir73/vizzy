@@ -25,6 +25,14 @@ namespace VizzyPlugin
 		}
 
         /// <summary>
+        /// Api level of the plugin
+        /// </summary>
+        public Int32 Api
+        {
+            get { return 1; }
+        }
+
+        /// <summary>
         /// GUID of the plugin
         /// </summary>
         public String Guid

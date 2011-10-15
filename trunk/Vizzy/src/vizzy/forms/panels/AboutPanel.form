@@ -76,7 +76,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="2"/>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;Vizzy Flash Tracer&lt;br&gt;2007 - 2010  &#xa9;&lt;br&gt;Developed by Sergei Ledvanov&lt;/html&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Vizzy Flash Tracer&lt;br&gt;2007 - 2011  &#xa9;&lt;br&gt;Developed by Sergei Ledvanov&lt;/html&gt;"/>
         <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
     </Component>

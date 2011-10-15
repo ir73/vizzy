@@ -64,7 +64,7 @@ public class AboutPanel extends javax.swing.JFrame {
         });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("<html>Vizzy Flash Tracer<br>2007 - 2010  ©<br>Developed by Sergei Ledvanov</html>");
+        jLabel1.setText("<html>Vizzy Flash Tracer<br>2007 - 2011  ©<br>Developed by Sergei Ledvanov</html>");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         jLabel2.setForeground(new java.awt.Color(0, 51, 204));

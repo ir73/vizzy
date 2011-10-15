@@ -1007,14 +1007,15 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     @Override
     public void onShowNewFeaturesPanel() {
         if (newFeaturesPanel == null) {
-            newFeaturesPanel = new NewFeaturesPanel("<html>You can now delete log content "
-                    + "by pressing Ctrl+E.</html>",
+            newFeaturesPanel = new NewFeaturesPanel("<html>Miss some feature in Vizzy? Click "
+                    + "here to submit it.</html>",
                     new INewFeaturesListener() {
                 public void click() {
                     removeNewFeaturesPanel();
                     if (Desktop.isDesktopSupported()) {
                         try {
-                            Desktop.getDesktop().browse(new URI(Conf.URL_PROJECT_HOME + "wiki/Features#Hotkeys"));
+//                            Desktop.getDesktop().browse(new URI(Conf.URL_PROJECT_HOME + "wiki/Features#Hotkeys"));
+                            Desktop.getDesktop().mail(new URI("mailto", "sergei.ledvanov@gmail.com?subject=Vizzy Feature Request", null));
                         } catch (Exception ex) {
 //                            log.warn("browse()", ex);
                         }

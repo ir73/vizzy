@@ -989,6 +989,9 @@ public final class VizzyController implements ILogFileListener {
             clearSearchClicked();
             return;
         }
+        if (text.length() < 3 && !enterKey && !settings.isFilter()) {
+            return;
+        }
         boolean isNewSearch = !text.equals(settings.getSearcher().getWord());
         int position;
         if (isNewSearch) {
