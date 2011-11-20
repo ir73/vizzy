@@ -2,7 +2,7 @@
 <project name="Vizzy" default="jar" basedir=".">
     <description>Builds, tests, and runs the project Vizzy.</description>
 
-    <property name="version" value="3.9"/>
+    <property name="version" value="3.91"/>
     
     <target name="jar" description="Create OSX App bundle for Vizzy">
         <taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler"

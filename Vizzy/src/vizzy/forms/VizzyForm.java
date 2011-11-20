@@ -41,7 +41,9 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 import org.apache.log4j.Logger;
+import vizzy.comp.FilterDocument;
 import vizzy.comp.JScrollHighlightPanel;
 import vizzy.comp.LineHeightTextArea;
 import vizzy.comp.NewFeaturesPanel;
@@ -611,6 +613,8 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     @Override
     public void onInit() {
         initComponents();
+        FilterDocument filterDocument = new FilterDocument();
+        jTraceTextArea.setDocument(filterDocument);
         searchComboboxBorder = ((JComponent)jSearchComboBox.getEditor().getEditorComponent()).getBorder();
     }
     @Override
@@ -707,7 +711,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                populateLineNumbersDeloayed();
+                populateLineNumbersDelayed();
             }
         });
     }
@@ -748,7 +752,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         }
     }
 
-    private void populateLineNumbersDeloayed(){
+    private void populateLineNumbersDelayed(){
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 populateLineNumbers();
@@ -840,7 +844,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     public void onFilterChanged(boolean filter) {
         if (!filter) {
             jTraceTextArea.setText(settings.getTraceContent());
-            populateLineNumbersDeloayed();
+            populateLineNumbersDelayed();
         }
         jFilterCheckbox.setSelected(settings.isFilter());
         updateCommaTooltipCheckBox();
@@ -899,7 +903,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     public void onTraceContentChanged(String traceContent) {
         if ("".equals(traceContent) || traceContent == null) {
             jTraceTextArea.setText(settings.getTraceContent());
-            populateLineNumbersDeloayed();
+            populateLineNumbersDelayed();
             needToScrolldown = true;
             ((JScrollHighlightPanel) jScrollHighlight).setIndexes(null);
         } else {
@@ -908,7 +912,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
             boolean filteringOff = !(settings.getSearcher().isWasSearching() && settings.isFilter());
             if (filteringOff) {
                 jTraceTextArea.setText(traceContent);
-                populateLineNumbersDeloayed();
+                populateLineNumbersDelayed();
             }
             if (needToScrolldown) {
                 jTraceTextArea.setCaretPosition(jTraceTextArea.getDocument().getLength());
@@ -952,10 +956,12 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     public void afterFilter(String content) {
         try {
             jTraceTextArea.setText(content);
+            FilterDocument document = (FilterDocument) jTraceTextArea.getDocument();
+            document.writeUnlock2();
             if (needToScrolldown) {
                 jTraceTextArea.setCaretPosition(jTraceTextArea.getDocument().getLength());
             }
-            populateLineNumbersDeloayed();
+            populateLineNumbersDelayed();
         } catch (Exception ex) {
             log.warn("onSearch()", ex);
         }
@@ -964,6 +970,8 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     @Override
     public void beforeFilter() {
         try {
+            FilterDocument document = (FilterDocument) jTraceTextArea.getDocument();
+            document.writeLock2();
             jTraceTextArea.setText(settings.getTraceContent());
         } catch (Exception ex) {
             log.warn("onSearch()", ex);
@@ -986,7 +994,8 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         }
         highlightSearchComboBox(false, false);
         ((JScrollHighlightPanel)jScrollHighlight).setIndexes(null);
-        populateLineNumbersDeloayed();
+        populateLineNumbersDelayed();
+        jSearchComboBox.requestFocus();
     }
 
     @Override
@@ -1006,30 +1015,28 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     }
     @Override
     public void onShowNewFeaturesPanel() {
-        if (newFeaturesPanel == null) {
-            newFeaturesPanel = new NewFeaturesPanel("<html>Miss some feature in Vizzy? Click "
-                    + "here to submit it.</html>",
-                    new INewFeaturesListener() {
-                public void click() {
-                    removeNewFeaturesPanel();
-                    if (Desktop.isDesktopSupported()) {
-                        try {
-//                            Desktop.getDesktop().browse(new URI(Conf.URL_PROJECT_HOME + "wiki/Features#Hotkeys"));
-                            Desktop.getDesktop().mail(new URI("mailto", "sergei.ledvanov@gmail.com?subject=Vizzy Feature Request", null));
-                        } catch (Exception ex) {
-//                            log.warn("browse()", ex);
-                        }
-                    }
-                }
-                public void close() {
-                    removeNewFeaturesPanel();
-                }
-            });
-            
-            jPanel1.add(newFeaturesPanel, jPanel1.getComponentCount() - 2);
-            jPanel1.validate();
-            jPanel1.repaint();
-        }
+//        if (newFeaturesPanel == null) {
+//            newFeaturesPanel = new NewFeaturesPanel("<html>Miss some feature in Vizzy? Send email to"
+//                    + " sergei.ledvanov@gmail.com</html>",
+//                    new INewFeaturesListener() {
+//                public void click() {
+//                    removeNewFeaturesPanel();
+//                    if (Desktop.isDesktopSupported()) {
+//                        try {
+//                              Desktop.getDesktop().mail(new URI("mailto", "sergei.ledvanov@gmail.com?subject=Vizzy Feature Request", null));
+//                        } catch (Exception ex) {
+//                        }
+//                    }
+//                }
+//                public void close() {
+//                    removeNewFeaturesPanel();
+//                }
+//            });
+//            
+//            jPanel1.add(newFeaturesPanel, jPanel1.getComponentCount() - 2);
+//            jPanel1.validate();
+//            jPanel1.repaint();
+//        }
     }
     @Override
     public void onNewFeaturesPanelShownChanged(boolean wasNewFeaturesPanelShown) {
@@ -1113,7 +1120,7 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
         jLineNumbersCheckBoxMenuItem.setSelected(lineNumbersVisible);
 
         if (lineNumbersVisible) {
-            populateLineNumbersDeloayed();
+            populateLineNumbersDelayed();
         }
     }
 

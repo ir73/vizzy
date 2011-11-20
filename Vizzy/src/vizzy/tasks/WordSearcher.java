@@ -240,11 +240,11 @@ public class WordSearcher {
 
         StringBuilder sb = new StringBuilder("");
         int totalLines = textArea.getLineCount();
-
+        
         for (int i=0; i < totalLines; i++) {
             int start = textArea.getLineStartOffset(i);
             int end = textArea.getLineEndOffset(i);
-            String lineText = sContent.substring(start, end);
+            String lineText = new String(sContent.substring(start, end));
 
             for (int j = 0; j < words.length; j++) {
                 String w = words[j];
