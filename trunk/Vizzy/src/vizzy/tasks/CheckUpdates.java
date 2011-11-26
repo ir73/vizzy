@@ -49,15 +49,12 @@ public class CheckUpdates extends Thread {
                 return;
             }
 
-            double dNewVersion = Double.parseDouble(newVersion);
-            double dCurrentVersion = Double.parseDouble(Conf.VERSION);
-
-            if (dNewVersion <= dCurrentVersion) {
+            if (compareVersions(newVersion, Conf.VERSION)) {
                 cleanUp();
                 return;
             }
 
-            updateDir = new File(Conf.vizzyRootDir, Conf.UPDATE_FOLDER);
+            updateDir = new File(Conf.UPDATE_FOLDER);
             if (updateDir.exists() && updateDir.list().length > 0) {
                 showPendingUpdateMessage();
                 return;
@@ -108,7 +105,12 @@ public class CheckUpdates extends Thread {
                     options[0]);
 
             if (reply == JOptionPane.OK_OPTION) {
-                if (Desktop.isDesktopSupported()) {
+                if (Conf.OS_MAC_OS_X.equals(Conf.OSName)) {
+                    Class.forName("com.apple.eio.FileManager").getDeclaredMethod(
+                      "openURL", new Class[] {String.class}).invoke(null,
+                      new Object[] {"file://" + downloadedZip.getAbsolutePath()});
+                    exit();
+                } else if (Desktop.isDesktopSupported()) {
                     try {
                         Desktop.getDesktop().open(downloadedZip);
                         exit();
@@ -231,7 +233,11 @@ public class CheckUpdates extends Thread {
 
         if (reply == JOptionPane.OK_OPTION) {
             try {
-                if (Desktop.isDesktopSupported()) {
+                if (Conf.OS_MAC_OS_X.equals(Conf.OSName)) {
+                    Class.forName("com.apple.eio.FileManager").getDeclaredMethod(
+                      "openURL", new Class[] {String.class}).invoke(null,
+                      new Object[] {"file://" + updateDir.getAbsolutePath()});
+                } else if (Desktop.isDesktopSupported()) {
                     Desktop.getDesktop().open(updateDir);
                 }
                 exit();
@@ -241,5 +247,33 @@ public class CheckUpdates extends Thread {
         } else {
             cleanUp();
         }
+    }
+
+    private boolean compareVersions(String newVersion, String currentVersion) {
+        if (newVersion != null) {
+            String[] newversplit = newVersion.split("\\.");
+            if (newversplit.length != 2) {
+                return true;
+            }
+            int newMajor = Integer.valueOf(newversplit[0]);
+            int newMinor = Integer.valueOf(newversplit[1]);
+            
+            if (currentVersion != null) {
+                String[] curversplit = currentVersion.split("\\.");
+                if (curversplit.length != 2) {
+                    return true;
+                }
+                int curMajor = Integer.valueOf(curversplit[0]);
+                int curMinor = Integer.valueOf(curversplit[1]);
+                
+                if (newMajor > curMajor) {
+                    return false;
+                }
+                if (newMinor > curMinor) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

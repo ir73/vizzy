@@ -50,6 +50,7 @@ import vizzy.listeners.IVizzyView;
 import vizzy.listeners.OutOfMemoryDisplayedListener;
 import vizzy.model.Conf;
 import vizzy.model.FlashPlayerFiles;
+import vizzy.model.HighlightsColorData;
 import vizzy.model.SearchResult;
 import vizzy.model.SettingsModel;
 import vizzy.model.SourceAndLine;
@@ -308,6 +309,7 @@ public final class VizzyController implements ILogFileListener {
         settings.getSearcher().setTextArea(view.getTextArea());
         settings.getSearcher().setHighlightPanel(view.getHighLightScroll());
         settings.getKeywordsHighlighter().setTextArea(view.getTextArea());
+        settings.getKeywordsHighlighter().setSettingsModel(settings);
         settings.getHandleWordAtPosition().setTextArea(view.getTextArea());
         settings.getCodePopupHandler().setTextArea(view.getTextArea());
         settings.getCodePopupHandler().setOwner(view.getScrollPane());
@@ -380,13 +382,12 @@ public final class VizzyController implements ILogFileListener {
         settings.setAutoRefresh(props.getProperty("settings.flashlog.auto_refresh", "true").equals("true"), true);
         settings.setWordWrap(props.getProperty("settings.flashlog.word_wrap", "true").equals("true"), true);
         settings.setEnableParsingSourceLines(props.getProperty("settings.flashlog.vizzy_trace_enabled", "false").equals("true"), true);
-        settings.setHighlightStackTraceErrors(props.getProperty("settings.flashlog.highlight_errors_enabled", "false").equals("true"), true);
+        settings.setHighlightColorData(props.getProperty("settings.flashlog.highlights", ""), true);
         settings.setEnableCodePopup(props.getProperty("settings.enable_code_popups", "true").equals("true"), true);
         settings.setEnableTraceClick(props.getProperty("settings.enable_trace_click", "true").equals("true"), true);
         settings.setCustomASEditor(props.getProperty("settings.custom_as_editor", null), true);
         settings.setSearchVisible(props.getProperty("settings.search_panel_visible", "true").equals("true"), true);
         settings.setLineNumbersVisible(props.getProperty("settings.line_numbers_visible", "true").equals("true"), true);
-
         settings.setNewFeaturesPanelShown(props.getProperty("settings.new_features_shown" + Conf.VERSION, "false").equals("true"), true);
         settings.setTraceFont(props.getProperty("settings.font.name", settings.getDefaultFont()),
                 props.getProperty("settings.font.size", "12"), true);
@@ -468,7 +469,7 @@ public final class VizzyController implements ILogFileListener {
     }
 
     private void highlightStackTraceErrors() {
-        if (settings.isHighlightStackTraceErrors()) {
+        if (!settings.getHighlightColorData().isEmpty()) {
             settings.getKeywordsHighlighter().highlight();
         }
     }
@@ -625,6 +626,19 @@ public final class VizzyController implements ILogFileListener {
 
     }
 
+    private String serializeHighlights(List<HighlightsColorData> highlightColorData) {
+        String ret = "";
+        for (int i = 0; i < highlightColorData.size(); i++) {
+            HighlightsColorData data = highlightColorData.get(i);
+            ret += data.getI() + "||" + data.getText().replaceAll("\\|", "\\\\|")
+                    + "||" + data.getBackground().getRGB();
+            if (i < highlightColorData.size() - 1) {
+                ret += "|||";
+            }
+        }
+        return ret;
+    }
+
     class HW implements Runnable {
 
         private final int offset;
@@ -763,7 +777,7 @@ public final class VizzyController implements ILogFileListener {
         props.setProperty("settings.flashlog.max_num_lines", String.valueOf(settings.getMaxNumLines()));
         props.setProperty("settings.flashlog.max_num_lines_enabled", String.valueOf(settings.isMaxNumLinesEnabled()));
         props.setProperty("settings.log_type", String.valueOf(settings.getLogType()));
-        props.setProperty("settings.flashlog.highlight_errors_enabled", String.valueOf(settings.isHighlightStackTraceErrors()));
+        props.setProperty("settings.flashlog.highlights", serializeHighlights(settings.getHighlightColorData()));
         props.setProperty("settings.enable_code_popups", String.valueOf(settings.isEnableCodePopup()));
         props.setProperty("settings.search_panel_visible", String.valueOf(settings.isSearchVisible()));
         props.setProperty("settings.line_numbers_visible", String.valueOf(settings.isLineNumbersVisible()));
@@ -949,7 +963,7 @@ public final class VizzyController implements ILogFileListener {
         settings.setUTF(s.isUTF(), true);
         settings.setRefreshFreq(s.getRefreshFreq(), true);
         settings.setRestoreOnUpdate(s.isRestoreOnUpdate(), true);
-        settings.setHighlightStackTraceErrors(s.isHighlightStackTraceErrors(), true);
+        settings.setHighlightColorData(s.getHighlightColorData(), true);
         settings.setCustomASEditor(s.getCustomASEditor(), true);
         settings.setDefaultASEditor(s.isDefaultASEditor(), true);
         settings.setEnableCodePopup(s.isEnableCodePopup(), true);

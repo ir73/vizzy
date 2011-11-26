@@ -6,12 +6,12 @@ package vizzy.tasks;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JTextArea;
 import javax.swing.text.Highlighter;
 import org.apache.log4j.Logger;
-import vizzy.model.Conf;
+import vizzy.model.HighlightsColorData;
+import vizzy.model.SettingsModel;
 
 /**
  *
@@ -21,9 +21,10 @@ public class KeywordsHighlighter {
 
     private static final Logger log = Logger.getLogger(KeywordsHighlighter.class);
 
-    private static final Pattern templateError = Pattern.compile("\\bError #[0-9]+:");
     private List<Object> highlightObjects = new ArrayList<Object>();
-
+    private JTextArea textArea;
+    private SettingsModel settings;
+    
     public KeywordsHighlighter() {
     }
 
@@ -35,8 +36,6 @@ public class KeywordsHighlighter {
         this.textArea = textArea;
     }
 
-    private JTextArea textArea;
-
     public synchronized boolean highlight() {
         Highlighter highlighter = getTextArea().getHighlighter();
         
@@ -45,22 +44,20 @@ public class KeywordsHighlighter {
         int totalLines = getTextArea().getLineCount();
         int start;
         int end;
-        int ind;
         String lineText;
         boolean highlighted = false;
 
         try {
-            int indEnd;
             int i;
-            Matcher matcher;
             for (i = 0; i < totalLines; i++) {
                 start = getTextArea().getLineStartOffset(i);
                 end = getTextArea().getLineEndOffset(i);
                 lineText = getTextArea().getText(start, end - start);
-                matcher = templateError.matcher(lineText);
-                if (matcher.find()) {
-                    highlightObjects.add(highlighter.addHighlight(start + matcher.start(), start + matcher.end() - 1, Conf.errorPainter));
-                    highlighted = true;
+                for (HighlightsColorData highlight : settings.getHighlightColorData()) {
+                    if (lineText.startsWith(highlight.getText())) {
+                        highlightObjects.add(highlighter.addHighlight(start, end, highlight.getPainter()));
+                        highlighted = true;
+                    }
                 }
             }
         } catch (Exception e) {
@@ -74,5 +71,9 @@ public class KeywordsHighlighter {
         for (Object object : highlightObjects) {
             highlighter.removeHighlight(object);
         }
+    }
+
+    public void setSettingsModel(SettingsModel settings) {
+        this.settings = settings;
     }
 }

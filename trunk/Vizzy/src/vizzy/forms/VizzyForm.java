@@ -12,7 +12,6 @@
 package vizzy.forms;
 
 import java.awt.Color;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
@@ -25,8 +24,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.beans.PropertyChangeListener;
-import java.net.URI;
 import java.util.Date;
+import java.util.List;
 import javax.swing.Action;
 import javax.swing.ActionMap;
 import javax.swing.BorderFactory;
@@ -41,16 +40,15 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
 import org.apache.log4j.Logger;
 import vizzy.comp.FilterDocument;
 import vizzy.comp.JScrollHighlightPanel;
 import vizzy.comp.LineHeightTextArea;
 import vizzy.comp.NewFeaturesPanel;
 import vizzy.controller.VizzyController;
-import vizzy.listeners.INewFeaturesListener;
 import vizzy.listeners.IVizzyView;
 import vizzy.model.Conf;
+import vizzy.model.HighlightsColorData;
 import vizzy.model.SearchResult;
 import vizzy.model.SettingsModel;
 
@@ -809,10 +807,6 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
 
     }
     @Override
-    public void onHighlightStackTraceErrorsChanged(boolean highlightKeywords) {
-
-    }
-    @Override
     public void onPolicyLogFileNameChanged(String policyLogFileName) {
 
     }
@@ -1126,6 +1120,10 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
 
     public JScrollPane getScrollPane() {
         return jScrollPane1;
+    }
+
+    public void onHighlightColorData(List<HighlightsColorData> highlightColorData) {
+        
     }
 
 }

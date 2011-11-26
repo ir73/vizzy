@@ -17,13 +17,19 @@ import java.awt.Desktop;
 import java.awt.Rectangle;
 import java.io.File;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import org.apache.log4j.Logger;
 import vizzy.controller.VizzyController;
 import vizzy.model.Conf;
+import vizzy.model.HighlightsColorData;
 import vizzy.model.SettingsModel;
 
 /**
@@ -75,13 +81,31 @@ public class OptionsForm extends javax.swing.JFrame {
         jCheckBoxVerbose = new javax.swing.JCheckBox();
         jCheckBoxStatic = new javax.swing.JCheckBox();
         jPanelTraceParser = new javax.swing.JPanel();
-        jEnableHighlightErrorsCheckBox = new javax.swing.JCheckBox();
         jEnableClickCheckBox = new javax.swing.JCheckBox();
         jLabelClickInfo = new javax.swing.JLabel();
         jEnablePopupsCheckBox = new javax.swing.JCheckBox();
         jLabelCodePopupInfo = new javax.swing.JLabel();
         jEnableVizzyTraceCheckBox = new javax.swing.JCheckBox();
         jLabelVizzyTraceInfo = new javax.swing.JLabel();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        jHighlight1TextField = new javax.swing.JTextField();
+        jHighlight1Panel = new javax.swing.JPanel();
+        jHighlight2TextField = new javax.swing.JTextField();
+        jHighlight2Panel = new javax.swing.JPanel();
+        jHighlight3TextField = new javax.swing.JTextField();
+        jHighlight3Panel = new javax.swing.JPanel();
+        jHighlight4TextField = new javax.swing.JTextField();
+        jHighlight4Panel = new javax.swing.JPanel();
+        jHighlight5TextField = new javax.swing.JTextField();
+        jHighlight5Panel = new javax.swing.JPanel();
+        jHighlight6TextField = new javax.swing.JTextField();
+        jHighlight6Panel = new javax.swing.JPanel();
+        jHighlight7TextField = new javax.swing.JTextField();
+        jHighlight7Panel = new javax.swing.JPanel();
+        jHighlight8TextField = new javax.swing.JTextField();
+        jHighlight8Panel = new javax.swing.JPanel();
+        jHighlight9TextField = new javax.swing.JTextField();
+        jHighlight9Panel = new javax.swing.JPanel();
         jPanelGeneral = new javax.swing.JPanel();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jLabel3 = new javax.swing.JLabel();
@@ -184,8 +208,6 @@ public class OptionsForm extends javax.swing.JFrame {
 
         jPanelTraceOutputLayout.linkSize(new java.awt.Component[] {jCheckBoxBuffer, jCheckBoxStatic, jCheckBoxTraceAll, jCheckBoxVerbose}, org.jdesktop.layout.GroupLayout.VERTICAL);
 
-        jEnableHighlightErrorsCheckBox.setText("Highlight thrown errors from stack traces");
-
         jEnableClickCheckBox.setText("<html>1. Open HTTP links on double click.<br>2. Open source files from stack traces on double click.</html>");
         jEnableClickCheckBox.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
@@ -226,42 +248,240 @@ public class OptionsForm extends javax.swing.JFrame {
             }
         });
 
+        jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Highlight lines starting with"));
+        jHighlight1TextField.setBounds(10, 20, 60, 20);
+        jLayeredPane1.add(jHighlight1TextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jHighlight1Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jHighlight1Panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jHighlight1PanelMouseClicked(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jHighlight1PanelLayout = new org.jdesktop.layout.GroupLayout(jHighlight1Panel);
+        jHighlight1Panel.setLayout(jHighlight1PanelLayout);
+        jHighlight1PanelLayout.setHorizontalGroup(
+            jHighlight1PanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 16, Short.MAX_VALUE)
+        );
+        jHighlight1PanelLayout.setVerticalGroup(
+            jHighlight1PanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 16, Short.MAX_VALUE)
+        );
+
+        jHighlight1Panel.setBounds(70, 20, 20, 20);
+        jLayeredPane1.add(jHighlight1Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jHighlight2TextField.setBounds(10, 50, 60, 20);
+        jLayeredPane1.add(jHighlight2TextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jHighlight2Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jHighlight2Panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jHighlight2PanelMouseClicked(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jHighlight2PanelLayout = new org.jdesktop.layout.GroupLayout(jHighlight2Panel);
+        jHighlight2Panel.setLayout(jHighlight2PanelLayout);
+        jHighlight2PanelLayout.setHorizontalGroup(
+            jHighlight2PanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 16, Short.MAX_VALUE)
+        );
+        jHighlight2PanelLayout.setVerticalGroup(
+            jHighlight2PanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 16, Short.MAX_VALUE)
+        );
+
+        jHighlight2Panel.setBounds(70, 50, 20, 20);
+        jLayeredPane1.add(jHighlight2Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jHighlight3TextField.setBounds(10, 80, 60, 20);
+        jLayeredPane1.add(jHighlight3TextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jHighlight3Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jHighlight3Panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jHighlight3PanelMouseClicked(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jHighlight3PanelLayout = new org.jdesktop.layout.GroupLayout(jHighlight3Panel);
+        jHighlight3Panel.setLayout(jHighlight3PanelLayout);
+        jHighlight3PanelLayout.setHorizontalGroup(
+            jHighlight3PanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 16, Short.MAX_VALUE)
+        );
+        jHighlight3PanelLayout.setVerticalGroup(
+            jHighlight3PanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 16, Short.MAX_VALUE)
+        );
+
+        jHighlight3Panel.setBounds(70, 80, 20, 20);
+        jLayeredPane1.add(jHighlight3Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jHighlight4TextField.setBounds(140, 20, 60, 20);
+        jLayeredPane1.add(jHighlight4TextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jHighlight4Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jHighlight4Panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jHighlight4PanelMouseClicked(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jHighlight4PanelLayout = new org.jdesktop.layout.GroupLayout(jHighlight4Panel);
+        jHighlight4Panel.setLayout(jHighlight4PanelLayout);
+        jHighlight4PanelLayout.setHorizontalGroup(
+            jHighlight4PanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 16, Short.MAX_VALUE)
+        );
+        jHighlight4PanelLayout.setVerticalGroup(
+            jHighlight4PanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 16, Short.MAX_VALUE)
+        );
+
+        jHighlight4Panel.setBounds(200, 20, 20, 20);
+        jLayeredPane1.add(jHighlight4Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jHighlight5TextField.setBounds(140, 50, 60, 20);
+        jLayeredPane1.add(jHighlight5TextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jHighlight5Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jHighlight5Panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jHighlight5PanelMouseClicked(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jHighlight5PanelLayout = new org.jdesktop.layout.GroupLayout(jHighlight5Panel);
+        jHighlight5Panel.setLayout(jHighlight5PanelLayout);
+        jHighlight5PanelLayout.setHorizontalGroup(
+            jHighlight5PanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 16, Short.MAX_VALUE)
+        );
+        jHighlight5PanelLayout.setVerticalGroup(
+            jHighlight5PanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 16, Short.MAX_VALUE)
+        );
+
+        jHighlight5Panel.setBounds(200, 50, 20, 20);
+        jLayeredPane1.add(jHighlight5Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jHighlight6TextField.setBounds(140, 80, 60, 20);
+        jLayeredPane1.add(jHighlight6TextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jHighlight6Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jHighlight6Panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jHighlight6PanelMouseClicked(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jHighlight6PanelLayout = new org.jdesktop.layout.GroupLayout(jHighlight6Panel);
+        jHighlight6Panel.setLayout(jHighlight6PanelLayout);
+        jHighlight6PanelLayout.setHorizontalGroup(
+            jHighlight6PanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 16, Short.MAX_VALUE)
+        );
+        jHighlight6PanelLayout.setVerticalGroup(
+            jHighlight6PanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 16, Short.MAX_VALUE)
+        );
+
+        jHighlight6Panel.setBounds(200, 80, 20, 20);
+        jLayeredPane1.add(jHighlight6Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jHighlight7TextField.setBounds(260, 20, 60, 20);
+        jLayeredPane1.add(jHighlight7TextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jHighlight7Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jHighlight7Panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jHighlight7PanelMouseClicked(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jHighlight7PanelLayout = new org.jdesktop.layout.GroupLayout(jHighlight7Panel);
+        jHighlight7Panel.setLayout(jHighlight7PanelLayout);
+        jHighlight7PanelLayout.setHorizontalGroup(
+            jHighlight7PanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 16, Short.MAX_VALUE)
+        );
+        jHighlight7PanelLayout.setVerticalGroup(
+            jHighlight7PanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 16, Short.MAX_VALUE)
+        );
+
+        jHighlight7Panel.setBounds(320, 20, 20, 20);
+        jLayeredPane1.add(jHighlight7Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jHighlight8TextField.setBounds(260, 50, 60, 20);
+        jLayeredPane1.add(jHighlight8TextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jHighlight8Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jHighlight8Panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jHighlight8PanelMouseClicked(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jHighlight8PanelLayout = new org.jdesktop.layout.GroupLayout(jHighlight8Panel);
+        jHighlight8Panel.setLayout(jHighlight8PanelLayout);
+        jHighlight8PanelLayout.setHorizontalGroup(
+            jHighlight8PanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 16, Short.MAX_VALUE)
+        );
+        jHighlight8PanelLayout.setVerticalGroup(
+            jHighlight8PanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 16, Short.MAX_VALUE)
+        );
+
+        jHighlight8Panel.setBounds(320, 50, 20, 20);
+        jLayeredPane1.add(jHighlight8Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jHighlight9TextField.setBounds(260, 80, 60, 20);
+        jLayeredPane1.add(jHighlight9TextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jHighlight9Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jHighlight9Panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jHighlight9PanelMouseClicked(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jHighlight9PanelLayout = new org.jdesktop.layout.GroupLayout(jHighlight9Panel);
+        jHighlight9Panel.setLayout(jHighlight9PanelLayout);
+        jHighlight9PanelLayout.setHorizontalGroup(
+            jHighlight9PanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 16, Short.MAX_VALUE)
+        );
+        jHighlight9PanelLayout.setVerticalGroup(
+            jHighlight9PanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 16, Short.MAX_VALUE)
+        );
+
+        jHighlight9Panel.setBounds(320, 80, 20, 20);
+        jLayeredPane1.add(jHighlight9Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         org.jdesktop.layout.GroupLayout jPanelTraceParserLayout = new org.jdesktop.layout.GroupLayout(jPanelTraceParser);
         jPanelTraceParser.setLayout(jPanelTraceParserLayout);
         jPanelTraceParserLayout.setHorizontalGroup(
             jPanelTraceParserLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanelTraceParserLayout.createSequentialGroup()
+                .addContainerGap()
                 .add(jPanelTraceParserLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLayeredPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                     .add(jPanelTraceParserLayout.createSequentialGroup()
-                        .add(6, 6, 6)
-                        .add(jPanelTraceParserLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jPanelTraceParserLayout.createSequentialGroup()
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jEnableHighlightErrorsCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 330, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                            .add(jPanelTraceParserLayout.createSequentialGroup()
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jPanelTraceParserLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(jPanelTraceParserLayout.createSequentialGroup()
-                                        .add(21, 21, 21)
-                                        .add(jLabelClickInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 210, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                    .add(jEnableClickCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 330, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                    .add(jPanelTraceParserLayout.createSequentialGroup()
-                                        .add(21, 21, 21)
-                                        .add(jLabelCodePopupInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 290, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                    .add(jEnablePopupsCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 330, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))))
+                        .add(21, 21, 21)
+                        .add(jLabelClickInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 210, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jEnableClickCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 330, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jPanelTraceParserLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(jPanelTraceParserLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(jLabelVizzyTraceInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 310, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jEnableVizzyTraceCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 330, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(57, Short.MAX_VALUE))
+                        .add(21, 21, 21)
+                        .add(jLabelCodePopupInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 290, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jEnablePopupsCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 330, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jPanelTraceParserLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                        .add(jLabelVizzyTraceInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 310, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jEnableVizzyTraceCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 330, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanelTraceParserLayout.setVerticalGroup(
             jPanelTraceParserLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanelTraceParserLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jEnableHighlightErrorsCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jEnableClickCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabelClickInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -273,7 +493,9 @@ public class OptionsForm extends javax.swing.JFrame {
                 .add(jEnableVizzyTraceCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabelVizzyTraceInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .add(18, 18, 18)
+                .add(jLayeredPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder("Font"));
@@ -767,6 +989,42 @@ public class OptionsForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFlashDevelopIntegrLabel1MouseEntered
 
+private void jHighlight1PanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jHighlight1PanelMouseClicked
+    chooseColor(jHighlight1Panel);
+}//GEN-LAST:event_jHighlight1PanelMouseClicked
+
+private void jHighlight2PanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jHighlight2PanelMouseClicked
+    chooseColor(jHighlight2Panel);
+}//GEN-LAST:event_jHighlight2PanelMouseClicked
+
+private void jHighlight3PanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jHighlight3PanelMouseClicked
+    chooseColor(jHighlight3Panel);
+}//GEN-LAST:event_jHighlight3PanelMouseClicked
+
+private void jHighlight4PanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jHighlight4PanelMouseClicked
+    chooseColor(jHighlight4Panel);
+}//GEN-LAST:event_jHighlight4PanelMouseClicked
+
+private void jHighlight5PanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jHighlight5PanelMouseClicked
+    chooseColor(jHighlight5Panel);
+}//GEN-LAST:event_jHighlight5PanelMouseClicked
+
+private void jHighlight6PanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jHighlight6PanelMouseClicked
+    chooseColor(jHighlight6Panel);
+}//GEN-LAST:event_jHighlight6PanelMouseClicked
+
+private void jHighlight7PanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jHighlight7PanelMouseClicked
+    chooseColor(jHighlight7Panel);
+}//GEN-LAST:event_jHighlight7PanelMouseClicked
+
+private void jHighlight8PanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jHighlight8PanelMouseClicked
+    chooseColor(jHighlight8Panel);
+}//GEN-LAST:event_jHighlight8PanelMouseClicked
+
+private void jHighlight9PanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jHighlight9PanelMouseClicked
+    chooseColor(jHighlight9Panel);
+}//GEN-LAST:event_jHighlight9PanelMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup ASEditorButtonGroup;
     private javax.swing.JLabel bgColorLabel;
@@ -783,7 +1041,6 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JRadioButton jCustomEditorRadioButton;
     private javax.swing.JRadioButton jDefaultRadioButton;
     private javax.swing.JCheckBox jEnableClickCheckBox;
-    private javax.swing.JCheckBox jEnableHighlightErrorsCheckBox;
     private javax.swing.JCheckBox jEnablePopupsCheckBox;
     private javax.swing.JCheckBox jEnableVizzyTraceCheckBox;
     private javax.swing.JLabel jFlashDevelopIntegrLabel;
@@ -792,6 +1049,24 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JComboBox jFontComboBox;
     private javax.swing.JTextField jFontSizeTextField;
     private javax.swing.JTextField jFreqTextField;
+    private javax.swing.JPanel jHighlight1Panel;
+    private javax.swing.JTextField jHighlight1TextField;
+    private javax.swing.JPanel jHighlight2Panel;
+    private javax.swing.JTextField jHighlight2TextField;
+    private javax.swing.JPanel jHighlight3Panel;
+    private javax.swing.JTextField jHighlight3TextField;
+    private javax.swing.JPanel jHighlight4Panel;
+    private javax.swing.JTextField jHighlight4TextField;
+    private javax.swing.JPanel jHighlight5Panel;
+    private javax.swing.JTextField jHighlight5TextField;
+    private javax.swing.JPanel jHighlight6Panel;
+    private javax.swing.JTextField jHighlight6TextField;
+    private javax.swing.JPanel jHighlight7Panel;
+    private javax.swing.JTextField jHighlight7TextField;
+    private javax.swing.JPanel jHighlight8Panel;
+    private javax.swing.JTextField jHighlight8TextField;
+    private javax.swing.JPanel jHighlight9Panel;
+    private javax.swing.JTextField jHighlight9TextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -803,6 +1078,7 @@ public class OptionsForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelClickInfo;
     private javax.swing.JLabel jLabelCodePopupInfo;
     private javax.swing.JLabel jLabelVizzyTraceInfo;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
     private javax.swing.JLayeredPane jLayeredPane4;
@@ -843,7 +1119,6 @@ public class OptionsForm extends javax.swing.JFrame {
         s.setUTF(jUTFCheckBox.isSelected(), false);
         s.setRefreshFreq(jFreqTextField.getText(), false);
         s.setRestoreOnUpdate(jRestoreCheckBox.isSelected(), false);
-        s.setHighlightStackTraceErrors(jEnableHighlightErrorsCheckBox.isSelected(), false);
         s.setCustomASEditor(jCustomASEditorTextFiled.getText(), false);
         s.setDefaultASEditor(jDefaultRadioButton.isSelected(), false);
         s.setEnableCodePopup(jEnablePopupsCheckBox.isSelected(), false);
@@ -851,6 +1126,45 @@ public class OptionsForm extends javax.swing.JFrame {
         s.setBgColor(bgColorPanel.getBackground(), false);
         s.setFontColor(fontColorPanel.getBackground(), false);
         s.setEnableParsingSourceLines(jEnableVizzyTraceCheckBox.isSelected(), false);
+        
+        List<HighlightsColorData> list = new ArrayList<HighlightsColorData>();
+        if (!"".equals(jHighlight1TextField.getText())) {
+            list.add(new HighlightsColorData(1, jHighlight1TextField.getText(), 
+                    jHighlight1Panel.getBackground()));
+        }
+        if (!"".equals(jHighlight2TextField.getText())) {
+            list.add(new HighlightsColorData(2, jHighlight2TextField.getText(), 
+                    jHighlight2Panel.getBackground()));
+        }
+        if (!"".equals(jHighlight3TextField.getText())) {
+            list.add(new HighlightsColorData(3, jHighlight3TextField.getText(), 
+                    jHighlight3Panel.getBackground()));
+        }
+        if (!"".equals(jHighlight4TextField.getText())) {
+            list.add(new HighlightsColorData(4, jHighlight4TextField.getText(), 
+                    jHighlight4Panel.getBackground()));
+        }
+        if (!"".equals(jHighlight5TextField.getText())) {
+            list.add(new HighlightsColorData(5, jHighlight5TextField.getText(), 
+                    jHighlight5Panel.getBackground()));
+        }
+        if (!"".equals(jHighlight6TextField.getText())) {
+            list.add(new HighlightsColorData(6, jHighlight6TextField.getText(), 
+                    jHighlight6Panel.getBackground()));
+        }
+        if (!"".equals(jHighlight7TextField.getText())) {
+            list.add(new HighlightsColorData(7, jHighlight7TextField.getText(), 
+                    jHighlight7Panel.getBackground()));
+        }
+        if (!"".equals(jHighlight8TextField.getText())) {
+            list.add(new HighlightsColorData(8, jHighlight8TextField.getText(), 
+                    jHighlight8Panel.getBackground()));
+        }
+        if (!"".equals(jHighlight9TextField.getText())) {
+            list.add(new HighlightsColorData(9, jHighlight9TextField.getText(), 
+                    jHighlight9Panel.getBackground()));
+        }
+        s.setHighlightColorData(list, false);
 
         controller.optionsOK(s, m);
     }
@@ -872,7 +1186,6 @@ public class OptionsForm extends javax.swing.JFrame {
         jCheckBoxTraceAll.setSelected(settings.getMmcfgKeys().get("AS3Trace", "0").equals("1"));
         jCheckBoxVerbose.setSelected(settings.getMmcfgKeys().get("AS3Verbose", "0").equals("1"));
         jCheckBoxStatic.setSelected(settings.getMmcfgKeys().get("AS3StaticProfile", "0").equals("1"));
-        jEnableHighlightErrorsCheckBox.setSelected(settings.isHighlightStackTraceErrors());
         jCustomASEditorTextFiled.setText(settings.getCustomASEditor());
         jEnableClickCheckBox.setSelected(settings.isEnableTraceClick());
         jEnablePopupsCheckBox.setSelected(settings.isEnableCodePopup());
@@ -883,6 +1196,19 @@ public class OptionsForm extends javax.swing.JFrame {
             jDefaultRadioButton.setSelected(true);
         } else {
             jCustomEditorRadioButton.setSelected(true);
+        }
+        List<HighlightsColorData> highlightColorData = settings.getHighlightColorData();
+        for (HighlightsColorData highlights : highlightColorData) {
+            try {
+                JPanel panel = (JPanel) (getClass().getDeclaredField("jHighlight" 
+                        + highlights.getI() + "Panel").get(this));
+                JTextField tfield = (JTextField) (getClass().getDeclaredField("jHighlight" 
+                        + highlights.getI() + "TextField").get(this));
+                panel.setBackground(highlights.getBackground());
+                tfield.setText(highlights.getText());
+            } catch (Exception ex) {
+                java.util.logging.Logger.getLogger(OptionsForm.class.getName()).log(Level.SEVERE, null, ex);
+            } 
         }
 
         checkFlashDevelop();
@@ -952,6 +1278,11 @@ public class OptionsForm extends javax.swing.JFrame {
         menuIndex = selectedIndex;
         jPanelContainer.validate();
         jPanelContainer.repaint();
+    }
+
+    private void chooseColor(JPanel panel) {
+        Color color = JColorChooser.showDialog(this, "Highlight color", panel.getBackground());
+        panel.setBackground(color);
     }
 
 }
