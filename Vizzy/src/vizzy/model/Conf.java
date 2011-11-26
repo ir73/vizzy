@@ -6,6 +6,7 @@
 package vizzy.model;
 
 import java.awt.Color;
+import java.io.File;
 import vizzy.util.TextAreaHighlightPainter;
 
 /**
@@ -21,6 +22,7 @@ public class Conf {
 
     public static final String OSName = System.getProperty("os.name").toLowerCase();
     public static final String newLine = System.getProperty("line.separator");
+    public static final String tempFolderPath = System.getProperty("java.io.tmpdir");
 
     public static String userHome;
     static {
@@ -69,7 +71,7 @@ public class Conf {
     public static final String DEFAULT_WINDOWS_EDITOR_PATH = "\"" + FLASHDEVELOP_PATH + "\" \"%file%\" -line %line%";
     public static final String DEFAULT_MAC_EDITOR_PATH = "/Applications/TextEdit.app/Contents/MacOS/TextEdit %file%";
     public static final String DEFAULT_LINUX_EDITOR_PATH = "gedit %file%";
-    public static final String UPDATE_FOLDER = "/.update";
+    public static final String UPDATE_FOLDER = Conf.tempFolderPath + File.separator + ".update" + Conf.VERSION;
     public static final long UPDATE_CHECK_FREQ = 7L * 24L * 60L * 60L * 1000L;
 
     public static final String WEBSITE_UPDATE_PHRASE = "Current version is: ";

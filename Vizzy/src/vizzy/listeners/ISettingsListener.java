@@ -9,7 +9,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.util.Date;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import vizzy.model.HighlightsColorData;
 import vizzy.model.SearchResult;
 
 /**
@@ -29,8 +31,6 @@ public interface ISettingsListener {
     public void onDefaultASEditorChanged(boolean defaultASEditor);
 
     public void onUTFChanged(boolean uTF);
-
-    public void onHighlightStackTraceErrorsChanged(boolean highlightKeywords);
 
     public void onPolicyLogFileNameChanged(String policyLogFileName);
 
@@ -111,5 +111,7 @@ public interface ISettingsListener {
     public void onSearchVisible(boolean searchVisible);
 
     public void onLineNumbersVisible(boolean lineNumbersVisible);
+
+    public void onHighlightColorData(List<HighlightsColorData> highlightColorData);
 
 }

@@ -40,7 +40,6 @@ public class SettingsModel {
     private String customASEditor = "";
     private boolean isRegexp = false;
     private boolean isDefaultASEditor = true;
-    private boolean highlightStackTraceErrors = true;
     private boolean isAutoRefresh = true;
     private boolean isUTF = true;
     private boolean isCheckUpdates = true;
@@ -73,6 +72,7 @@ public class SettingsModel {
     private Map<Integer, String> sourceLines;
     private Color bgColor = Color.white;
     private Color fontColor = Color.black;
+    private List<HighlightsColorData> highlightColorData = new ArrayList<HighlightsColorData>();
 
     private KeywordsHighlighter keywordsHighlighter;
     private HandleWordAtPosition handleWordAtPosition;
@@ -259,17 +259,6 @@ public class SettingsModel {
         }
         if (doFireEvent && listener != null) {
             getListener().onDefaultASEditorChanged(this.isDefaultASEditor);
-        }
-    }
-
-    public boolean isHighlightStackTraceErrors() {
-        return highlightStackTraceErrors;
-    }
-
-    public void setHighlightStackTraceErrors(boolean highlightKeywords, boolean doFireEvent) {
-        this.highlightStackTraceErrors = highlightKeywords;
-        if (doFireEvent && listener != null) {
-            getListener().onHighlightStackTraceErrorsChanged(this.highlightStackTraceErrors);
         }
     }
 
@@ -732,6 +721,33 @@ public class SettingsModel {
         this.isLineNumbersVisible = isLineNumbersVisible;
         if (doFireEvent && listener != null) {
             getListener().onLineNumbersVisible(this.isLineNumbersVisible);
+        }
+    }
+
+    public List<HighlightsColorData> getHighlightColorData() {
+        return highlightColorData;
+    }
+
+    public void setHighlightColorData(List<HighlightsColorData> highlightColorData, boolean doFireEvent) {
+        this.highlightColorData = highlightColorData;
+        if (doFireEvent && listener != null) {
+            getListener().onHighlightColorData(this.highlightColorData);
+        }
+    }
+
+    public void setHighlightColorData(String str, boolean doFireEvent) {
+        if (!"".equals(str)) {
+            List<HighlightsColorData> list = new ArrayList<HighlightsColorData>();
+            String[] higlightsList = str.split("\\|\\|\\|");
+            for (String highlight : higlightsList) {
+                String[] items = highlight.split("\\|\\|");
+                list.add(new HighlightsColorData(Integer.valueOf(items[0]), 
+                        items[1].replaceAll("\\\\\\|", "|"), new Color(Integer.valueOf(items[2]))));
+            }
+            highlightColorData = list;
+        }
+        if (doFireEvent && listener != null) {
+            getListener().onHighlightColorData(this.highlightColorData);
         }
     }
     
