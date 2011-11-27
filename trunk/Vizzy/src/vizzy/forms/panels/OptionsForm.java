@@ -49,6 +49,7 @@ public class OptionsForm extends javax.swing.JFrame {
         this.controller = controller;
         this.settings = settings;
         initComponents();
+        afterInitComponents();
         initPositionAndSize(rect);
     }
 
@@ -248,8 +249,8 @@ public class OptionsForm extends javax.swing.JFrame {
             }
         });
 
-        jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Highlight lines starting with"));
-        jHighlight1TextField.setBounds(10, 20, 60, 20);
+        jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Highlight lines starting with..."));
+        jHighlight1TextField.setBounds(10, 20, 90, 20);
         jLayeredPane1.add(jHighlight1TextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jHighlight1Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -270,9 +271,9 @@ public class OptionsForm extends javax.swing.JFrame {
             .add(0, 16, Short.MAX_VALUE)
         );
 
-        jHighlight1Panel.setBounds(70, 20, 20, 20);
+        jHighlight1Panel.setBounds(100, 20, 20, 20);
         jLayeredPane1.add(jHighlight1Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jHighlight2TextField.setBounds(10, 50, 60, 20);
+        jHighlight2TextField.setBounds(10, 45, 90, 20);
         jLayeredPane1.add(jHighlight2TextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jHighlight2Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -293,9 +294,9 @@ public class OptionsForm extends javax.swing.JFrame {
             .add(0, 16, Short.MAX_VALUE)
         );
 
-        jHighlight2Panel.setBounds(70, 50, 20, 20);
+        jHighlight2Panel.setBounds(100, 45, 20, 20);
         jLayeredPane1.add(jHighlight2Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jHighlight3TextField.setBounds(10, 80, 60, 20);
+        jHighlight3TextField.setBounds(10, 70, 90, 20);
         jLayeredPane1.add(jHighlight3TextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jHighlight3Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -316,9 +317,9 @@ public class OptionsForm extends javax.swing.JFrame {
             .add(0, 16, Short.MAX_VALUE)
         );
 
-        jHighlight3Panel.setBounds(70, 80, 20, 20);
+        jHighlight3Panel.setBounds(100, 70, 20, 20);
         jLayeredPane1.add(jHighlight3Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jHighlight4TextField.setBounds(140, 20, 60, 20);
+        jHighlight4TextField.setBounds(140, 20, 80, 20);
         jLayeredPane1.add(jHighlight4TextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jHighlight4Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -339,9 +340,9 @@ public class OptionsForm extends javax.swing.JFrame {
             .add(0, 16, Short.MAX_VALUE)
         );
 
-        jHighlight4Panel.setBounds(200, 20, 20, 20);
+        jHighlight4Panel.setBounds(220, 20, 20, 20);
         jLayeredPane1.add(jHighlight4Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jHighlight5TextField.setBounds(140, 50, 60, 20);
+        jHighlight5TextField.setBounds(140, 45, 80, 20);
         jLayeredPane1.add(jHighlight5TextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jHighlight5Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -362,9 +363,9 @@ public class OptionsForm extends javax.swing.JFrame {
             .add(0, 16, Short.MAX_VALUE)
         );
 
-        jHighlight5Panel.setBounds(200, 50, 20, 20);
+        jHighlight5Panel.setBounds(220, 45, 20, 20);
         jLayeredPane1.add(jHighlight5Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jHighlight6TextField.setBounds(140, 80, 60, 20);
+        jHighlight6TextField.setBounds(140, 70, 80, 20);
         jLayeredPane1.add(jHighlight6TextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jHighlight6Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -385,9 +386,9 @@ public class OptionsForm extends javax.swing.JFrame {
             .add(0, 16, Short.MAX_VALUE)
         );
 
-        jHighlight6Panel.setBounds(200, 80, 20, 20);
+        jHighlight6Panel.setBounds(220, 70, 20, 20);
         jLayeredPane1.add(jHighlight6Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jHighlight7TextField.setBounds(260, 20, 60, 20);
+        jHighlight7TextField.setBounds(260, 20, 70, 20);
         jLayeredPane1.add(jHighlight7TextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jHighlight7Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -408,9 +409,9 @@ public class OptionsForm extends javax.swing.JFrame {
             .add(0, 16, Short.MAX_VALUE)
         );
 
-        jHighlight7Panel.setBounds(320, 20, 20, 20);
+        jHighlight7Panel.setBounds(330, 20, 20, 20);
         jLayeredPane1.add(jHighlight7Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jHighlight8TextField.setBounds(260, 50, 60, 20);
+        jHighlight8TextField.setBounds(260, 45, 70, 20);
         jLayeredPane1.add(jHighlight8TextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jHighlight8Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -431,9 +432,9 @@ public class OptionsForm extends javax.swing.JFrame {
             .add(0, 16, Short.MAX_VALUE)
         );
 
-        jHighlight8Panel.setBounds(320, 50, 20, 20);
+        jHighlight8Panel.setBounds(330, 45, 20, 20);
         jLayeredPane1.add(jHighlight8Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jHighlight9TextField.setBounds(260, 80, 60, 20);
+        jHighlight9TextField.setBounds(260, 70, 70, 20);
         jLayeredPane1.add(jHighlight9TextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jHighlight9Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -454,7 +455,7 @@ public class OptionsForm extends javax.swing.JFrame {
             .add(0, 16, Short.MAX_VALUE)
         );
 
-        jHighlight9Panel.setBounds(320, 80, 20, 20);
+        jHighlight9Panel.setBounds(330, 70, 20, 20);
         jLayeredPane1.add(jHighlight9Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout jPanelTraceParserLayout = new org.jdesktop.layout.GroupLayout(jPanelTraceParser);
@@ -464,19 +465,21 @@ public class OptionsForm extends javax.swing.JFrame {
             .add(jPanelTraceParserLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jPanelTraceParserLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLayeredPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                    .add(jLayeredPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
                     .add(jPanelTraceParserLayout.createSequentialGroup()
-                        .add(21, 21, 21)
-                        .add(jLabelClickInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 210, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(jEnableClickCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 330, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jPanelTraceParserLayout.createSequentialGroup()
-                        .add(21, 21, 21)
-                        .add(jLabelCodePopupInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 290, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(jEnablePopupsCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 330, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jPanelTraceParserLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                        .add(jLabelVizzyTraceInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 310, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(jEnableVizzyTraceCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 330, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .add(jPanelTraceParserLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jPanelTraceParserLayout.createSequentialGroup()
+                                .add(21, 21, 21)
+                                .add(jLabelClickInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 210, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(jEnableClickCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 330, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jPanelTraceParserLayout.createSequentialGroup()
+                                .add(21, 21, 21)
+                                .add(jLabelCodePopupInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 290, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(jEnablePopupsCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 330, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jPanelTraceParserLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                .add(jLabelVizzyTraceInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 310, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(jEnableVizzyTraceCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 330, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(53, Short.MAX_VALUE))))
         );
         jPanelTraceParserLayout.setVerticalGroup(
             jPanelTraceParserLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -493,8 +496,8 @@ public class OptionsForm extends javax.swing.JFrame {
                 .add(jEnableVizzyTraceCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabelVizzyTraceInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(18, 18, 18)
-                .add(jLayeredPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLayeredPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1283,6 +1286,18 @@ private void jHighlight9PanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-
     private void chooseColor(JPanel panel) {
         Color color = JColorChooser.showDialog(this, "Highlight color", panel.getBackground());
         panel.setBackground(color);
+    }
+
+    private void afterInitComponents() {
+        jHighlight1Panel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        jHighlight2Panel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        jHighlight3Panel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        jHighlight4Panel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        jHighlight5Panel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        jHighlight6Panel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        jHighlight7Panel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        jHighlight8Panel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        jHighlight9Panel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
 }

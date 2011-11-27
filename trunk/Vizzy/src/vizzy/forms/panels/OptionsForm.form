@@ -86,23 +86,27 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLayeredPane1" alignment="0" pref="373" max="32767" attributes="0"/>
+                      <Component id="jLayeredPane1" alignment="0" pref="383" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="21" pref="21" max="21" attributes="0"/>
-                          <Component id="jLabelClickInfo" min="-2" pref="210" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="jEnableClickCheckBox" alignment="0" min="-2" pref="330" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="21" pref="21" max="21" attributes="0"/>
-                          <Component id="jLabelCodePopupInfo" min="-2" pref="290" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="jEnablePopupsCheckBox" alignment="0" min="-2" pref="330" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                          <Component id="jLabelVizzyTraceInfo" alignment="1" min="-2" pref="310" max="-2" attributes="0"/>
-                          <Component id="jEnableVizzyTraceCheckBox" alignment="1" min="-2" pref="330" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="21" pref="21" max="21" attributes="0"/>
+                                  <Component id="jLabelClickInfo" min="-2" pref="210" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jEnableClickCheckBox" alignment="0" min="-2" pref="330" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="21" pref="21" max="21" attributes="0"/>
+                                  <Component id="jLabelCodePopupInfo" min="-2" pref="290" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jEnablePopupsCheckBox" alignment="0" min="-2" pref="330" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                  <Component id="jLabelVizzyTraceInfo" alignment="1" min="-2" pref="310" max="-2" attributes="0"/>
+                                  <Component id="jEnableVizzyTraceCheckBox" alignment="1" min="-2" pref="330" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="53" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -121,8 +125,8 @@
                   <Component id="jEnableVizzyTraceCheckBox" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabelVizzyTraceInfo" min="-2" pref="16" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLayeredPane1" pref="114" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLayeredPane1" pref="126" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -179,7 +183,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Highlight lines starting with"/>
+                <TitledBorder title="Highlight lines starting with..."/>
               </Border>
             </Property>
           </Properties>
@@ -189,7 +193,7 @@
             <Component class="javax.swing.JTextField" name="jHighlight1TextField">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                  <JLayeredPaneConstraints x="10" y="20" width="60" height="-1" layer="0" position="-1"/>
+                  <JLayeredPaneConstraints x="10" y="20" width="90" height="-1" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -206,7 +210,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                  <JLayeredPaneConstraints x="70" y="20" width="20" height="20" layer="0" position="-1"/>
+                  <JLayeredPaneConstraints x="100" y="20" width="20" height="20" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
 
@@ -226,7 +230,7 @@
             <Component class="javax.swing.JTextField" name="jHighlight2TextField">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                  <JLayeredPaneConstraints x="10" y="50" width="60" height="-1" layer="0" position="-1"/>
+                  <JLayeredPaneConstraints x="10" y="45" width="90" height="-1" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -243,7 +247,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                  <JLayeredPaneConstraints x="70" y="50" width="20" height="20" layer="0" position="-1"/>
+                  <JLayeredPaneConstraints x="100" y="45" width="20" height="20" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
 
@@ -263,7 +267,7 @@
             <Component class="javax.swing.JTextField" name="jHighlight3TextField">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                  <JLayeredPaneConstraints x="10" y="80" width="60" height="-1" layer="0" position="-1"/>
+                  <JLayeredPaneConstraints x="10" y="70" width="90" height="-1" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -280,7 +284,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                  <JLayeredPaneConstraints x="70" y="80" width="20" height="20" layer="0" position="-1"/>
+                  <JLayeredPaneConstraints x="100" y="70" width="20" height="20" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
 
@@ -300,7 +304,7 @@
             <Component class="javax.swing.JTextField" name="jHighlight4TextField">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                  <JLayeredPaneConstraints x="140" y="20" width="60" height="-1" layer="0" position="-1"/>
+                  <JLayeredPaneConstraints x="140" y="20" width="80" height="-1" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -317,7 +321,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                  <JLayeredPaneConstraints x="200" y="20" width="20" height="20" layer="0" position="-1"/>
+                  <JLayeredPaneConstraints x="220" y="20" width="20" height="20" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
 
@@ -337,7 +341,7 @@
             <Component class="javax.swing.JTextField" name="jHighlight5TextField">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                  <JLayeredPaneConstraints x="140" y="50" width="60" height="-1" layer="0" position="-1"/>
+                  <JLayeredPaneConstraints x="140" y="45" width="80" height="-1" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -354,7 +358,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                  <JLayeredPaneConstraints x="200" y="50" width="20" height="20" layer="0" position="-1"/>
+                  <JLayeredPaneConstraints x="220" y="45" width="20" height="20" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
 
@@ -374,7 +378,7 @@
             <Component class="javax.swing.JTextField" name="jHighlight6TextField">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                  <JLayeredPaneConstraints x="140" y="80" width="60" height="-1" layer="0" position="-1"/>
+                  <JLayeredPaneConstraints x="140" y="70" width="80" height="-1" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -391,7 +395,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                  <JLayeredPaneConstraints x="200" y="80" width="20" height="20" layer="0" position="-1"/>
+                  <JLayeredPaneConstraints x="220" y="70" width="20" height="20" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
 
@@ -411,7 +415,7 @@
             <Component class="javax.swing.JTextField" name="jHighlight7TextField">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                  <JLayeredPaneConstraints x="260" y="20" width="60" height="-1" layer="0" position="-1"/>
+                  <JLayeredPaneConstraints x="260" y="20" width="70" height="-1" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -428,7 +432,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                  <JLayeredPaneConstraints x="320" y="20" width="20" height="20" layer="0" position="-1"/>
+                  <JLayeredPaneConstraints x="330" y="20" width="20" height="20" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
 
@@ -448,7 +452,7 @@
             <Component class="javax.swing.JTextField" name="jHighlight8TextField">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                  <JLayeredPaneConstraints x="260" y="50" width="60" height="-1" layer="0" position="-1"/>
+                  <JLayeredPaneConstraints x="260" y="45" width="70" height="-1" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -465,7 +469,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                  <JLayeredPaneConstraints x="320" y="50" width="20" height="20" layer="0" position="-1"/>
+                  <JLayeredPaneConstraints x="330" y="45" width="20" height="20" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
 
@@ -485,7 +489,7 @@
             <Component class="javax.swing.JTextField" name="jHighlight9TextField">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                  <JLayeredPaneConstraints x="260" y="80" width="60" height="-1" layer="0" position="-1"/>
+                  <JLayeredPaneConstraints x="260" y="70" width="70" height="-1" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -502,7 +506,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                  <JLayeredPaneConstraints x="320" y="80" width="20" height="20" layer="0" position="-1"/>
+                  <JLayeredPaneConstraints x="330" y="70" width="20" height="20" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
 
