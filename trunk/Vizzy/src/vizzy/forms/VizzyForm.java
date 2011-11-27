@@ -12,6 +12,7 @@
 package vizzy.forms;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
@@ -24,6 +25,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.beans.PropertyChangeListener;
+import java.net.URI;
 import java.util.Date;
 import java.util.List;
 import javax.swing.Action;
@@ -46,6 +48,7 @@ import vizzy.comp.JScrollHighlightPanel;
 import vizzy.comp.LineHeightTextArea;
 import vizzy.comp.NewFeaturesPanel;
 import vizzy.controller.VizzyController;
+import vizzy.listeners.INewFeaturesListener;
 import vizzy.listeners.IVizzyView;
 import vizzy.model.Conf;
 import vizzy.model.HighlightsColorData;
@@ -1009,28 +1012,28 @@ public class VizzyForm extends javax.swing.JFrame implements IVizzyView {
     }
     @Override
     public void onShowNewFeaturesPanel() {
-//        if (newFeaturesPanel == null) {
-//            newFeaturesPanel = new NewFeaturesPanel("<html>Miss some feature in Vizzy? Send email to"
-//                    + " sergei.ledvanov@gmail.com</html>",
-//                    new INewFeaturesListener() {
-//                public void click() {
-//                    removeNewFeaturesPanel();
-//                    if (Desktop.isDesktopSupported()) {
-//                        try {
-//                              Desktop.getDesktop().mail(new URI("mailto", "sergei.ledvanov@gmail.com?subject=Vizzy Feature Request", null));
-//                        } catch (Exception ex) {
-//                        }
-//                    }
-//                }
-//                public void close() {
-//                    removeNewFeaturesPanel();
-//                }
-//            });
-//            
-//            jPanel1.add(newFeaturesPanel, jPanel1.getComponentCount() - 2);
-//            jPanel1.validate();
-//            jPanel1.repaint();
-//        }
+        if (newFeaturesPanel == null) {
+            newFeaturesPanel = new NewFeaturesPanel("<html>Did you know that it's possible to highlight"
+                    + " lines based on custom keywords? Read more...</html>",
+                    new INewFeaturesListener() {
+                public void click() {
+                    removeNewFeaturesPanel();
+                    if (Desktop.isDesktopSupported()) {
+                        try {
+                              Desktop.getDesktop().browse(new URI(Conf.URL_PROJECT_HOME + "wiki/Features#Custom_highlights"));
+                        } catch (Exception ex) {
+                        }
+                    }
+                }
+                public void close() {
+                    removeNewFeaturesPanel();
+                }
+            });
+            
+            jPanel1.add(newFeaturesPanel, jPanel1.getComponentCount() - 2);
+            jPanel1.validate();
+            jPanel1.repaint();
+        }
     }
     @Override
     public void onNewFeaturesPanelShownChanged(boolean wasNewFeaturesPanelShown) {
