@@ -4,6 +4,7 @@
  */
 package vizzy.controller;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
@@ -23,6 +24,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +41,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.log4j.Logger;
 import vizzy.forms.VizzyForm;
 import vizzy.forms.panels.AboutPanel;
@@ -153,6 +156,7 @@ public final class VizzyController implements ILogFileListener {
         view = new VizzyForm(this, settings);
         settings.setListener(view);
         settings.setUIActionsAvailable(false);
+        initDefaultValues();
 
         settings.onInit();
         init();
@@ -637,6 +641,12 @@ public final class VizzyController implements ILogFileListener {
             }
         }
         return ret;
+    }
+
+    private void initDefaultValues() {
+        Collections.addAll(settings.getHighlightColorData(), 
+                new HighlightsColorData(1, "Error: ", Color.ORANGE),
+                new HighlightsColorData(2, "Warning: ", Color.YELLOW));
     }
 
     class HW implements Runnable {
